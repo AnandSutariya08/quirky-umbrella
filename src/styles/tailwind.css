@@ -1,0 +1,231 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Primary Colors */
+    --color-primary: #FA00AC; /* quirky-pink */
+    --color-primary-foreground: #FFFFFF; /* white */
+    
+    /* Secondary Colors */
+    --color-secondary: #274EFF; /* trust-blue */
+    --color-secondary-foreground: #FFFFFF; /* white */
+    
+    /* Accent Colors */
+    --color-accent: #DAF304; /* lime-pop */
+    --color-accent-foreground: #1A1A1A; /* gray-900 */
+    
+    /* Background Colors */
+    --color-background: #FAFBFC; /* gray-50 */
+    --color-foreground: #1A1A1A; /* gray-900 */
+    
+    /* Surface Colors */
+    --color-card: #FFFFFF; /* white */
+    --color-card-foreground: #2D3748; /* gray-700 */
+    
+    --color-popover: #FFFFFF; /* white */
+    --color-popover-foreground: #2D3748; /* gray-700 */
+    
+    /* Muted Colors */
+    --color-muted: #F7FAFC; /* gray-100 */
+    --color-muted-foreground: #4A5568; /* gray-600 */
+    
+    /* Border & Input */
+    --color-border: rgba(45, 55, 72, 0.12); /* gray-700/12 */
+    --color-input: rgba(45, 55, 72, 0.12); /* gray-700/12 */
+    --color-ring: #DAF304; /* lime-pop */
+    
+    /* Semantic Colors */
+    --color-success: #10B981; /* green-500 */
+    --color-success-foreground: #FFFFFF; /* white */
+    
+    --color-warning: #F59E0B; /* amber-500 */
+    --color-warning-foreground: #1A1A1A; /* gray-900 */
+    
+    --color-error: #EF4444; /* red-500 */
+    --color-error-foreground: #FFFFFF; /* white */
+    
+    --color-destructive: #EF4444; /* red-500 */
+    --color-destructive-foreground: #FFFFFF; /* white */
+    
+    /* Text Colors */
+    --color-text-primary: #1A1A1A; /* gray-900 */
+    --color-text-secondary: #4A5568; /* gray-600 */
+    
+    /* Radius */
+    --radius-sm: 6px;
+    --radius-md: 12px;
+    --radius-lg: 18px;
+    --radius-xl: 24px;
+  }
+
+  .dark {
+    /* Primary Colors */
+    --color-primary: #FA00AC; /* quirky-pink */
+    --color-primary-foreground: #FFFFFF; /* white */
+    
+    /* Secondary Colors */
+    --color-secondary: #274EFF; /* trust-blue */
+    --color-secondary-foreground: #FFFFFF; /* white */
+    
+    /* Accent Colors */
+    --color-accent: #DAF304; /* lime-pop */
+    --color-accent-foreground: #1A1A1A; /* gray-900 */
+    
+    /* Background Colors */
+    --color-background: #0F0F0F; /* gray-950 */
+    --color-foreground: rgba(255, 255, 255, 0.92); /* white/92 */
+    
+    /* Surface Colors */
+    --color-card: #1F1F1F; /* gray-900 */
+    --color-card-foreground: rgba(255, 255, 255, 0.92); /* white/92 */
+    
+    --color-popover: #1F1F1F; /* gray-900 */
+    --color-popover-foreground: rgba(255, 255, 255, 0.92); /* white/92 */
+    
+    /* Muted Colors */
+    --color-muted: #2F2F2F; /* gray-800 */
+    --color-muted-foreground: rgba(255, 255, 255, 0.65); /* white/65 */
+    
+    /* Border & Input */
+    --color-border: rgba(255, 255, 255, 0.12); /* white/12 */
+    --color-input: rgba(255, 255, 255, 0.12); /* white/12 */
+    --color-ring: #DAF304; /* lime-pop */
+    
+    /* Semantic Colors */
+    --color-success: #10B981; /* green-500 */
+    --color-success-foreground: #FFFFFF; /* white */
+    
+    --color-warning: #F59E0B; /* amber-500 */
+    --color-warning-foreground: #1A1A1A; /* gray-900 */
+    
+    --color-error: #EF4444; /* red-500 */
+    --color-error-foreground: #FFFFFF; /* white */
+    
+    --color-destructive: #EF4444; /* red-500 */
+    --color-destructive-foreground: #FFFFFF; /* white */
+    
+    /* Text Colors */
+    --color-text-primary: rgba(255, 255, 255, 0.92); /* white/92 */
+    --color-text-secondary: rgba(255, 255, 255, 0.65); /* white/65 */
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.65;
+    position: relative;
+    min-height: 100vh;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Fraunces', serif;
+  }
+
+  h1 {
+    font-size: 2.75rem;
+    line-height: 1.15;
+  }
+
+  h2 {
+    font-size: 2.25rem;
+    line-height: 1.2;
+  }
+
+  h3 {
+    font-size: 1.75rem;
+    line-height: 1.25;
+  }
+
+  h4 {
+    font-size: 1.375rem;
+    line-height: 1.3;
+  }
+
+  h5 {
+    font-size: 1.125rem;
+    line-height: 1.4;
+  }
+
+  .caption {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.875rem;
+    line-height: 1.45;
+    letter-spacing: 0.025em;
+  }
+
+  .mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  @media (max-width: 768px) {
+    body {
+      font-size: 15px;
+      line-height: 1.6;
+    }
+  }
+}
+
+@layer utilities {
+  .transition-smooth {
+    transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .transition-spring {
+    transition: all 250ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .shadow-warm {
+    box-shadow: 0 2px 4px rgba(250, 0, 172, 0.08);
+  }
+
+  .shadow-warm-md {
+    box-shadow: 0 6px 12px rgba(250, 0, 172, 0.08);
+  }
+
+  .shadow-warm-lg {
+    box-shadow: 0 12px 24px rgba(250, 0, 172, 0.08);
+  }
+
+  .shadow-warm-xl {
+    box-shadow: 0 20px 40px -8px rgba(250, 0, 172, 0.08);
+  }
+
+  .shadow-neutral {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+  }
+
+  .shadow-neutral-md {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.06);
+  }
+
+  .shadow-neutral-lg {
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.06);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .focus-ring {
+    @apply outline-none ring-3 ring-accent ring-offset-3 ring-offset-background;
+  }
+.hover-lift  {
+    @apply transition-smooth hover:-translate-y-1;
+  }
+
+  .press-scale {
+    @apply active:scale-[0.97] transition-smooth;
+  }
+}
