@@ -1,9 +1,9 @@
 'use client';
 
-import { useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 
-export default function BlogDetailRedirect() {
+function BlogDetailRedirectContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -24,5 +24,19 @@ export default function BlogDetailRedirect() {
         <p className="text-muted-foreground">Redirecting...</p>
       </div>
     </div>
+  );
+}
+
+export default function BlogDetailRedirect() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-center">
+          <p className="text-muted-foreground">Loading...</p>
+        </div>
+      </div>
+    }>
+      <BlogDetailRedirectContent />
+    </Suspense>
   );
 }
