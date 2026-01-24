@@ -84,6 +84,16 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
       href: '/admin-blogs-management',
       icon: 'DocumentTextIcon',
     },
+    {
+      title: 'Growth Audit',
+      href: '/admin-growth-audit',
+      icon: 'ChartBarIcon',
+    },
+    {
+      title: 'Bookings',
+      href: '/admin-bookings',
+      icon: 'CalendarIcon',
+    },
   ];
 
   const isActivePath = (path: string) => {

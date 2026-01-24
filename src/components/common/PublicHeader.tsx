@@ -179,7 +179,10 @@ const PublicHeader = ({ className = '' }: PublicHeaderProps) => {
 
             <Link
               href="/contact"
-              className="ml-4 px-7 py-3 bg-primary text-primary-foreground rounded-md font-medium transition-smooth hover:shadow-warm-md hover:-translate-y-0.5 press-scale"
+              className={`px-6 py-3 rounded-md font-medium transition-smooth hover:bg-muted press-scale ${
+                isActivePath('/contact')
+                  ? 'text-primary bg-muted' :'text-foreground'
+              }`}
             >
               Contact Us
             </Link>
@@ -282,7 +285,10 @@ const PublicHeader = ({ className = '' }: PublicHeaderProps) => {
 
             <Link
               href="/contact"
-              className="block mt-6 px-7 py-4 bg-primary text-primary-foreground rounded-md font-medium text-center transition-smooth hover:shadow-warm-md press-scale"
+              className={`block px-6 py-4 rounded-md font-medium transition-smooth hover:bg-muted ${
+                isActivePath('/contact')
+                  ? 'text-primary bg-muted' :'text-foreground'
+              }`}
             >
               Contact Us
             </Link>
