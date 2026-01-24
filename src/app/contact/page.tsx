@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import PublicHeader from '@/components/common/PublicHeader';
+import ClientFooter from '@/components/common/ClientFooter';
 import ContactSection from './components/ContactSection';
-import Footer from '../blog-listing/components/Footer';
 
 export const metadata: Metadata = {
   title: 'Contact Us - Quirky Umbrella',
@@ -11,14 +11,14 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <div className="min-h-screen bg-background overflow-x-hidden">
+    <div className="flex flex-col min-h-screen bg-background overflow-x-hidden">
       <PublicHeader />
       
-      <main className="pt-20 w-full max-w-full overflow-x-hidden">
+      <main className="pt-20 w-full max-w-full overflow-x-hidden flex-1">
         <ContactSection />
       </main>
 
-      <Footer />
+      <ClientFooter />
     </div>
   );
 }

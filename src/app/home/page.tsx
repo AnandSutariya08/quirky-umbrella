@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import PublicHeader from '@/components/common/PublicHeader';
+import ClientFooter from '@/components/common/ClientFooter';
 import HomeInteractive from './components/HomeInteractive';
 
 export const metadata: Metadata = {
@@ -132,15 +133,16 @@ export default function HomePage() {
   };
 
   return (
-    <>
+    <div className="flex flex-col min-h-screen">
       <PublicHeader />
-      <main className="pt-20">
+      <main className="pt-20 flex-1">
         <HomeInteractive
           heroData={heroData}
           statsData={statsData}
           clientsData={clientsData}
         />
       </main>
-    </>
+      <ClientFooter />
+    </div>
   );
 }

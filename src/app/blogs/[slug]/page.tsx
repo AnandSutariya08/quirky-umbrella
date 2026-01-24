@@ -2,6 +2,7 @@ import { Suspense } from 'react';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import PublicHeader from '@/components/common/PublicHeader';
+import ClientFooter from '@/components/common/ClientFooter';
 import { blogsService } from '@/lib/blogs';
 import BlogDetailContent from './components/BlogDetailContent';
 
@@ -91,11 +92,14 @@ export default async function BlogPage({ params }: BlogPageProps) {
   }
 
   return (
-    <>
+    <div className="flex flex-col min-h-screen bg-background">
       <PublicHeader />
-      <Suspense fallback={<BlogDetailLoading />}>
-        <BlogDetailContent blog={blog} />
-      </Suspense>
-    </>
+      <main className="flex-1">
+        <Suspense fallback={<BlogDetailLoading />}>
+          <BlogDetailContent blog={blog} />
+        </Suspense>
+      </main>
+      <ClientFooter />
+    </div>
   );
 }

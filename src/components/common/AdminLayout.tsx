@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import Icon from '@/components/ui/AppIcon';
+import AdminFooter from './AdminFooter';
 
 interface AdminLayoutProps {
   children: React.ReactNode;

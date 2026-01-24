@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 import PublicHeader from '@/components/common/PublicHeader';
+import ClientFooter from '@/components/common/ClientFooter';
 import HeroSection from '../blog-listing/components/HeroSection';
 import BlogListingServer from './components/BlogListingServer';
 import NewsletterSection from '../blog-listing/components/NewsletterSection';
-import Footer from '../blog-listing/components/Footer';
 import { blogsService } from '@/lib/blogs';
 
 export const metadata: Metadata = {
@@ -20,16 +20,16 @@ export default async function BlogsPage() {
   const blogs = await blogsService.getPublished();
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="flex flex-col min-h-screen bg-background">
       <PublicHeader />
       
-      <main className="pt-20">
+      <main className="pt-20 flex-1">
         <HeroSection />
         <BlogListingServer initialBlogs={blogs} />
         <NewsletterSection />
       </main>
 
-      <Footer />
+      <ClientFooter />
     </div>
   );
 }

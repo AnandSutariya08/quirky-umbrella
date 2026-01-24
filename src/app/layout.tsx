@@ -1,6 +1,7 @@
 import React from 'react';
 import type { Metadata, Viewport } from 'next';
 import '../styles/index.css';
+import { ServicesProvider } from '@/contexts/ServicesContext';
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -40,7 +41,9 @@ export default function RootLayout({
           {/* Additional texture overlay */}
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(45,55,72,0.02)_1px,transparent_0)] bg-[size:40px_40px]" />
         </div>
-        {children}
+        <ServicesProvider>
+          {children}
+        </ServicesProvider>
         <script type="module" async src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fquirkyumb2951back.builtwithrocket.new&_be=https%3A%2F%2Fappanalytics.rocket.new&_v=0.1.14" />
         <script type="module" defer src="https://static.rocket.new/rocket-shot.js?v=0.0.2" />
       </body>

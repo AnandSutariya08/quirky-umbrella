@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 import PublicHeader from '@/components/common/PublicHeader';
+import ClientFooter from '@/components/common/ClientFooter';
 import HeroSection from './components/HeroSection';
 import BlogListingInteractive from './components/BlogListingInteractive';
 import NewsletterSection from './components/NewsletterSection';
-import Footer from './components/Footer';
 
 export const metadata: Metadata = {
   title: 'Blog - Quirky Umbrella',
@@ -13,16 +13,16 @@ export const metadata: Metadata = {
 
 export default function BlogListingPage() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="flex flex-col min-h-screen bg-background">
       <PublicHeader />
       
-      <main className="pt-20">
+      <main className="pt-20 flex-1">
         <HeroSection />
         <BlogListingInteractive />
         <NewsletterSection />
       </main>
 
-      <Footer />
+      <ClientFooter />
     </div>
   );
 }

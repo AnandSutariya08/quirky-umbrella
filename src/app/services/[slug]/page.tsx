@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import PublicHeader from '@/components/common/PublicHeader';
+import ClientFooter from '@/components/common/ClientFooter';
 import { servicesService } from '@/lib/services';
 import ServiceDetail from './components/ServiceDetail';
 
@@ -51,11 +52,12 @@ export default async function ServicePage({ params }: ServicePageProps) {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="flex flex-col min-h-screen bg-background">
       <PublicHeader />
-      <main className="pt-20">
+      <main className="pt-20 flex-1">
         <ServiceDetail service={service} />
       </main>
+      <ClientFooter />
     </div>
   );
 }

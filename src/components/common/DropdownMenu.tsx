@@ -1,9 +1,9 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useMemo } from 'react';
 import Link from 'next/link';
 import Icon from '@/components/ui/AppIcon';
-import { servicesService } from '@/lib/services';
+import { useServices } from '@/contexts/ServicesContext';
 
 interface DropdownItem {
   id: string;
@@ -19,37 +19,19 @@ interface DropdownMenuProps {
 }
 
 const DropdownMenu = ({ collection, onClose, isMobile = false }: DropdownMenuProps) => {
-  const [items, setItems] = useState<DropdownItem[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const { services, isLoading, error } = useServices();
 
-  useEffect(() => {
-    const fetchItems = async () => {
-      setIsLoading(true);
-      setError(null);
-
-      try {
-        if (collection === 'services') {
-          const services = await servicesService.getActive();
-          setItems(
-            services.map((service) => ({
-              id: service.id || '',
-              title: service.title,
-              slug: service.slug,
-              description: service.tagline,
-            }))
-          );
-        }
-      } catch (err) {
-        setError('Failed to load items. Please try again.');
-        console.error('Error fetching dropdown items:', err);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchItems();
-  }, [collection]);
+  const items = useMemo<DropdownItem[]>(() => {
+    if (collection === 'services') {
+      return services.map((service) => ({
+        id: service.id || '',
+        title: service.title,
+        slug: service.slug,
+        description: service.tagline,
+      }));
+    }
+    return [];
+  }, [services, collection]);
 
   if (isMobile) {
     return (
