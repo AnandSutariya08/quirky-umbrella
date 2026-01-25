@@ -10,11 +10,11 @@ export const metadata: Metadata = {
 
 export default function AboutUsPage() {
   return (
-    <div className="flex flex-col min-h-screen bg-background">
+    <div className="flex flex-col min-h-screen">
       <PublicHeader />
       
-      <main className="pt-20 flex-1">
-        <div className="container mx-auto px-6 py-16">
+      <main className=" flex-1">
+        <div className="container mx-auto px-6 pt-24 pb-16 lg:pt-28 lg:pb-24">
           <div className="max-w-4xl mx-auto">
             <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
               About Us
@@ -58,7 +58,7 @@ export default function AboutUsPage() {
                 </p>
               </section>
 
-              <Discuss />
+             
             </div>
           </div>
         </div>

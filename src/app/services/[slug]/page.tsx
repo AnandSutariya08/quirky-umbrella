@@ -52,9 +52,9 @@ export default async function ServicePage({ params }: ServicePageProps) {
   }
 
   return (
-    <div className="flex flex-col min-h-screen bg-background">
+    <div className="flex flex-col min-h-screen">
       <PublicHeader />
-      <main className="pt-20 flex-1">
+      <main className="flex-1">
         <ServiceDetail service={service} />
       </main>
       <ClientFooter />

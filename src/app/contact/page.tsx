@@ -11,10 +11,10 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <div className="flex flex-col min-h-screen bg-background overflow-x-hidden">
+    <div className="flex flex-col min-h-screen overflow-x-hidden">
       <PublicHeader />
       
-      <main className="pt-20 w-full max-w-full overflow-x-hidden flex-1">
+      <main className="w-full max-w-full overflow-x-hidden flex-1">
         <ContactSection />
       </main>
 

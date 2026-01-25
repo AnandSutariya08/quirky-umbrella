@@ -46,7 +46,7 @@ export default function ContactSection() {
 
 
   return (
-    <section className="py-16 lg:py-24 bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5 overflow-x-hidden">
+    <section className="pt-24 pb-16 lg:pt-28 lg:pb-24 bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5 overflow-x-hidden">
       <div className="container mx-auto px-6 w-full max-w-full">
         {/* Header */}
         <div className="text-center mb-16">

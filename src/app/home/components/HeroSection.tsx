@@ -540,7 +540,8 @@ export default function HeroSection({
         ))}
       </div>
 
-      <div className="container mx-auto px-6 py-16 lg:py-24 relative z-10">
+      {/* Extra top padding so content isn't hidden under transparent header */}
+      <div className="container mx-auto px-6 pt-24 pb-16 lg:pt-28 lg:pb-24 relative z-10">
         <div className="mx-auto max-w-6xl">
           <div className="grid items-center gap-12 lg:grid-cols-2">
             {/* Left: copy */}

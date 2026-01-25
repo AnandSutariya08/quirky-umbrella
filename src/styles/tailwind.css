@@ -229,6 +229,33 @@
     @apply active:scale-[0.97] transition-smooth;
   }
 
+  /* Quirky pink scrollbar (works in WebKit + Firefox) */
+  .scrollbar-quirky {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-primary) transparent;
+  }
+
+  .scrollbar-quirky::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  .scrollbar-quirky::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-quirky::-webkit-scrollbar-thumb {
+    background: rgba(250, 0, 172, 0.55);
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+
+  .scrollbar-quirky::-webkit-scrollbar-thumb:hover {
+    background: rgba(250, 0, 172, 0.8);
+    background-clip: content-box;
+  }
+
   /* Premium hover effects (buttons, images, cards) */
   .btn-aurora {
     position: relative;

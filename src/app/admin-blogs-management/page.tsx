@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function AdminBlogsManagementPage() {
   return (
     <AdminLayout>
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-transparent">
         <div className="container mx-auto px-6 py-8">
           <BlogsManagementInteractive />
         </div>

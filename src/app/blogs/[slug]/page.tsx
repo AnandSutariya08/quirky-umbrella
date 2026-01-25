@@ -60,7 +60,7 @@ export async function generateMetadata({ params }: BlogPageProps): Promise<Metad
 
 function BlogDetailLoading() {
   return (
-    <div className="min-h-screen bg-background pt-32 pb-20">
+    <div className="min-h-screen bg-transparent pt-32 pb-20">
       <div className="container mx-auto px-6">
         <article className="max-w-4xl mx-auto">
           <div className="h-12 bg-muted rounded-lg animate-pulse mb-6" />
@@ -92,7 +92,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
   }
 
   return (
-    <div className="flex flex-col min-h-screen bg-background">
+    <div className="flex flex-col min-h-screen">
       <PublicHeader />
       <main className="flex-1">
         <Suspense fallback={<BlogDetailLoading />}>

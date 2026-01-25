@@ -20,10 +20,10 @@ export default async function BlogsPage() {
   const blogs = await blogsService.getPublished();
 
   return (
-    <div className="flex flex-col min-h-screen bg-background">
+    <div className="flex flex-col min-h-screen">
       <PublicHeader />
       
-      <main className="pt-20 flex-1">
+      <main className="flex-1">
         <HeroSection />
         <BlogListingServer initialBlogs={blogs} />
         <NewsletterSection />

@@ -35,7 +35,7 @@ const DropdownMenu = ({ collection, onClose, isMobile = false }: DropdownMenuPro
 
   if (isMobile) {
     return (
-      <div className="space-y-2 animate-slide-down">
+      <div className="animate-slide-down">
         {isLoading ? (
           <div className="space-y-2">
             {[1, 2, 3].map((i) => (
@@ -52,21 +52,25 @@ const DropdownMenu = ({ collection, onClose, isMobile = false }: DropdownMenuPro
             No services listed
           </div>
         ) : (
-          items.map((item) => (
-            <Link
-              key={item.id}
-              href={`/services/${item.slug}`}
-              onClick={onClose}
-              className="block px-6 py-4 rounded-md hover:bg-muted transition-smooth"
-            >
-              <div className="font-medium text-foreground">{item.title}</div>
-              {item.description && (
-                <div className="text-sm text-muted-foreground mt-1">
-                  {item.description}
-                </div>
-              )}
-            </Link>
-          ))
+          <div className="max-h-[50vh] overflow-y-auto pr-1 scrollbar-quirky">
+            <div className="space-y-2">
+              {items.map((item) => (
+                <Link
+                  key={item.id}
+                  href={`/services/${item.slug}`}
+                  onClick={onClose}
+                  className="block px-6 py-4 rounded-md hover:bg-muted transition-smooth"
+                >
+                  <div className="font-medium text-foreground">{item.title}</div>
+                  {/* {item.description && (
+                    <div className="text-sm text-muted-foreground mt-1">
+                      {item.description}
+                    </div>
+                  )} */}
+                </Link>
+              ))}
+            </div>
+          </div>
         )}
       </div>
     );
@@ -101,7 +105,7 @@ const DropdownMenu = ({ collection, onClose, isMobile = false }: DropdownMenuPro
           <p className="text-muted-foreground text-xs mt-1">Services will appear here once they are added</p>
         </div>
       ) : (
-        <div className="py-2">
+        <div className="py-2 max-h-[360px] overflow-y-auto pr-1 scrollbar-quirky">
           {items.map((item, index) => (
             <Link
               key={item.id}
@@ -113,11 +117,11 @@ const DropdownMenu = ({ collection, onClose, isMobile = false }: DropdownMenuPro
               <div className="font-medium text-popover-foreground">
                 {item.title}
               </div>
-              {item.description && (
+              {/* {item.description && (
                 <div className="text-sm text-muted-foreground mt-1 line-clamp-2">
                   {item.description}
                 </div>
-              )}
+              )} */}
             </Link>
           ))}
         </div>

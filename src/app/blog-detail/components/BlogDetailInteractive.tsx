@@ -92,7 +92,7 @@ const BlogDetailInteractive = () => {
 
   if (!isHydrated || isLoading) {
     return (
-      <div className="min-h-screen bg-background pt-32 pb-20">
+      <div className="min-h-screen bg-transparent pt-32 pb-20">
         <div className="container mx-auto px-6">
           <article className="max-w-4xl mx-auto">
             <div className="h-12 bg-muted rounded-lg animate-pulse mb-6" />
@@ -111,7 +111,7 @@ const BlogDetailInteractive = () => {
 
   if (error || !blog) {
     return (
-      <div className="min-h-screen bg-background pt-32 pb-20">
+      <div className="min-h-screen bg-transparent pt-32 pb-20">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto text-center py-20">
             <Icon
@@ -151,7 +151,7 @@ const BlogDetailInteractive = () => {
   }));
 
   return (
-    <div className="min-h-screen bg-background pt-32 pb-20">
+    <div className="min-h-screen bg-transparent pt-32 pb-20">
       <div className="container mx-auto px-6">
         <article className="max-w-4xl mx-auto">
           <BlogHeader
