@@ -33,7 +33,8 @@ function AppImage({
     fill = false,
     sizes,
     onClick,
-    fallbackSrc = '/assets/images/no_image.png',
+    // Use an existing local asset as default fallback
+    fallbackSrc = '/assets/images/ImageToStl.com_QU_Logo-1768912371539.png',
     ...props
 }: AppImageProps) {
     const [imageSrc, setImageSrc] = useState(src);
@@ -115,7 +116,7 @@ function AppImage({
 
     if (fill) {
         return (
-            <div className={`relative ${className}`}>
+            <div className={`relative w-full h-full ${className}`}>
                 <Image
                     {...imageProps}
                     fill

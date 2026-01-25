@@ -110,12 +110,38 @@ module.exports = {
           '0%': { transform: 'scale(0.95)', opacity: '0' },
           '100%': { transform: 'scale(1)', opacity: '1' },
         },
+        float: {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(-12px)' },
+        },
+        'float-soft': {
+          '0%, 100%': { transform: 'translateY(0px) translateX(0px)' },
+          '50%': { transform: 'translateY(-10px) translateX(6px)' },
+        },
+        'drift-x': {
+          '0%, 100%': { transform: 'translateX(0px)' },
+          '50%': { transform: 'translateX(18px)' },
+        },
+        'gradient-pan': {
+          '0%': { backgroundPosition: '0% 50%' },
+          '50%': { backgroundPosition: '100% 50%' },
+          '100%': { backgroundPosition: '0% 50%' },
+        },
+        shimmer: {
+          '0%': { backgroundPosition: '-200% 0' },
+          '100%': { backgroundPosition: '200% 0' },
+        },
       },
       animation: {
         'fade-in': 'fade-in 250ms ease-out',
         'slide-up': 'slide-up 250ms ease-out',
         'slide-down': 'slide-down 250ms ease-out',
         'scale-in': 'scale-in 250ms cubic-bezier(0.34, 1.56, 0.64, 1)',
+        float: 'float 6s ease-in-out infinite',
+        'float-soft': 'float-soft 10s ease-in-out infinite',
+        'drift-x': 'drift-x 14s ease-in-out infinite',
+        'gradient-pan': 'gradient-pan 10s ease-in-out infinite',
+        shimmer: 'shimmer 2.25s linear infinite',
       },
     },
   },

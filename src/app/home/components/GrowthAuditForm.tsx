@@ -192,10 +192,15 @@ export default function GrowthAuditForm() {
 
   if (submitted) {
     return (
-      <section id="growth-audit" className="py-16 lg:py-24 bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5">
+      <section id="growth-audit" className="py-16 lg:py-24 bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5 relative overflow-hidden">
+        <div className="pointer-events-none absolute inset-0 opacity-30">
+          <div className="absolute -top-10 -left-10 w-72 h-72 bg-primary/15 rounded-full blur-3xl animate-float-soft" />
+          <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary/15 rounded-full blur-3xl animate-float" style={{ animationDelay: '800ms' }} />
+        </div>
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto">
-            <div className="bg-card rounded-xl shadow-warm-lg border border-border p-8 lg:p-12">
+            <div className="bg-card rounded-xl shadow-warm-lg border border-border p-8 lg:p-12 relative overflow-hidden">
+              <div className="absolute inset-0 bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.35),transparent)] bg-[length:200%_100%] opacity-25 animate-shimmer" />
               <div className="text-center py-12">
                 <Icon name="CheckCircleIcon" size={64} className="text-primary mx-auto mb-4" />
                 <h3 className="text-2xl font-semibold text-foreground mb-2">Thank You!</h3>
@@ -211,10 +216,14 @@ export default function GrowthAuditForm() {
   }
 
   return (
-    <section id="growth-audit" className="py-16 lg:py-24 bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5">
+    <section id="growth-audit" className="py-16 lg:py-24 bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5 relative overflow-hidden">
+      <div className="pointer-events-none absolute inset-0 opacity-30">
+        <div className="absolute -top-10 -left-10 w-72 h-72 bg-primary/15 rounded-full blur-3xl animate-float-soft" />
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary/15 rounded-full blur-3xl animate-float" style={{ animationDelay: '800ms' }} />
+      </div>
       <div className="container mx-auto px-6">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-12">
+          <div className="text-center mb-12 animate-slide-down">
             <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
               Get Your Free Growth Audit
             </h2>
@@ -223,7 +232,8 @@ export default function GrowthAuditForm() {
             </p>
           </div>
 
-          <div className="bg-card rounded-xl shadow-warm-lg border border-border p-8 lg:p-12">
+          <div className="bg-card rounded-xl shadow-warm-lg border border-border p-8 lg:p-12 relative overflow-hidden">
+            <div className="absolute inset-0 bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.35),transparent)] bg-[length:200%_100%] opacity-20 animate-shimmer" />
             {/* Progress Indicator */}
             <div className="mb-8">
               <div className="flex items-center justify-between mb-2">
@@ -339,7 +349,7 @@ export default function GrowthAuditForm() {
                 <div className="flex justify-end">
                   <button
                     type="submit"
-                    className="px-8 py-4 bg-primary text-primary-foreground rounded-md font-medium text-lg transition-smooth hover:shadow-warm-md hover:-translate-y-1 press-scale flex items-center gap-2"
+                    className="btn-aurora px-8 py-4 bg-primary text-primary-foreground rounded-md font-medium text-lg shadow-warm-md hover:shadow-warm-xl press-scale flex items-center gap-2 focus-ring"
                   >
                     Next
                     <Icon name="ArrowRightIcon" size={20} />
@@ -430,7 +440,7 @@ export default function GrowthAuditForm() {
                   <button
                     type="button"
                     onClick={handleBack}
-                    className="px-8 py-4 bg-muted text-foreground rounded-md font-medium text-lg transition-smooth hover:bg-muted/80 press-scale flex items-center gap-2"
+                    className="btn-aurora px-8 py-4 bg-card/70 backdrop-blur-sm border border-border text-foreground rounded-md font-medium text-lg shadow-neutral hover:shadow-neutral-lg press-scale flex items-center gap-2 focus-ring"
                   >
                     <Icon name="ArrowLeftIcon" size={20} />
                     Back
@@ -438,7 +448,7 @@ export default function GrowthAuditForm() {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="px-8 py-4 bg-primary text-primary-foreground rounded-md font-medium text-lg transition-smooth hover:shadow-warm-md hover:-translate-y-1 press-scale disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                    className="btn-aurora px-8 py-4 bg-primary text-primary-foreground rounded-md font-medium text-lg shadow-warm-md hover:shadow-warm-xl press-scale disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 focus-ring"
                   >
                     {isSubmitting ? (
                       <>

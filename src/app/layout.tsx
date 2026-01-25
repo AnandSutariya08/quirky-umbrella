@@ -36,7 +36,7 @@ export default function RootLayout({
           <div className="absolute top-1/2 left-1/2 w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(218,243,4,0.1)_0%,transparent_70%)] rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
           
           {/* Subtle grid pattern */}
-          <div className="absolute inset-0 bg-[linear-gradient(rgba(45,55,72,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(45,55,72,0.03)_1px,transparent_1px)] bg-[size:60px_60px]" />
+          {/* <div className="absolute inset-0 bg-[linear-gradient(rgba(45,55,72,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(45,55,72,0.03)_1px,transparent_1px)] bg-[size:60px_60px]" /> */}
           
           {/* Additional texture overlay */}
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(45,55,72,0.02)_1px,transparent_0)] bg-[size:40px_40px]" />

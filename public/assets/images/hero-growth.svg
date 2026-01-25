@@ -1,0 +1,69 @@
+<svg width="1600" height="1200" viewBox="0 0 1600 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g1" x1="0" y1="0" x2="1600" y2="1200" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FA00AC" stop-opacity="0.55"/>
+      <stop offset="0.55" stop-color="#274EFF" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#DAF304" stop-opacity="0.35"/>
+    </linearGradient>
+    <radialGradient id="g2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(520 420) rotate(120) scale(720 560)">
+      <stop stop-color="#FA00AC" stop-opacity="0.40"/>
+      <stop offset="1" stop-color="#FA00AC" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="g3" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1180 820) rotate(-45) scale(760 620)">
+      <stop stop-color="#274EFF" stop-opacity="0.40"/>
+      <stop offset="1" stop-color="#274EFF" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="blur" x="-200" y="-200" width="2000" height="1600" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="42"/>
+    </filter>
+    <filter id="softShadow" x="-40" y="-40" width="1680" height="1280" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#000000" flood-opacity="0.10"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="1200" rx="56" fill="url(#g1)"/>
+
+  <g filter="url(#blur)">
+    <circle cx="520" cy="420" r="420" fill="url(#g2)"/>
+    <circle cx="1180" cy="820" r="460" fill="url(#g3)"/>
+  </g>
+
+  <!-- Grid -->
+  <g opacity="0.18">
+    <path d="M0 200H1600" stroke="#1A1A1A" stroke-opacity="0.22"/>
+    <path d="M0 400H1600" stroke="#1A1A1A" stroke-opacity="0.18"/>
+    <path d="M0 600H1600" stroke="#1A1A1A" stroke-opacity="0.14"/>
+    <path d="M0 800H1600" stroke="#1A1A1A" stroke-opacity="0.12"/>
+    <path d="M0 1000H1600" stroke="#1A1A1A" stroke-opacity="0.10"/>
+    <path d="M200 0V1200" stroke="#1A1A1A" stroke-opacity="0.12"/>
+    <path d="M400 0V1200" stroke="#1A1A1A" stroke-opacity="0.10"/>
+    <path d="M600 0V1200" stroke="#1A1A1A" stroke-opacity="0.08"/>
+    <path d="M800 0V1200" stroke="#1A1A1A" stroke-opacity="0.07"/>
+    <path d="M1000 0V1200" stroke="#1A1A1A" stroke-opacity="0.08"/>
+    <path d="M1200 0V1200" stroke="#1A1A1A" stroke-opacity="0.10"/>
+    <path d="M1400 0V1200" stroke="#1A1A1A" stroke-opacity="0.12"/>
+  </g>
+
+  <!-- Stylized "growth" curve -->
+  <g filter="url(#softShadow)">
+    <path d="M230 860C420 760 560 780 740 690C920 600 1010 520 1170 440C1290 380 1370 340 1490 300"
+          stroke="#FFFFFF" stroke-opacity="0.75" stroke-width="18" stroke-linecap="round"/>
+    <path d="M230 860C420 760 560 780 740 690C920 600 1010 520 1170 440C1290 380 1370 340 1490 300"
+          stroke="#1A1A1A" stroke-opacity="0.10" stroke-width="22" stroke-linecap="round"/>
+
+    <!-- Nodes -->
+    <circle cx="230" cy="860" r="18" fill="#FFFFFF" fill-opacity="0.85"/>
+    <circle cx="740" cy="690" r="18" fill="#FFFFFF" fill-opacity="0.85"/>
+    <circle cx="1170" cy="440" r="18" fill="#FFFFFF" fill-opacity="0.85"/>
+    <circle cx="1490" cy="300" r="18" fill="#FFFFFF" fill-opacity="0.85"/>
+  </g>
+
+  <!-- Micro data bars -->
+  <g opacity="0.85">
+    <rect x="300" y="250" width="36" height="160" rx="12" fill="#FFFFFF" fill-opacity="0.55"/>
+    <rect x="350" y="210" width="36" height="200" rx="12" fill="#FFFFFF" fill-opacity="0.62"/>
+    <rect x="400" y="280" width="36" height="130" rx="12" fill="#FFFFFF" fill-opacity="0.50"/>
+    <rect x="450" y="170" width="36" height="240" rx="12" fill="#FFFFFF" fill-opacity="0.70"/>
+  </g>
+</svg>
+
