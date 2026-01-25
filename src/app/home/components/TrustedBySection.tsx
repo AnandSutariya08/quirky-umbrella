@@ -31,16 +31,16 @@ export default function TrustedBySection({
   useEffect(() => {
     if (!clients?.length) return;
 
-    const intervalId = window.setInterval(() => {
+    const intervalId = setInterval(() => {
       setIsFading(true);
 
-      window.setTimeout(() => {
+      setTimeout(() => {
         setPageStart((prev) => (prev + PAGE_SIZE) % clients.length);
         setIsFading(false);
       }, FADE_MS);
     }, ROTATE_MS);
 
-    return () => window.clearInterval(intervalId);
+    return () => clearInterval(intervalId);
   }, [clients.length]);
 
   const visibleClients = useMemo(() => {
@@ -96,7 +96,7 @@ export default function TrustedBySection({
         {/* 3x3 rotating logo grid */}
         <div className="mt-10 flex justify-center">
           <div
-            className={`w-full max-w-5xl transition-opacity duration-${FADE_MS} ${isFading ? 'opacity-0' : 'opacity-100'}`}
+            className={`w-full max-w-5xl transition-opacity duration-200 ${isFading ? 'opacity-0' : 'opacity-100'}`}
           >
             <div className="grid grid-cols-3 gap-x-10 gap-y-10 items-center">
               {visibleClients.map((client) => (

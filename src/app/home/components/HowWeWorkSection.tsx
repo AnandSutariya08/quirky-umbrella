@@ -122,7 +122,7 @@
 
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { 
   Settings, 
   Lightbulb, 
@@ -206,6 +206,25 @@ const workCards: WorkCard[] = [
 export default function HowWeWorkSection() {
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
   const [expandedCard, setExpandedCard] = useState<string | null>(null);
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    // Avoid referencing `window` during prerender; compute after hydration.
+    const mql = window.matchMedia('(min-width: 768px)');
+    const update = () => setIsDesktop(mql.matches);
+    update();
+
+    // Safari < 14 support
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const anyMql: any = mql;
+    if (anyMql.addEventListener) anyMql.addEventListener('change', update);
+    else anyMql.addListener(update);
+
+    return () => {
+      if (anyMql.removeEventListener) anyMql.removeEventListener('change', update);
+      else anyMql.removeListener(update);
+    };
+  }, []);
 
   return (
     <section id="how-we-work" className="py-16 lg:py-24 bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5 relative overflow-hidden">
@@ -322,7 +341,7 @@ export default function HowWeWorkSection() {
                             key={areaIndex} 
                             className="flex items-start gap-3 group/item transition-all duration-300 hover:translate-x-1"
                             style={{
-                              animation: isExpanded || window.innerWidth >= 768 
+                              animation: isExpanded || isDesktop 
                                 ? `slide-in 300ms ease-out ${areaIndex * 50}ms backwards` 
                                 : 'none'
                             }}
