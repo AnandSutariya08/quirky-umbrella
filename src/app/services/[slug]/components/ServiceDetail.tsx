@@ -25,21 +25,29 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
         </div>
 
         <div className="container mx-auto px-6 relative z-10">
-          <div className="max-w-5xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-8 animate-slide-down">
-              <Zap className="w-4 h-4 text-primary" />
-              <span className="text-sm font-bold text-primary uppercase tracking-widest">Premium Service</span>
-            </div>
-            
-            <h1 className="text-5xl lg:text-8xl font-black text-foreground mb-8 tracking-tighter leading-[0.9] animate-slide-down">
-              {service.title}
-            </h1>
-            
-            <div className="grid lg:grid-cols-2 gap-12 items-end animate-slide-up" style={{ animationDelay: '200ms' }}>
-              <p className="text-xl lg:text-2xl text-muted-foreground font-medium leading-relaxed">
-                {service.tagline}
-              </p>
-              <p className="text-lg text-muted-foreground/80 leading-relaxed border-l-2 border-primary/30 pl-8">
+          <div className="max-w-6xl mx-auto">
+            <div className="flex flex-col items-center text-center space-y-12 animate-slide-down">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20">
+                <Zap className="w-4 h-4 text-primary" />
+                <span className="text-sm font-bold text-primary uppercase tracking-widest">{service.tagline}</span>
+              </div>
+              
+              <h1 className="text-6xl lg:text-9xl font-black text-foreground tracking-tighter leading-[0.8] max-w-4xl">
+                {service.title}
+              </h1>
+
+              {service.imageUrl && (
+                <div className="relative w-full max-w-4xl aspect-[21/9] rounded-[2.5rem] overflow-hidden shadow-2xl border border-white/10 group">
+                  <img 
+                    src={service.imageUrl} 
+                    alt={service.title}
+                    className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                </div>
+              )}
+              
+              <p className="text-xl lg:text-2xl text-muted-foreground font-medium leading-relaxed max-w-3xl">
                 {service.description}
               </p>
             </div>

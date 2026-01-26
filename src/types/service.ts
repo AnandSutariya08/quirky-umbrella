@@ -22,6 +22,7 @@ export interface Service {
   slug: string;
   tagline: string;
   description: string;
+  imageUrl?: string;
   whatIsIt: {
     title: string;
     content: string;

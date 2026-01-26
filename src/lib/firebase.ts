@@ -1,5 +1,6 @@
 import { initializeApp, getApps, FirebaseApp } from 'firebase/app';
 import { getFirestore, Firestore } from 'firebase/firestore';
+import { getStorage, FirebaseStorage } from 'firebase/storage';
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -27,4 +28,12 @@ try {
   throw error;
 }
 
-export { db };
+let storage: FirebaseStorage;
+try {
+  storage = getStorage(app);
+} catch (error) {
+  console.error('Error initializing Firebase Storage:', error);
+  throw error;
+}
+
+export { db, storage };
