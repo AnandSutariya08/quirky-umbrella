@@ -5,6 +5,9 @@ import GrowthAuditForm from './GrowthAuditForm';
 import HowWeWorkSection from './HowWeWorkSection';
 import GlobalReachSection from './GlobalReachSection';
 import TrustedBySection from './TrustedBySection';
+import { 
+  ArrowRight
+} from 'lucide-react';
 
 interface StatItem {
   id: string;
