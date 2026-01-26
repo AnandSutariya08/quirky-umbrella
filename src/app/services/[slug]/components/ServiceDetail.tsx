@@ -11,52 +11,39 @@ interface ServiceDetailProps {
 export default function ServiceDetail({ service }: ServiceDetailProps) {
   return (
     <div className="bg-background">
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
-        {/* Advanced Background Elements */}
-        <div className="absolute inset-0 z-0">
-          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-primary/5 via-background to-background" />
-          <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/20 rounded-full blur-[120px] animate-pulse" />
-          <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-secondary/20 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: '2s' }} />
-          
-          {/* Subtle Grid Pattern */}
-          <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay" />
-          <div className="absolute inset-0 opacity-[0.03] bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
-        </div>
+      {/* Simplified Hero Section */}
+      <section className="relative pt-24 pb-16 lg:pt-32 lg:pb-24 border-b border-border">
+        <div className="container mx-auto px-6">
+          <div className="max-w-4xl mx-auto text-center space-y-6">
+            <div className="inline-block px-3 py-1 rounded-full bg-primary/5 text-primary text-xs font-bold tracking-widest uppercase">
+              {service.tagline}
+            </div>
+            
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground tracking-tight">
+              {service.title}
+            </h1>
 
-        <div className="container mx-auto px-6 relative z-10">
-          <div className="max-w-4xl mx-auto">
-            <div className="flex flex-col items-center text-center space-y-8 animate-slide-down">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-md">
-                <Zap className="w-3.5 h-3.5 text-primary" />
-                <span className="text-xs font-bold text-primary uppercase tracking-[0.2em]">{service.tagline}</span>
-              </div>
-              
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-black text-foreground tracking-tight leading-[1.1] max-w-4xl bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent">
-                {service.title}
-              </h1>
+            <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto">
+              {service.description}
+            </p>
 
-              {service.imageUrl && (
-                <div className="relative w-full max-w-3xl aspect-video rounded-[2rem] overflow-hidden shadow-2xl border border-white/5 group">
+            {service.imageUrl && (
+              <div className="pt-8">
+                <div className="relative aspect-video rounded-2xl overflow-hidden shadow-lg border border-border">
                   <img 
                     src={service.imageUrl} 
                     alt={service.title}
-                    className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-1000"
+                    className="w-full h-full object-cover"
                   />
-                  <div className="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-[2rem]" />
                 </div>
-              )}
-              
-              <p className="text-lg md:text-xl text-muted-foreground/90 font-medium leading-relaxed max-w-2xl">
-                {service.description}
-              </p>
-            </div>
+              </div>
+            )}
           </div>
         </div>
       </section>
 
       {/* Main Content Grid */}
-      <section className="py-24 relative z-10">
+      <section className="py-20">
         <div className="container mx-auto px-6">
           <div className="grid lg:grid-cols-12 gap-16">
             {/* Left Column: What & Deliverables */}
