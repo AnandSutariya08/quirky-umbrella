@@ -25,29 +25,29 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
         </div>
 
         <div className="container mx-auto px-6 relative z-10">
-          <div className="max-w-6xl mx-auto">
-            <div className="flex flex-col items-center text-center space-y-12 animate-slide-down">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20">
-                <Zap className="w-4 h-4 text-primary" />
-                <span className="text-sm font-bold text-primary uppercase tracking-widest">{service.tagline}</span>
+          <div className="max-w-4xl mx-auto">
+            <div className="flex flex-col items-center text-center space-y-8 animate-slide-down">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-md">
+                <Zap className="w-3.5 h-3.5 text-primary" />
+                <span className="text-xs font-bold text-primary uppercase tracking-[0.2em]">{service.tagline}</span>
               </div>
               
-              <h1 className="text-6xl lg:text-9xl font-black text-foreground tracking-tighter leading-[0.8] max-w-4xl">
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-black text-foreground tracking-tight leading-[1.1] max-w-4xl bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent">
                 {service.title}
               </h1>
 
               {service.imageUrl && (
-                <div className="relative w-full max-w-4xl aspect-[21/9] rounded-[2.5rem] overflow-hidden shadow-2xl border border-white/10 group">
+                <div className="relative w-full max-w-3xl aspect-video rounded-[2rem] overflow-hidden shadow-2xl border border-white/5 group">
                   <img 
                     src={service.imageUrl} 
                     alt={service.title}
-                    className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+                    className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-1000"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                  <div className="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-[2rem]" />
                 </div>
               )}
               
-              <p className="text-xl lg:text-2xl text-muted-foreground font-medium leading-relaxed max-w-3xl">
+              <p className="text-lg md:text-xl text-muted-foreground/90 font-medium leading-relaxed max-w-2xl">
                 {service.description}
               </p>
             </div>
