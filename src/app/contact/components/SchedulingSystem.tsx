@@ -528,46 +528,48 @@ export default function SchedulingSystem() {
                 Choose the type of meeting that best fits your needs
               </p>
             </div>
-            <div className="grid md:grid-cols-3 gap-4 lg:gap-6">
+            <div className="flex flex-col gap-4">
               {meetingTypes.map((type, index) => (
                 <button
                   key={type.id}
                   onClick={() => handleMeetingTypeSelect(type.id)}
-                  className="group relative p-6 lg:p-8 bg-gradient-to-br from-background to-muted/30 border-2 border-border rounded-2xl hover:border-primary hover:shadow-warm-xl transition-all duration-300 text-left overflow-hidden transform hover:-translate-y-1"
+                  className="group relative p-6 bg-gradient-to-br from-background to-muted/30 border-2 border-border rounded-2xl hover:border-primary hover:shadow-warm-xl transition-all duration-300 text-left overflow-hidden transform hover:-translate-y-1 w-full"
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
                   {/* Hover Effect Background */}
                   <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
-                  <div className="relative z-10">
-                    <div className="flex items-start justify-between mb-4">
-                      <div className="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center group-hover:bg-primary transition-all duration-300">
-                        <Icon
-                          name="CalendarIcon"
-                          size={24}
-                          className="text-primary group-hover:text-primary-foreground transition-colors"
-                        />
-                      </div>
+                  <div className="relative z-10 flex flex-col md:flex-row md:items-center gap-6">
+                    <div className="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center group-hover:bg-primary transition-all duration-300">
                       <Icon
-                        name="ArrowRightIcon"
-                        size={20}
-                        className="text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all"
+                        name="CalendarIcon"
+                        size={24}
+                        className="text-primary group-hover:text-primary-foreground transition-colors"
                       />
                     </div>
 
-                    <h3 className="text-lg font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
-                      {type.name}
-                    </h3>
-                    <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
-                      {type.description}
-                    </p>
-
-                    <div className="flex items-center gap-2">
-                      <Icon name="ClockIcon" size={16} className="text-primary" />
-                      <span className="text-sm font-semibold text-primary">
-                        {type.duration} minutes
-                      </span>
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between mb-1">
+                        <h3 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors">
+                          {type.name}
+                        </h3>
+                        <div className="flex items-center gap-2 bg-primary/10 px-3 py-1 rounded-full">
+                          <Icon name="ClockIcon" size={14} className="text-primary" />
+                          <span className="text-xs font-bold text-primary">
+                            {type.duration} min
+                          </span>
+                        </div>
+                      </div>
+                      <p className="text-sm text-muted-foreground leading-relaxed">
+                        {type.description}
+                      </p>
                     </div>
+
+                    <Icon
+                      name="ArrowRightIcon"
+                      size={20}
+                      className="hidden md:block text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all"
+                    />
                   </div>
                 </button>
               ))}
