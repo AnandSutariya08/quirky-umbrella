@@ -80,10 +80,10 @@ const BlogDetailContent = ({ blog: initialBlog }: BlogDetailContentProps) => {
             onClick={() => router.push('/blogs')}
             className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-smooth mb-8 group"
           >
-            <Icon 
-              name="ArrowLeftIcon" 
-              size={20} 
-              className="transition-transform group-hover:-translate-x-1" 
+            <Icon
+              name="ArrowLeftIcon"
+              size={20}
+              className="transition-transform group-hover:-translate-x-1"
             />
             <span className="font-medium">Back to Blog</span>
           </button>

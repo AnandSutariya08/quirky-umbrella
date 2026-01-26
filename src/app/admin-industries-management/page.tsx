@@ -4,7 +4,8 @@ import IndustriesManagementInteractive from './components/IndustriesManagementIn
 
 export const metadata: Metadata = {
   title: 'Industries Management - Quirky Umbrella Admin',
-  description: 'Manage industry content, SEO settings, and publication status with advanced editing tools and comprehensive content lifecycle management.',
+  description:
+    'Manage industry content, SEO settings, and publication status with advanced editing tools and comprehensive content lifecycle management.',
 };
 
 export default function AdminIndustriesManagementPage() {

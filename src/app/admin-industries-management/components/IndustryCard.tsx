@@ -50,8 +50,7 @@ const IndustryCard = ({ industry, onEdit, onDelete, onPreview }: IndustryCardPro
           </div>
           <span
             className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium flex-shrink-0 ${
-              industry.isPublished
-                ? 'bg-success/10 text-success' :'bg-muted text-muted-foreground'
+              industry.isPublished ? 'bg-success/10 text-success' : 'bg-muted text-muted-foreground'
             }`}
           >
             <span
@@ -64,7 +63,8 @@ const IndustryCard = ({ industry, onEdit, onDelete, onPreview }: IndustryCardPro
         </div>
 
         <div className="text-xs text-muted-foreground mb-4">
-          Updated: {new Date(industry.updatedAt).toLocaleDateString('en-US', {
+          Updated:{' '}
+          {new Date(industry.updatedAt).toLocaleDateString('en-US', {
             month: 'short',
             day: 'numeric',
             year: 'numeric',

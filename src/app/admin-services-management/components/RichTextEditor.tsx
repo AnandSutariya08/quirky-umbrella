@@ -40,8 +40,9 @@ const RichTextEditor = ({ value, onChange, error }: RichTextEditorProps) => {
     const start = textarea.selectionStart;
     const end = textarea.selectionEnd;
     const selectedText = value.substring(start, end);
-    const newText = value.substring(0, start) + before + selectedText + after + value.substring(end);
-    
+    const newText =
+      value.substring(0, start) + before + selectedText + after + value.substring(end);
+
     onChange(newText);
 
     setTimeout(() => {
@@ -59,7 +60,12 @@ const RichTextEditor = ({ value, onChange, error }: RichTextEditorProps) => {
     { icon: 'UnderlineIcon', title: 'Underline', before: '<u>', after: '</u>' },
     { icon: 'LinkIcon', title: 'Link', before: '<a href="url">', after: '</a>' },
     { icon: 'ListBulletIcon', title: 'Bullet List', before: '<ul>\n  <li>', after: '</li>\n</ul>' },
-    { icon: 'NumberedListIcon', title: 'Numbered List', before: '<ol>\n  <li>', after: '</li>\n</ol>' },
+    {
+      icon: 'NumberedListIcon',
+      title: 'Numbered List',
+      before: '<ol>\n  <li>',
+      after: '</li>\n</ol>',
+    },
   ];
 
   const insertHeading = (level: number) => {
@@ -71,9 +77,11 @@ const RichTextEditor = ({ value, onChange, error }: RichTextEditorProps) => {
   };
 
   return (
-    <div className={`border rounded-md overflow-hidden transition-smooth ${
-      error ? 'border-error' : 'border-input'
-    }`}>
+    <div
+      className={`border rounded-md overflow-hidden transition-smooth ${
+        error ? 'border-error' : 'border-input'
+      }`}
+    >
       <div className="bg-muted p-3 border-b border-border">
         <div className="flex flex-wrap items-center gap-2">
           <div className="flex gap-1">
@@ -147,7 +155,9 @@ const RichTextEditor = ({ value, onChange, error }: RichTextEditorProps) => {
         <div className="p-6 bg-background min-h-96 max-h-96 overflow-y-auto">
           <div
             className="prose prose-sm max-w-none"
-            dangerouslySetInnerHTML={{ __html: value || '<p class="text-muted-foreground">No content to preview</p>' }}
+            dangerouslySetInnerHTML={{
+              __html: value || '<p class="text-muted-foreground">No content to preview</p>',
+            }}
           />
         </div>
       ) : (

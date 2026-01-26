@@ -47,8 +47,7 @@ const NewsletterSection = () => {
               Stay in the Loop
             </h2>
             <p className="text-muted-foreground text-lg">
-              Get the latest insights, trends, and strategies delivered straight
-              to your inbox.
+              Get the latest insights, trends, and strategies delivered straight to your inbox.
             </p>
           </div>
 
@@ -60,9 +59,7 @@ const NewsletterSection = () => {
                 className="text-success mx-auto mb-3"
                 variant="solid"
               />
-              <p className="text-success font-medium text-lg">
-                Thank you for subscribing!
-              </p>
+              <p className="text-success font-medium text-lg">Thank you for subscribing!</p>
               <p className="text-muted-foreground text-sm mt-2">
                 Check your inbox for a confirmation email.
               </p>

@@ -19,18 +19,18 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
   const router = useRouter();
 
   // ALL HOOKS MUST BE CALLED BEFORE ANY CONDITIONAL RETURNS
-  
+
   // Check authentication on mount
   useEffect(() => {
     const checkAuth = () => {
       const authenticated = localStorage.getItem('adminAuthenticated') === 'true';
       setIsAuthenticated(authenticated);
-      
+
       if (!authenticated) {
         router.push('/admin-login');
       }
     };
-    
+
     checkAuth();
   }, [router]);
 
@@ -51,7 +51,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
   }, [isMobileSidebarOpen]);
 
   // NOW WE CAN DO CONDITIONAL RETURNS
-  
+
   // Show loading state while checking authentication
   if (isAuthenticated === null) {
     return (
@@ -120,8 +120,9 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
   return (
     <div className="min-h-screen bg-background">
       <aside
-        className={`hidden lg:block lg:fixed top-0 left-0 h-screen bg-card border-r border-border transition-all duration-300 z-[100] ${isSidebarCollapsed ? 'w-20' : 'w-64'
-          }`}
+        className={`hidden lg:block lg:fixed top-0 left-0 h-screen bg-card border-r border-border transition-all duration-300 z-[100] ${
+          isSidebarCollapsed ? 'w-20' : 'w-64'
+        }`}
       >
         <div className="flex flex-col h-full">
           <div className="flex items-center justify-between h-20 px-6 border-b border-border">
@@ -156,13 +157,13 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
                 key={item.href}
                 href={item.href}
                 className={`flex items-center gap-3 px-4 py-3 rounded-md font-medium transition-smooth press-scale
-  ${isActivePath(item.href)
-                    ? "bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground"
-                    : "text-foreground hover:bg-muted"
-                  }
-  ${isSidebarCollapsed ? "justify-center" : ""}
+  ${
+    isActivePath(item.href)
+      ? 'bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground'
+      : 'text-foreground hover:bg-muted'
+  }
+  ${isSidebarCollapsed ? 'justify-center' : ''}
 `}
-
                 title={isSidebarCollapsed ? item.title : undefined}
               >
                 <Icon name={item.icon as any} size={20} />
@@ -175,8 +176,9 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
             <a
               href="/home"
               onClick={handleBackToWebsite}
-              className={`flex items-center gap-3 px-4 py-3 rounded-md font-medium text-foreground transition-smooth hover:bg-muted press-scale ${isSidebarCollapsed ? 'justify-center' : ''
-                }`}
+              className={`flex items-center gap-3 px-4 py-3 rounded-md font-medium text-foreground transition-smooth hover:bg-muted press-scale ${
+                isSidebarCollapsed ? 'justify-center' : ''
+              }`}
               title={isSidebarCollapsed ? 'Back to Website' : undefined}
             >
               <Icon name="ArrowLeftIcon" size={20} />
@@ -218,12 +220,12 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
                 key={item.href}
                 href={item.href}
                 className={`flex items-center gap-3 px-6 py-4 rounded-md font-medium transition-smooth
-  ${isActivePath(item.href)
-                    ? "bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground"
-                    : "text-foreground hover:bg-muted"
-                  }
+  ${
+    isActivePath(item.href)
+      ? 'bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground'
+      : 'text-foreground hover:bg-muted'
+  }
 `}
-
               >
                 <Icon name={item.icon as any} size={20} />
                 <span>{item.title}</span>
@@ -245,8 +247,9 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
       )}
 
       <main
-        className={`transition-all duration-300 ${isSidebarCollapsed ? 'lg:ml-20' : 'lg:ml-64'
-          } pt-16 lg:pt-0`}
+        className={`transition-all duration-300 ${
+          isSidebarCollapsed ? 'lg:ml-20' : 'lg:ml-64'
+        } pt-16 lg:pt-0`}
       >
         {children}
       </main>
@@ -261,7 +264,8 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
               <div>
                 <h3 className="text-xl font-bold text-foreground mb-2">Confirm Logout</h3>
                 <p className="text-muted-foreground">
-                  Are you sure you want to leave the admin panel? You will need to log in again to access admin features.
+                  Are you sure you want to leave the admin panel? You will need to log in again to
+                  access admin features.
                 </p>
               </div>
             </div>

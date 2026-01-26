@@ -72,23 +72,19 @@ const FilterBar = ({
             <Icon
               name="ChevronDownIcon"
               size={16}
-              className={`transition-smooth ${
-                isMobileFilterOpen ? 'rotate-180' : ''
-              }`}
+              className={`transition-smooth ${isMobileFilterOpen ? 'rotate-180' : ''}`}
             />
           </button>
         </div>
 
-        <div
-          className={`${
-            isMobileFilterOpen ? 'block' : 'hidden'
-          } lg:block lg:flex-shrink-0`}
-        >
+        <div className={`${isMobileFilterOpen ? 'block' : 'hidden'} lg:block lg:flex-shrink-0`}>
           <div className="flex flex-wrap gap-2">
             <button
               onClick={() => onCategoryChange('All')}
               className={`px-4 py-2 rounded-md font-medium transition-smooth press-scale ${
-                selectedCategory === 'All' ?'bg-primary text-primary-foreground' :'bg-muted text-foreground hover:bg-muted/80'
+                selectedCategory === 'All'
+                  ? 'bg-primary text-primary-foreground'
+                  : 'bg-muted text-foreground hover:bg-muted/80'
               }`}
             >
               All

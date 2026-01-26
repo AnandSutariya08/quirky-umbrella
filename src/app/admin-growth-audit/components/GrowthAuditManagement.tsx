@@ -69,10 +69,7 @@ export default function GrowthAuditManagement() {
       return (
         <div className="flex flex-wrap gap-2">
           {answer.map((item, idx) => (
-            <span
-              key={idx}
-              className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm"
-            >
+            <span key={idx} className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">
               {item}
             </span>
           ))}
@@ -281,7 +278,9 @@ export default function GrowthAuditManagement() {
                   {selectedSubmission.companyName && (
                     <div>
                       <label className="text-sm font-medium text-muted-foreground">Company</label>
-                      <p className="text-foreground font-medium">{selectedSubmission.companyName}</p>
+                      <p className="text-foreground font-medium">
+                        {selectedSubmission.companyName}
+                      </p>
                     </div>
                   )}
                   <div className="md:col-span-2">

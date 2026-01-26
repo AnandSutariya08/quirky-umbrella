@@ -60,11 +60,11 @@ const ServicesManagementInteractive = () => {
 
   const handleDelete = async (id: string) => {
     if (!id) return;
-    
+
     if (confirm('Are you sure you want to delete this service? This action cannot be undone.')) {
       try {
         await servicesService.delete(id);
-        setServices(prev => prev.filter(s => s.id !== id));
+        setServices((prev) => prev.filter((s) => s.id !== id));
         showNotification('success', 'Service deleted successfully');
       } catch (error) {
         console.error('Error deleting service:', error);
@@ -80,7 +80,7 @@ const ServicesManagementInteractive = () => {
   const handleSave = async (serviceData: Omit<Service, 'id' | 'createdAt' | 'updatedAt'>) => {
     try {
       console.log('handleSave called with:', serviceData);
-      
+
       if (editingService && editingService.id) {
         // Update existing service
         console.log('Updating service:', editingService.id);
@@ -93,14 +93,16 @@ const ServicesManagementInteractive = () => {
         console.log('Service created with ID:', serviceId);
         showNotification('success', 'Service created successfully');
       }
-      
+
       // Refresh services list
       await fetchServices();
       setShowForm(false);
       setEditingService(null);
     } catch (error: any) {
       console.error('Error saving service:', error);
-      const errorMessage = error?.message || 'Failed to save service. Please check your Firebase configuration and try again.';
+      const errorMessage =
+        error?.message ||
+        'Failed to save service. Please check your Firebase configuration and try again.';
       showNotification('error', errorMessage);
     }
   };
@@ -126,9 +128,7 @@ const ServicesManagementInteractive = () => {
       <div className="max-w-7xl mx-auto p-6 space-y-6">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-heading font-bold text-foreground">
-              Services Management
-            </h1>
+            <h1 className="text-3xl font-heading font-bold text-foreground">Services Management</h1>
             <p className="text-muted-foreground mt-2">
               Create and manage service offerings for your website
             </p>
@@ -145,7 +145,9 @@ const ServicesManagementInteractive = () => {
         {notification && (
           <div
             className={`flex items-center gap-3 p-4 rounded-md animate-slide-down ${
-              notification.type === 'success' ?'bg-success/10 text-success' :'bg-error/10 text-error'
+              notification.type === 'success'
+                ? 'bg-success/10 text-success'
+                : 'bg-error/10 text-error'
             }`}
           >
             <Icon
@@ -157,11 +159,7 @@ const ServicesManagementInteractive = () => {
         )}
 
         {showForm ? (
-          <ServiceFormNew
-            service={editingService}
-            onSave={handleSave}
-            onCancel={handleCancel}
-          />
+          <ServiceFormNew service={editingService} onSave={handleSave} onCancel={handleCancel} />
         ) : isLoading ? (
           <div className="bg-card rounded-lg shadow-neutral-md p-12 text-center">
             <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4" />
@@ -177,10 +175,7 @@ const ServicesManagementInteractive = () => {
         )}
 
         {previewService && (
-          <ServicePreview
-            service={previewService}
-            onClose={() => setPreviewService(null)}
-          />
+          <ServicePreview service={previewService} onClose={() => setPreviewService(null)} />
         )}
       </div>
     </div>

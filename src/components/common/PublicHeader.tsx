@@ -83,15 +83,13 @@ const PublicHeader = ({ className = '' }: PublicHeaderProps) => {
   };
 
   return (
-    <header
-      ref={headerRef}
-      className={`fixed top-0 left-0 right-0 z-[1000] ${className}`}
-    >
+    <header ref={headerRef} className={`fixed top-0 left-0 right-0 z-[1000] ${className}`}>
       <div
-        className={`relative mx-auto transition-all duration-500 ease-in-out ${isScrolled
+        className={`relative mx-auto transition-all duration-500 ease-in-out ${
+          isScrolled
             ? 'mt-4 w-[95%] max-w-7xl rounded-3xl backdrop-blur-xl bg-card/80 border border-border/50 shadow-lg'
             : 'w-full bg-transparent'
-          }`}
+        }`}
       >
         <div className="container mx-auto">
           <div className="flex items-center justify-between h-20">
@@ -110,9 +108,9 @@ const PublicHeader = ({ className = '' }: PublicHeaderProps) => {
             <nav className="hidden lg:flex items-center gap-2">
               <Link
                 href="/home"
-                className={`px-6 py-3 rounded-md font-medium transition-smooth hover:bg-muted press-scale ${isActivePath('/home')
-                    ? 'text-primary bg-muted' : 'text-foreground'
-                  }`}
+                className={`px-6 py-3 rounded-md font-medium transition-smooth hover:bg-muted press-scale ${
+                  isActivePath('/home') ? 'text-primary bg-muted' : 'text-foreground'
+                }`}
               >
                 Home
               </Link>
@@ -120,8 +118,9 @@ const PublicHeader = ({ className = '' }: PublicHeaderProps) => {
               <div className="relative">
                 <button
                   onMouseEnter={() => handleMouseEnter('services')}
-                  className={`flex items-center gap-2 px-6 py-3 rounded-md font-medium transition-smooth hover:bg-muted press-scale ${activeDropdown === 'services' ? 'bg-muted text-primary' : 'text-foreground'
-                    }`}
+                  className={`flex items-center gap-2 px-6 py-3 rounded-md font-medium transition-smooth hover:bg-muted press-scale ${
+                    activeDropdown === 'services' ? 'bg-muted text-primary' : 'text-foreground'
+                  }`}
                   aria-expanded={activeDropdown === 'services'}
                   aria-haspopup="true"
                 >
@@ -129,54 +128,50 @@ const PublicHeader = ({ className = '' }: PublicHeaderProps) => {
                   <Icon
                     name="ChevronDownIcon"
                     size={16}
-                    className={`transition-smooth ${activeDropdown === 'services' ? 'rotate-180' : ''
-                      }`}
+                    className={`transition-smooth ${
+                      activeDropdown === 'services' ? 'rotate-180' : ''
+                    }`}
                   />
                 </button>
                 {activeDropdown === 'services' && (
                   <div onMouseLeave={handleMouseLeave}>
-                    <DropdownMenu
-                      collection="services"
-                      onClose={() => setActiveDropdown(null)}
-                    />
+                    <DropdownMenu collection="services" onClose={() => setActiveDropdown(null)} />
                   </div>
                 )}
               </div>
 
-
-
               <Link
                 href="/discuss"
-                className={`px-6 py-3 rounded-md font-medium transition-smooth hover:bg-muted press-scale ${isActivePath('/discuss')
-                    ? 'text-primary bg-muted' : 'text-foreground'
-                  }`}
+                className={`px-6 py-3 rounded-md font-medium transition-smooth hover:bg-muted press-scale ${
+                  isActivePath('/discuss') ? 'text-primary bg-muted' : 'text-foreground'
+                }`}
               >
                 Discuss
               </Link>
 
               <Link
                 href="/blogs"
-                className={`px-6 py-3 rounded-md font-medium transition-smooth hover:bg-muted press-scale ${isActivePath('/blogs')
-                    ? 'text-primary bg-muted' : 'text-foreground'
-                  }`}
+                className={`px-6 py-3 rounded-md font-medium transition-smooth hover:bg-muted press-scale ${
+                  isActivePath('/blogs') ? 'text-primary bg-muted' : 'text-foreground'
+                }`}
               >
                 Blog
               </Link>
 
               <Link
                 href="/about-us"
-                className={`px-6 py-3 rounded-md font-medium transition-smooth hover:bg-muted press-scale ${isActivePath('/about-us')
-                    ? 'text-primary bg-muted' : 'text-foreground'
-                  }`}
+                className={`px-6 py-3 rounded-md font-medium transition-smooth hover:bg-muted press-scale ${
+                  isActivePath('/about-us') ? 'text-primary bg-muted' : 'text-foreground'
+                }`}
               >
                 About Us
               </Link>
 
               <Link
                 href="/contact"
-                className={`px-6 py-3 rounded-md font-medium transition-smooth hover:bg-muted press-scale ${isActivePath('/contact')
-                    ? 'text-primary bg-muted' : 'text-foreground'
-                  }`}
+                className={`px-6 py-3 rounded-md font-medium transition-smooth hover:bg-muted press-scale ${
+                  isActivePath('/contact') ? 'text-primary bg-muted' : 'text-foreground'
+                }`}
               >
                 Contact Us
               </Link>
@@ -193,10 +188,11 @@ const PublicHeader = ({ className = '' }: PublicHeaderProps) => {
 
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className={`lg:hidden inline-flex items-center justify-center h-11 w-11 rounded-xl transition-smooth press-scale focus:outline-none ${isScrolled
+              className={`lg:hidden inline-flex items-center justify-center h-11 w-11 rounded-xl transition-smooth press-scale focus:outline-none ${
+                isScrolled
                   ? 'bg-muted/60 hover:bg-muted border border-border/60 shadow-sm'
                   : 'bg-card/50 hover:bg-card/70 backdrop-blur-sm border border-border/40 shadow-sm'
-                }`}
+              }`}
               aria-label="Toggle mobile menu"
               aria-expanded={isMobileMenuOpen}
             >
@@ -212,10 +208,11 @@ const PublicHeader = ({ className = '' }: PublicHeaderProps) => {
 
       {/* Bottom fade to visually merge header into content */}
       <div
-        className={`pointer-events-none absolute inset-x-0 bottom-0 h-10 transition-opacity duration-500 ${isScrolled
+        className={`pointer-events-none absolute inset-x-0 bottom-0 h-10 transition-opacity duration-500 ${
+          isScrolled
             ? 'opacity-100 bg-gradient-to-b from-card/70 via-card/30 to-transparent'
             : 'opacity-100 bg-gradient-to-b from-transparent via-transparent to-transparent'
-          }`}
+        }`}
       />
 
       {isMobileMenuOpen && (
@@ -258,9 +255,9 @@ const PublicHeader = ({ className = '' }: PublicHeaderProps) => {
               <nav className="px-3 py-4 space-y-2 max-h-[calc(100vh-6rem)] overflow-y-auto">
                 <Link
                   href="/home"
-                  className={`block px-4 py-3 rounded-xl font-semibold transition-smooth hover:bg-muted ${isActivePath('/home')
-                      ? 'text-primary bg-muted' : 'text-foreground'
-                    }`}
+                  className={`block px-4 py-3 rounded-xl font-semibold transition-smooth hover:bg-muted ${
+                    isActivePath('/home') ? 'text-primary bg-muted' : 'text-foreground'
+                  }`}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   Home
@@ -269,15 +266,19 @@ const PublicHeader = ({ className = '' }: PublicHeaderProps) => {
                 <div>
                   <button
                     onClick={() => toggleDropdown('services-mobile')}
-                    className={`w-full flex items-center justify-between px-4 py-3 rounded-xl font-semibold transition-smooth hover:bg-muted ${activeDropdown === 'services-mobile' ? 'bg-muted text-primary' : 'text-foreground'
-                      }`}
+                    className={`w-full flex items-center justify-between px-4 py-3 rounded-xl font-semibold transition-smooth hover:bg-muted ${
+                      activeDropdown === 'services-mobile'
+                        ? 'bg-muted text-primary'
+                        : 'text-foreground'
+                    }`}
                   >
                     Services
                     <Icon
                       name="ChevronDownIcon"
                       size={20}
-                      className={`transition-smooth ${activeDropdown === 'services-mobile' ? 'rotate-180' : ''
-                        }`}
+                      className={`transition-smooth ${
+                        activeDropdown === 'services-mobile' ? 'rotate-180' : ''
+                      }`}
                     />
                   </button>
                   {activeDropdown === 'services-mobile' && (
@@ -293,9 +294,9 @@ const PublicHeader = ({ className = '' }: PublicHeaderProps) => {
 
                 <Link
                   href="/about-us"
-                  className={`block px-4 py-3 rounded-xl font-semibold transition-smooth hover:bg-muted ${isActivePath('/about-us')
-                      ? 'text-primary bg-muted' : 'text-foreground'
-                    }`}
+                  className={`block px-4 py-3 rounded-xl font-semibold transition-smooth hover:bg-muted ${
+                    isActivePath('/about-us') ? 'text-primary bg-muted' : 'text-foreground'
+                  }`}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   About Us
@@ -303,9 +304,9 @@ const PublicHeader = ({ className = '' }: PublicHeaderProps) => {
 
                 <Link
                   href="/discuss"
-                  className={`block px-4 py-3 rounded-xl font-semibold transition-smooth hover:bg-muted ${isActivePath('/discuss')
-                      ? 'text-primary bg-muted' : 'text-foreground'
-                    }`}
+                  className={`block px-4 py-3 rounded-xl font-semibold transition-smooth hover:bg-muted ${
+                    isActivePath('/discuss') ? 'text-primary bg-muted' : 'text-foreground'
+                  }`}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   Discuss
@@ -313,9 +314,9 @@ const PublicHeader = ({ className = '' }: PublicHeaderProps) => {
 
                 <Link
                   href="/blogs"
-                  className={`block px-4 py-3 rounded-xl font-semibold transition-smooth hover:bg-muted ${isActivePath('/blogs')
-                      ? 'text-primary bg-muted' : 'text-foreground'
-                    }`}
+                  className={`block px-4 py-3 rounded-xl font-semibold transition-smooth hover:bg-muted ${
+                    isActivePath('/blogs') ? 'text-primary bg-muted' : 'text-foreground'
+                  }`}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   Blog
@@ -323,9 +324,9 @@ const PublicHeader = ({ className = '' }: PublicHeaderProps) => {
 
                 <Link
                   href="/contact"
-                  className={`block px-4 py-3 rounded-xl font-semibold transition-smooth hover:bg-muted ${isActivePath('/contact')
-                      ? 'text-primary bg-muted' : 'text-foreground'
-                    }`}
+                  className={`block px-4 py-3 rounded-xl font-semibold transition-smooth hover:bg-muted ${
+                    isActivePath('/contact') ? 'text-primary bg-muted' : 'text-foreground'
+                  }`}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   Contact Us

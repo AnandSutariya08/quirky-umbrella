@@ -4,7 +4,8 @@ import ServicesManagementInteractive from './components/ServicesManagementIntera
 
 export const metadata: Metadata = {
   title: 'Services Management - Quirky Umbrella Admin',
-  description: 'Manage service offerings with comprehensive CRUD operations, rich text editing, and SEO optimization tools for your corporate website.',
+  description:
+    'Manage service offerings with comprehensive CRUD operations, rich text editing, and SEO optimization tools for your corporate website.',
 };
 
 export default function AdminServicesManagementPage() {

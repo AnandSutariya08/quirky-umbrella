@@ -11,28 +11,59 @@ export const questions: Question[] = [
     id: 'q1',
     question: 'What is your primary marketing goal?',
     type: 'single',
-    options: ['Increase brand awareness', 'Generate more leads', 'Improve customer retention', 'Drive sales revenue', 'Expand market reach'],
+    options: [
+      'Increase brand awareness',
+      'Generate more leads',
+      'Improve customer retention',
+      'Drive sales revenue',
+      'Expand market reach',
+    ],
     required: true,
   },
   {
     id: 'q2',
     question: 'Which marketing channels are you currently using? (Select all that apply)',
     type: 'multiple',
-    options: ['Social Media', 'Email Marketing', 'Content Marketing', 'SEO/SEM', 'Paid Advertising', 'Influencer Marketing', 'Events/Webinars', 'Other'],
+    options: [
+      'Social Media',
+      'Email Marketing',
+      'Content Marketing',
+      'SEO/SEM',
+      'Paid Advertising',
+      'Influencer Marketing',
+      'Events/Webinars',
+      'Other',
+    ],
     required: true,
   },
   {
     id: 'q3',
     question: 'What is your current monthly marketing budget?',
     type: 'single',
-    options: ['Under $1,000', '$1,000 - $5,000', '$5,000 - $10,000', '$10,000 - $50,000', 'Over $50,000', 'Not sure'],
+    options: [
+      'Under $1,000',
+      '$1,000 - $5,000',
+      '$5,000 - $10,000',
+      '$10,000 - $50,000',
+      'Over $50,000',
+      'Not sure',
+    ],
     required: true,
   },
   {
     id: 'q4',
     question: 'What are your biggest marketing challenges? (Select all that apply)',
     type: 'multiple',
-    options: ['Limited budget', 'Lack of expertise', 'Measuring ROI', 'Generating quality leads', 'Content creation', 'Staying competitive', 'Technology integration', 'Team resources'],
+    options: [
+      'Limited budget',
+      'Lack of expertise',
+      'Measuring ROI',
+      'Generating quality leads',
+      'Content creation',
+      'Staying competitive',
+      'Technology integration',
+      'Team resources',
+    ],
     required: true,
   },
   {
@@ -52,7 +83,16 @@ export const questions: Question[] = [
     id: 'q7',
     question: 'Which tools or platforms do you use for marketing? (Select all that apply)',
     type: 'multiple',
-    options: ['CRM System', 'Email Marketing Platform', 'Social Media Management', 'Analytics Tools', 'Marketing Automation', 'Content Management System', 'None', 'Other'],
+    options: [
+      'CRM System',
+      'Email Marketing Platform',
+      'Social Media Management',
+      'Analytics Tools',
+      'Marketing Automation',
+      'Content Management System',
+      'None',
+      'Other',
+    ],
     required: true,
   },
   {
@@ -65,7 +105,13 @@ export const questions: Question[] = [
     id: 'q9',
     question: 'How would you rate your current marketing ROI?',
     type: 'single',
-    options: ['Excellent - High ROI', 'Good - Positive ROI', 'Average - Break even', 'Poor - Negative ROI', 'Not measured'],
+    options: [
+      'Excellent - High ROI',
+      'Good - Positive ROI',
+      'Average - Break even',
+      'Poor - Negative ROI',
+      'Not measured',
+    ],
     required: true,
   },
   {
@@ -110,7 +156,7 @@ export default function GrowthAuditForm() {
 
   const validateStep1 = (): boolean => {
     const newErrors: Record<string, string> = {};
-    
+
     if (!formData.name.trim()) {
       newErrors.name = 'Name is required';
     }
@@ -129,11 +175,15 @@ export default function GrowthAuditForm() {
 
   const validateStep2 = (): boolean => {
     const newErrors: Record<string, string> = {};
-    
+
     questions.forEach((question) => {
       if (question.required) {
         const answer = answers[question.id];
-        if (!answer || (Array.isArray(answer) && answer.length === 0) || (typeof answer === 'string' && !answer.trim())) {
+        if (
+          !answer ||
+          (Array.isArray(answer) && answer.length === 0) ||
+          (typeof answer === 'string' && !answer.trim())
+        ) {
           newErrors[question.id] = 'This question is required';
         }
       }
@@ -159,21 +209,21 @@ export default function GrowthAuditForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!validateStep2()) {
       return;
     }
 
     setIsSubmitting(true);
-    
+
     try {
       await growthAuditService.submit({
         ...formData,
         answers,
       });
-      
+
       setSubmitted(true);
-      
+
       // Reset form after 5 seconds
       setTimeout(() => {
         setSubmitted(false);
@@ -192,10 +242,16 @@ export default function GrowthAuditForm() {
 
   if (submitted) {
     return (
-      <section id="growth-audit" className="py-16 lg:py-24 bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5 relative overflow-hidden">
+      <section
+        id="growth-audit"
+        className="py-16 lg:py-24 bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5 relative overflow-hidden"
+      >
         <div className="pointer-events-none absolute inset-0 opacity-30">
           <div className="absolute -top-10 -left-10 w-72 h-72 bg-primary/15 rounded-full blur-3xl animate-float-soft" />
-          <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary/15 rounded-full blur-3xl animate-float" style={{ animationDelay: '800ms' }} />
+          <div
+            className="absolute bottom-0 right-0 w-96 h-96 bg-secondary/15 rounded-full blur-3xl animate-float"
+            style={{ animationDelay: '800ms' }}
+          />
         </div>
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto">
@@ -205,7 +261,8 @@ export default function GrowthAuditForm() {
                 <Icon name="CheckCircleIcon" size={64} className="text-primary mx-auto mb-4" />
                 <h3 className="text-2xl font-semibold text-foreground mb-2">Thank You!</h3>
                 <p className="text-muted-foreground">
-                  We've received your growth audit submission and will get back to you soon with personalized insights.
+                  We've received your growth audit submission and will get back to you soon with
+                  personalized insights.
                 </p>
               </div>
             </div>
@@ -216,10 +273,16 @@ export default function GrowthAuditForm() {
   }
 
   return (
-    <section id="growth-audit" className="py-16 lg:py-24 bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5 relative overflow-hidden">
+    <section
+      id="growth-audit"
+      className="py-16 lg:py-24 bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5 relative overflow-hidden"
+    >
       <div className="pointer-events-none absolute inset-0 opacity-30">
         <div className="absolute -top-10 -left-10 w-72 h-72 bg-primary/15 rounded-full blur-3xl animate-float-soft" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary/15 rounded-full blur-3xl animate-float" style={{ animationDelay: '800ms' }} />
+        <div
+          className="absolute bottom-0 right-0 w-96 h-96 bg-secondary/15 rounded-full blur-3xl animate-float"
+          style={{ animationDelay: '800ms' }}
+        />
       </div>
       <div className="container mx-auto px-6">
         <div className="max-w-4xl mx-auto">
@@ -237,9 +300,7 @@ export default function GrowthAuditForm() {
             {/* Progress Indicator */}
             <div className="mb-8">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-sm font-medium text-foreground">
-                  Step {currentStep} of 2
-                </span>
+                <span className="text-sm font-medium text-foreground">Step {currentStep} of 2</span>
                 <span className="text-sm text-muted-foreground">
                   {currentStep === 1 ? 'Your Details' : 'Marketing Questions'}
                 </span>
@@ -253,10 +314,19 @@ export default function GrowthAuditForm() {
             </div>
 
             {currentStep === 1 ? (
-              <form onSubmit={(e) => { e.preventDefault(); handleNext(); }} className="space-y-6">
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  handleNext();
+                }}
+                className="space-y-6"
+              >
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
+                    <label
+                      htmlFor="name"
+                      className="block text-sm font-medium text-foreground mb-2"
+                    >
                       Name <span className="text-error">*</span>
                     </label>
                     <input
@@ -271,12 +341,13 @@ export default function GrowthAuditForm() {
                       }`}
                       placeholder="Your name"
                     />
-                    {errors.name && (
-                      <p className="mt-1 text-sm text-error">{errors.name}</p>
-                    )}
+                    {errors.name && <p className="mt-1 text-sm text-error">{errors.name}</p>}
                   </div>
                   <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
+                    <label
+                      htmlFor="email"
+                      className="block text-sm font-medium text-foreground mb-2"
+                    >
                       Email <span className="text-error">*</span>
                     </label>
                     <input
@@ -291,14 +362,15 @@ export default function GrowthAuditForm() {
                       }`}
                       placeholder="your.email@example.com"
                     />
-                    {errors.email && (
-                      <p className="mt-1 text-sm text-error">{errors.email}</p>
-                    )}
+                    {errors.email && <p className="mt-1 text-sm text-error">{errors.email}</p>}
                   </div>
                 </div>
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
-                    <label htmlFor="mobile" className="block text-sm font-medium text-foreground mb-2">
+                    <label
+                      htmlFor="mobile"
+                      className="block text-sm font-medium text-foreground mb-2"
+                    >
                       Mobile Number
                     </label>
                     <input
@@ -312,7 +384,10 @@ export default function GrowthAuditForm() {
                     />
                   </div>
                   <div>
-                    <label htmlFor="companyName" className="block text-sm font-medium text-foreground mb-2">
+                    <label
+                      htmlFor="companyName"
+                      className="block text-sm font-medium text-foreground mb-2"
+                    >
                       Company Name
                     </label>
                     <input
@@ -327,7 +402,10 @@ export default function GrowthAuditForm() {
                   </div>
                 </div>
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
+                  <label
+                    htmlFor="message"
+                    className="block text-sm font-medium text-foreground mb-2"
+                  >
                     One Line Message <span className="text-error">*</span>
                   </label>
                   <textarea
@@ -342,9 +420,7 @@ export default function GrowthAuditForm() {
                     }`}
                     placeholder="Tell us about your growth goals or just say hello..."
                   />
-                  {errors.message && (
-                    <p className="mt-1 text-sm text-error">{errors.message}</p>
-                  )}
+                  {errors.message && <p className="mt-1 text-sm text-error">{errors.message}</p>}
                 </div>
                 <div className="flex justify-end">
                   <button
@@ -364,7 +440,7 @@ export default function GrowthAuditForm() {
                       {index + 1}. {question.question}
                       {question.required && <span className="text-error ml-1">*</span>}
                     </label>
-                    
+
                     {question.type === 'single' && question.options && (
                       <div className="space-y-3">
                         {question.options.map((option) => (
@@ -396,9 +472,9 @@ export default function GrowthAuditForm() {
                             <input
                               type="checkbox"
                               value={option}
-                              checked={(answers[question.id] as string[] || []).includes(option)}
+                              checked={((answers[question.id] as string[]) || []).includes(option)}
                               onChange={(e) => {
-                                const current = (answers[question.id] as string[] || []);
+                                const current = (answers[question.id] as string[]) || [];
                                 const updated = e.target.checked
                                   ? [...current, option]
                                   : current.filter((v) => v !== option);

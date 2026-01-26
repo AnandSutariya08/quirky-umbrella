@@ -25,9 +25,11 @@ export const servicesService = {
   async create(service: Omit<Service, 'id' | 'createdAt' | 'updatedAt'>): Promise<string> {
     try {
       console.log('Creating service with data:', service);
-      
+
       if (!firestoreDb) {
-        throw new Error('Firestore database is not initialized. Please check your Firebase configuration.');
+        throw new Error(
+          'Firestore database is not initialized. Please check your Firebase configuration.'
+        );
       }
 
       const docRef = await addDoc(collection(firestoreDb, SERVICES_COLLECTION), {
@@ -35,7 +37,7 @@ export const servicesService = {
         createdAt: Timestamp.now(),
         updatedAt: Timestamp.now(),
       });
-      
+
       console.log('Service created successfully with ID:', docRef.id);
       return docRef.id;
     } catch (error) {

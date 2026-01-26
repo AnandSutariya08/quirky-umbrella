@@ -17,7 +17,9 @@ const firestoreDb: typeof db = db;
 
 export const growthAuditService = {
   // Submit a new growth audit
-  async submit(submission: Omit<GrowthAuditSubmission, 'id' | 'submittedAt' | 'createdAt' | 'updatedAt'>): Promise<string> {
+  async submit(
+    submission: Omit<GrowthAuditSubmission, 'id' | 'submittedAt' | 'createdAt' | 'updatedAt'>
+  ): Promise<string> {
     try {
       if (!firestoreDb) {
         throw new Error('Firestore database is not initialized.');
@@ -48,9 +50,9 @@ export const growthAuditService = {
         collection(firestoreDb, GROWTH_AUDIT_COLLECTION),
         orderBy('submittedAt', 'desc')
       );
-      
+
       const querySnapshot = await getDocs(q);
-      
+
       return querySnapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),

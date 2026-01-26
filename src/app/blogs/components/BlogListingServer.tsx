@@ -38,8 +38,7 @@ const BlogListingServer = ({ initialBlogs }: BlogListingServerProps) => {
 
   const filteredPosts = useMemo(() => {
     return blogPosts.filter((post) => {
-      const matchesCategory =
-        selectedCategory === 'All' || post.category === selectedCategory;
+      const matchesCategory = selectedCategory === 'All' || post.category === selectedCategory;
       const matchesSearch =
         searchQuery === '' ||
         post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -80,17 +79,11 @@ const BlogListingServer = ({ initialBlogs }: BlogListingServerProps) => {
 
       {currentPosts.length === 0 ? (
         <div className="text-center py-20">
-          <Icon
-            name="DocumentTextIcon"
-            size={64}
-            className="text-muted-foreground mx-auto mb-4"
-          />
+          <Icon name="DocumentTextIcon" size={64} className="text-muted-foreground mx-auto mb-4" />
           <h3 className="font-heading text-2xl font-semibold text-foreground mb-2">
             No articles found
           </h3>
-          <p className="text-muted-foreground">
-            Try adjusting your filters or search query
-          </p>
+          <p className="text-muted-foreground">Try adjusting your filters or search query</p>
         </div>
       ) : (
         <>
@@ -124,21 +117,19 @@ const BlogListingServer = ({ initialBlogs }: BlogListingServerProps) => {
                 <Icon name="ChevronLeftIcon" size={20} />
               </button>
 
-              {Array.from({ length: totalPages }, (_, i) => i + 1).map(
-                (page) => (
-                  <button
-                    key={page}
-                    onClick={() => handlePageChange(page)}
-                    className={`px-4 py-2 rounded-md font-medium transition-smooth press-scale ${
-                      currentPage === page
-                        ? 'bg-primary text-primary-foreground'
-                        : 'bg-card text-foreground border border-border hover:bg-muted'
-                    }`}
-                  >
-                    {page}
-                  </button>
-                )
-              )}
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                <button
+                  key={page}
+                  onClick={() => handlePageChange(page)}
+                  className={`px-4 py-2 rounded-md font-medium transition-smooth press-scale ${
+                    currentPage === page
+                      ? 'bg-primary text-primary-foreground'
+                      : 'bg-card text-foreground border border-border hover:bg-muted'
+                  }`}
+                >
+                  {page}
+                </button>
+              ))}
 
               <button
                 onClick={() => handlePageChange(currentPage + 1)}

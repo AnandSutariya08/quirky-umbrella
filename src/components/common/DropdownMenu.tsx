@@ -39,10 +39,7 @@ const DropdownMenu = ({ collection, onClose, isMobile = false }: DropdownMenuPro
         {isLoading ? (
           <div className="space-y-2">
             {[1, 2, 3].map((i) => (
-              <div
-                key={i}
-                className="h-16 bg-muted rounded-md animate-pulse"
-              />
+              <div key={i} className="h-16 bg-muted rounded-md animate-pulse" />
             ))}
           </div>
         ) : error ? (
@@ -81,10 +78,7 @@ const DropdownMenu = ({ collection, onClose, isMobile = false }: DropdownMenuPro
       {isLoading ? (
         <div className="p-4 space-y-3">
           {[1, 2, 3].map((i) => (
-            <div
-              key={i}
-              className="h-16 bg-muted rounded-md animate-pulse"
-            />
+            <div key={i} className="h-16 bg-muted rounded-md animate-pulse" />
           ))}
         </div>
       ) : error ? (
@@ -100,9 +94,15 @@ const DropdownMenu = ({ collection, onClose, isMobile = false }: DropdownMenuPro
         </div>
       ) : items.length === 0 ? (
         <div className="p-6 text-center">
-          <Icon name="InboxIcon" size={32} className="text-muted-foreground mx-auto mb-3 opacity-50" />
+          <Icon
+            name="InboxIcon"
+            size={32}
+            className="text-muted-foreground mx-auto mb-3 opacity-50"
+          />
           <p className="text-muted-foreground text-sm font-medium">No services listed</p>
-          <p className="text-muted-foreground text-xs mt-1">Services will appear here once they are added</p>
+          <p className="text-muted-foreground text-xs mt-1">
+            Services will appear here once they are added
+          </p>
         </div>
       ) : (
         <div className="py-2 max-h-[360px] overflow-y-auto pr-1 scrollbar-quirky">
@@ -114,9 +114,7 @@ const DropdownMenu = ({ collection, onClose, isMobile = false }: DropdownMenuPro
               className="block px-6 py-4 hover:bg-muted transition-smooth"
               style={{ animationDelay: `${index * 50}ms` }}
             >
-              <div className="font-medium text-popover-foreground">
-                {item.title}
-              </div>
+              <div className="font-medium text-popover-foreground">{item.title}</div>
               {/* {item.description && (
                 <div className="text-sm text-muted-foreground mt-1 line-clamp-2">
                   {item.description}

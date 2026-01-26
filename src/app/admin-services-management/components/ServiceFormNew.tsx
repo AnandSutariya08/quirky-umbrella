@@ -2,7 +2,13 @@
 
 import { useState, useEffect } from 'react';
 import Icon from '@/components/ui/AppIcon';
-import type { Service, ServiceDeliverable, ProcessStep, IndustryUseCase, FAQ } from '@/types/service';
+import type {
+  Service,
+  ServiceDeliverable,
+  ProcessStep,
+  IndustryUseCase,
+  FAQ,
+} from '@/types/service';
 
 interface ServiceFormNewProps {
   service: Service | null;
@@ -75,35 +81,35 @@ const ServiceFormNew = ({ service, onSave, onCancel }: ServiceFormNewProps) => {
   };
 
   const handleTitleChange = (value: string) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       title: value,
       slug: prev.slug || generateSlug(value),
     }));
     if (errors.title) {
-      setErrors(prev => ({ ...prev, title: '' }));
+      setErrors((prev) => ({ ...prev, title: '' }));
     }
   };
 
   const handleChange = (field: string, value: any) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    setFormData((prev) => ({ ...prev, [field]: value }));
     if (errors[field]) {
-      setErrors(prev => ({ ...prev, [field]: '' }));
+      setErrors((prev) => ({ ...prev, [field]: '' }));
     }
   };
 
   const handleNestedChange = (section: string, field: string, value: any) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       [section]: {
-        ...prev[section as keyof typeof prev] as any,
+        ...(prev[section as keyof typeof prev] as any),
         [field]: value,
       },
     }));
   };
 
   const addDeliverable = () => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       deliverables: {
         ...prev.deliverables,
@@ -113,7 +119,7 @@ const ServiceFormNew = ({ service, onSave, onCancel }: ServiceFormNewProps) => {
   };
 
   const removeDeliverable = (index: number) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       deliverables: {
         ...prev.deliverables,
@@ -123,17 +129,17 @@ const ServiceFormNew = ({ service, onSave, onCancel }: ServiceFormNewProps) => {
   };
 
   const updateDeliverable = (index: number, text: string) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       deliverables: {
         ...prev.deliverables,
-        items: prev.deliverables.items.map((item, i) => i === index ? { text } : item),
+        items: prev.deliverables.items.map((item, i) => (i === index ? { text } : item)),
       },
     }));
   };
 
   const addProcessStep = () => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       approach: {
         ...prev.approach,
@@ -143,7 +149,7 @@ const ServiceFormNew = ({ service, onSave, onCancel }: ServiceFormNewProps) => {
   };
 
   const removeProcessStep = (index: number) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       approach: {
         ...prev.approach,
@@ -153,17 +159,17 @@ const ServiceFormNew = ({ service, onSave, onCancel }: ServiceFormNewProps) => {
   };
 
   const updateProcessStep = (index: number, text: string) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       approach: {
         ...prev.approach,
-        processSteps: prev.approach.processSteps.map((step, i) => i === index ? { text } : step),
+        processSteps: prev.approach.processSteps.map((step, i) => (i === index ? { text } : step)),
       },
     }));
   };
 
   const addIndustry = () => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       useCases: {
         ...prev.useCases,
@@ -173,7 +179,7 @@ const ServiceFormNew = ({ service, onSave, onCancel }: ServiceFormNewProps) => {
   };
 
   const removeIndustry = (index: number) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       useCases: {
         ...prev.useCases,
@@ -183,7 +189,7 @@ const ServiceFormNew = ({ service, onSave, onCancel }: ServiceFormNewProps) => {
   };
 
   const updateIndustry = (index: number, field: 'title' | 'items', value: string | string[]) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       useCases: {
         ...prev.useCases,
@@ -195,21 +201,19 @@ const ServiceFormNew = ({ service, onSave, onCancel }: ServiceFormNewProps) => {
   };
 
   const addIndustryItem = (industryIndex: number) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       useCases: {
         ...prev.useCases,
         industries: prev.useCases.industries.map((industry, i) =>
-          i === industryIndex
-            ? { ...industry, items: [...industry.items, ''] }
-            : industry
+          i === industryIndex ? { ...industry, items: [...industry.items, ''] } : industry
         ),
       },
     }));
   };
 
   const removeIndustryItem = (industryIndex: number, itemIndex: number) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       useCases: {
         ...prev.useCases,
@@ -223,7 +227,7 @@ const ServiceFormNew = ({ service, onSave, onCancel }: ServiceFormNewProps) => {
   };
 
   const updateIndustryItem = (industryIndex: number, itemIndex: number, value: string) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       useCases: {
         ...prev.useCases,
@@ -231,7 +235,7 @@ const ServiceFormNew = ({ service, onSave, onCancel }: ServiceFormNewProps) => {
           i === industryIndex
             ? {
                 ...industry,
-                items: industry.items.map((item, j) => j === itemIndex ? value : item),
+                items: industry.items.map((item, j) => (j === itemIndex ? value : item)),
               }
             : industry
         ),
@@ -240,58 +244,57 @@ const ServiceFormNew = ({ service, onSave, onCancel }: ServiceFormNewProps) => {
   };
 
   const addFAQ = () => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       faqs: [...prev.faqs, { question: '', answer: '' }],
     }));
   };
 
   const removeFAQ = (index: number) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       faqs: prev.faqs.filter((_, i) => i !== index),
     }));
   };
 
   const updateFAQ = (index: number, field: 'question' | 'answer', value: string) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      faqs: prev.faqs.map((faq, i) =>
-        i === index ? { ...faq, [field]: value } : faq
-      ),
+      faqs: prev.faqs.map((faq, i) => (i === index ? { ...faq, [field]: value } : faq)),
     }));
   };
 
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     console.log('=== FORM SUBMISSION STARTED ===');
     console.log('Raw form data:', formData);
-    
+
     // Clean up empty items
     const cleanedData = {
       ...formData,
       deliverables: {
         ...formData.deliverables,
-        items: formData.deliverables.items.filter(item => item.text.trim()),
+        items: formData.deliverables.items.filter((item) => item.text.trim()),
       },
       approach: {
         ...formData.approach,
-        processSteps: formData.approach.processSteps.filter(step => step.text.trim()),
+        processSteps: formData.approach.processSteps.filter((step) => step.text.trim()),
       },
       useCases: {
         ...formData.useCases,
-        industries: formData.useCases.industries.map(industry => ({
-          ...industry,
-          items: industry.items.filter(item => item.trim()),
-        })).filter(industry => industry.title.trim() && industry.items.length > 0),
+        industries: formData.useCases.industries
+          .map((industry) => ({
+            ...industry,
+            items: industry.items.filter((item) => item.trim()),
+          }))
+          .filter((industry) => industry.title.trim() && industry.items.length > 0),
       },
-      faqs: formData.faqs.filter(faq => faq.question.trim() && faq.answer.trim()),
+      faqs: formData.faqs.filter((faq) => faq.question.trim() && faq.answer.trim()),
     };
 
     console.log('Cleaned data:', cleanedData);
-    
+
     // Validate manually to get errors synchronously
     const validationErrors: Record<string, string> = {};
 
@@ -299,11 +302,16 @@ const ServiceFormNew = ({ service, onSave, onCancel }: ServiceFormNewProps) => {
     if (!cleanedData.slug.trim()) validationErrors.slug = 'Slug is required';
     if (!cleanedData.tagline.trim()) validationErrors.tagline = 'Tagline is required';
     if (!cleanedData.description.trim()) validationErrors.description = 'Description is required';
-    if (!cleanedData.whatIsIt.content.trim()) validationErrors.whatIsIt = 'What Is It content is required';
-    if (cleanedData.deliverables.items.length === 0) validationErrors.deliverables = 'At least one deliverable is required';
-    if (!cleanedData.approach.content.trim()) validationErrors.approach = 'Approach content is required';
-    if (cleanedData.approach.processSteps.length === 0) validationErrors.processSteps = 'At least one process step is required';
-    if (cleanedData.useCases.industries.length === 0) validationErrors.useCases = 'At least one industry use case is required';
+    if (!cleanedData.whatIsIt.content.trim())
+      validationErrors.whatIsIt = 'What Is It content is required';
+    if (cleanedData.deliverables.items.length === 0)
+      validationErrors.deliverables = 'At least one deliverable is required';
+    if (!cleanedData.approach.content.trim())
+      validationErrors.approach = 'Approach content is required';
+    if (cleanedData.approach.processSteps.length === 0)
+      validationErrors.processSteps = 'At least one process step is required';
+    if (cleanedData.useCases.industries.length === 0)
+      validationErrors.useCases = 'At least one industry use case is required';
     if (!cleanedData.cta.content.trim()) validationErrors.cta = 'CTA content is required';
     if (cleanedData.faqs.length === 0) validationErrors.faqs = 'At least one FAQ is required';
 
@@ -317,13 +325,14 @@ const ServiceFormNew = ({ service, onSave, onCancel }: ServiceFormNewProps) => {
     } else {
       console.log('✗ Validation failed with errors:', validationErrors);
       setErrors(validationErrors);
-      
+
       // Scroll to first error
       const firstErrorField = Object.keys(validationErrors)[0];
       console.log('Scrolling to first error field:', firstErrorField);
       if (firstErrorField) {
-        const errorElement = document.querySelector(`[name="${firstErrorField}"]`) || 
-                           document.querySelector(`#${firstErrorField}`);
+        const errorElement =
+          document.querySelector(`[name="${firstErrorField}"]`) ||
+          document.querySelector(`#${firstErrorField}`);
         if (errorElement) {
           errorElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
@@ -356,14 +365,17 @@ const ServiceFormNew = ({ service, onSave, onCancel }: ServiceFormNewProps) => {
         </div>
       </div>
 
-      <form onSubmit={handleSubmit} className="p-6 space-y-8 max-h-[calc(100vh-200px)] overflow-y-auto">
+      <form
+        onSubmit={handleSubmit}
+        className="p-6 space-y-8 max-h-[calc(100vh-200px)] overflow-y-auto"
+      >
         {/* Basic Information */}
         <section className="space-y-4 border-b border-border pb-6">
           <h3 className="text-xl font-semibold text-foreground flex items-center gap-2">
             <Icon name="DocumentTextIcon" size={24} className="text-primary" />
             Basic Information
           </h3>
-          
+
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-foreground mb-2">
@@ -453,11 +465,9 @@ const ServiceFormNew = ({ service, onSave, onCancel }: ServiceFormNewProps) => {
             <Icon name="QuestionMarkCircleIcon" size={24} className="text-primary" />
             What Is It Section
           </h3>
-          
+
           <div>
-            <label className="block text-sm font-medium text-foreground mb-2">
-              Section Title
-            </label>
+            <label className="block text-sm font-medium text-foreground mb-2">Section Title</label>
             <input
               type="text"
               value={formData.whatIsIt.title}
@@ -501,9 +511,7 @@ const ServiceFormNew = ({ service, onSave, onCancel }: ServiceFormNewProps) => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-foreground mb-2">
-              Section Title
-            </label>
+            <label className="block text-sm font-medium text-foreground mb-2">Section Title</label>
             <input
               type="text"
               value={formData.deliverables.title}
@@ -545,9 +553,7 @@ const ServiceFormNew = ({ service, onSave, onCancel }: ServiceFormNewProps) => {
           </h3>
 
           <div>
-            <label className="block text-sm font-medium text-foreground mb-2">
-              Section Title
-            </label>
+            <label className="block text-sm font-medium text-foreground mb-2">Section Title</label>
             <input
               type="text"
               value={formData.approach.title}
@@ -573,9 +579,7 @@ const ServiceFormNew = ({ service, onSave, onCancel }: ServiceFormNewProps) => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-foreground mb-2">
-              Process Title
-            </label>
+            <label className="block text-sm font-medium text-foreground mb-2">Process Title</label>
             <input
               type="text"
               value={formData.approach.processTitle}
@@ -641,9 +645,7 @@ const ServiceFormNew = ({ service, onSave, onCancel }: ServiceFormNewProps) => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-foreground mb-2">
-              Section Title
-            </label>
+            <label className="block text-sm font-medium text-foreground mb-2">Section Title</label>
             <input
               type="text"
               value={formData.useCases.title}
@@ -680,7 +682,9 @@ const ServiceFormNew = ({ service, onSave, onCancel }: ServiceFormNewProps) => {
                       <input
                         type="text"
                         value={item}
-                        onChange={(e) => updateIndustryItem(industryIndex, itemIndex, e.target.value)}
+                        onChange={(e) =>
+                          updateIndustryItem(industryIndex, itemIndex, e.target.value)
+                        }
                         className="flex-1 px-4 py-3 bg-background border border-border rounded-md text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-smooth text-sm"
                         placeholder="Use case item..."
                       />
@@ -718,9 +722,7 @@ const ServiceFormNew = ({ service, onSave, onCancel }: ServiceFormNewProps) => {
           </h3>
 
           <div>
-            <label className="block text-sm font-medium text-foreground mb-2">
-              CTA Title
-            </label>
+            <label className="block text-sm font-medium text-foreground mb-2">CTA Title</label>
             <input
               type="text"
               value={formData.cta.title}
@@ -746,9 +748,7 @@ const ServiceFormNew = ({ service, onSave, onCancel }: ServiceFormNewProps) => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-foreground mb-2">
-              Button Text
-            </label>
+            <label className="block text-sm font-medium text-foreground mb-2">Button Text</label>
             <input
               type="text"
               value={formData.cta.buttonText}

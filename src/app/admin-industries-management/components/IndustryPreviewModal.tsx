@@ -61,7 +61,8 @@ const IndustryPreviewModal = ({ industry, onClose }: IndustryPreviewModalProps) 
               <span
                 className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium ${
                   industry.isPublished
-                    ? 'bg-success/10 text-success' :'bg-muted text-muted-foreground'
+                    ? 'bg-success/10 text-success'
+                    : 'bg-muted text-muted-foreground'
                 }`}
               >
                 <span
@@ -81,7 +82,8 @@ const IndustryPreviewModal = ({ industry, onClose }: IndustryPreviewModalProps) 
               <div className="flex items-center gap-2">
                 <Icon name="CalendarIcon" size={16} />
                 <span>
-                  Updated: {new Date(industry.updatedAt).toLocaleDateString('en-US', {
+                  Updated:{' '}
+                  {new Date(industry.updatedAt).toLocaleDateString('en-US', {
                     month: 'long',
                     day: 'numeric',
                     year: 'numeric',

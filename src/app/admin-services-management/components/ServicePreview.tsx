@@ -74,12 +74,14 @@ const ServicePreview = ({ service, onClose }: ServicePreviewProps) => {
               <h3 className="text-lg font-semibold text-foreground">Service Preview</h3>
               <span
                 className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium ${
-                  service.isActive ?'bg-success/10 text-success' :'bg-warning/10 text-warning'
+                  service.isActive ? 'bg-success/10 text-success' : 'bg-warning/10 text-warning'
                 }`}
               >
-                <span className={`w-2 h-2 rounded-full ${
-                  service.isActive ? 'bg-success' : 'bg-warning'
-                }`} />
+                <span
+                  className={`w-2 h-2 rounded-full ${
+                    service.isActive ? 'bg-success' : 'bg-warning'
+                  }`}
+                />
                 {service.isActive ? 'Active' : 'Inactive'}
               </span>
             </div>
@@ -95,16 +97,26 @@ const ServicePreview = ({ service, onClose }: ServicePreviewProps) => {
               </div>
 
               <div className="border-t border-border pt-4">
-                <h2 className="text-xl font-semibold text-foreground mb-2">{service.whatIsIt.title}</h2>
-                <p className="text-muted-foreground whitespace-pre-line">{service.whatIsIt.content}</p>
+                <h2 className="text-xl font-semibold text-foreground mb-2">
+                  {service.whatIsIt.title}
+                </h2>
+                <p className="text-muted-foreground whitespace-pre-line">
+                  {service.whatIsIt.content}
+                </p>
               </div>
 
               <div className="border-t border-border pt-4">
-                <h2 className="text-xl font-semibold text-foreground mb-3">{service.deliverables.title}</h2>
+                <h2 className="text-xl font-semibold text-foreground mb-3">
+                  {service.deliverables.title}
+                </h2>
                 <ul className="space-y-2">
                   {service.deliverables.items.map((item, index) => (
                     <li key={index} className="flex items-start gap-2">
-                      <Icon name="CheckCircleIcon" size={20} className="text-primary mt-0.5 flex-shrink-0" />
+                      <Icon
+                        name="CheckCircleIcon"
+                        size={20}
+                        className="text-primary mt-0.5 flex-shrink-0"
+                      />
                       <span className="text-muted-foreground">{item.text}</span>
                     </li>
                   ))}
@@ -112,13 +124,23 @@ const ServicePreview = ({ service, onClose }: ServicePreviewProps) => {
               </div>
 
               <div className="border-t border-border pt-4">
-                <h2 className="text-xl font-semibold text-foreground mb-2">{service.approach.title}</h2>
-                <p className="text-muted-foreground whitespace-pre-line mb-4">{service.approach.content}</p>
-                <h3 className="font-semibold text-foreground mb-2">{service.approach.processTitle}</h3>
+                <h2 className="text-xl font-semibold text-foreground mb-2">
+                  {service.approach.title}
+                </h2>
+                <p className="text-muted-foreground whitespace-pre-line mb-4">
+                  {service.approach.content}
+                </p>
+                <h3 className="font-semibold text-foreground mb-2">
+                  {service.approach.processTitle}
+                </h3>
                 <ul className="space-y-2">
                   {service.approach.processSteps.map((step, index) => (
                     <li key={index} className="flex items-start gap-2">
-                      <Icon name="ArrowRightIcon" size={20} className="text-primary mt-1.5 flex-shrink-0" />
+                      <Icon
+                        name="ArrowRightIcon"
+                        size={20}
+                        className="text-primary mt-1.5 flex-shrink-0"
+                      />
                       <span className="text-muted-foreground">{step.text}</span>
                     </li>
                   ))}
@@ -126,15 +148,24 @@ const ServicePreview = ({ service, onClose }: ServicePreviewProps) => {
               </div>
 
               <div className="border-t border-border pt-4">
-                <h2 className="text-xl font-semibold text-foreground mb-3">{service.useCases.title}</h2>
+                <h2 className="text-xl font-semibold text-foreground mb-3">
+                  {service.useCases.title}
+                </h2>
                 <div className="grid md:grid-cols-2 gap-4">
                   {service.useCases.industries.map((industry, index) => (
                     <div key={index} className="p-3 bg-muted/50 rounded-lg">
                       <h3 className="font-semibold text-foreground mb-2">{industry.title}</h3>
                       <ul className="space-y-1">
                         {industry.items.map((item, itemIndex) => (
-                          <li key={itemIndex} className="text-sm text-muted-foreground flex items-start gap-2">
-                            <Icon name="CheckCircleIcon" size={16} className="text-primary mt-0.5 flex-shrink-0" />
+                          <li
+                            key={itemIndex}
+                            className="text-sm text-muted-foreground flex items-start gap-2"
+                          >
+                            <Icon
+                              name="CheckCircleIcon"
+                              size={16}
+                              className="text-primary mt-0.5 flex-shrink-0"
+                            />
                             <span>{item}</span>
                           </li>
                         ))}
@@ -146,7 +177,9 @@ const ServicePreview = ({ service, onClose }: ServicePreviewProps) => {
 
               <div className="border-t border-border pt-4">
                 <h2 className="text-xl font-semibold text-foreground mb-2">{service.cta.title}</h2>
-                <p className="text-muted-foreground whitespace-pre-line mb-3">{service.cta.content}</p>
+                <p className="text-muted-foreground whitespace-pre-line mb-3">
+                  {service.cta.content}
+                </p>
                 <button className="px-6 py-3 bg-primary text-primary-foreground rounded-md font-medium">
                   {service.cta.buttonText}
                 </button>
@@ -176,7 +209,9 @@ const ServicePreview = ({ service, onClose }: ServicePreviewProps) => {
               </div>
               <div>
                 <span className="text-muted-foreground">Status:</span>
-                <span className="ml-2 text-foreground">{service.isActive ? 'Active' : 'Inactive'}</span>
+                <span className="ml-2 text-foreground">
+                  {service.isActive ? 'Active' : 'Inactive'}
+                </span>
               </div>
             </div>
           </div>

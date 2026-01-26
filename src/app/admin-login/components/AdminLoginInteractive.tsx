@@ -33,7 +33,11 @@ const AdminLoginInteractive = () => {
       <div className="w-full max-w-md">
         <div className="bg-card border border-border rounded-lg shadow-warm-lg p-8">
           <div className="flex flex-col items-center py-12">
-            <Icon name="ArrowPathIcon" size={48} className="text-primary mx-auto mb-4 animate-spin" />
+            <Icon
+              name="ArrowPathIcon"
+              size={48}
+              className="text-primary mx-auto mb-4 animate-spin"
+            />
             <p className="text-muted-foreground">Checking authentication...</p>
           </div>
         </div>
@@ -46,13 +50,13 @@ const AdminLoginInteractive = () => {
     setError('');
     setIsLoading(true);
 
-    await new Promise(resolve => setTimeout(resolve, 500));
+    await new Promise((resolve) => setTimeout(resolve, 500));
 
     if (username === 'admin' && password === '123') {
       // Set authentication flag in localStorage
       localStorage.setItem('adminAuthenticated', 'true');
       localStorage.setItem('adminLoginTime', Date.now().toString());
-      document.cookie = `adminAuthenticated=true; path=/; max-age=86400`
+      document.cookie = `adminAuthenticated=true; path=/; max-age=86400`;
       // Redirect to admin dashboard
       router.push('/admin-services-management');
     } else {
@@ -71,7 +75,9 @@ const AdminLoginInteractive = () => {
             className="h-16 w-auto mb-6"
           />
           <h1 className="text-3xl font-bold text-foreground mb-2">Admin Login</h1>
-          <p className="text-muted-foreground text-center">Enter your credentials to access the admin panel</p>
+          <p className="text-muted-foreground text-center">
+            Enter your credentials to access the admin panel
+          </p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">

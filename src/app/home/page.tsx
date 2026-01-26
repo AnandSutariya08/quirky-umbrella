@@ -5,7 +5,8 @@ import HomeInteractive from './components/HomeInteractive';
 
 export const metadata: Metadata = {
   title: 'Home - Quirky Umbrella',
-  description: 'Welcome to Quirky Umbrella - Your trusted partner for innovative corporate branding solutions, digital marketing services, and industry expertise across multiple sectors.',
+  description:
+    'Welcome to Quirky Umbrella - Your trusted partner for innovative corporate branding solutions, digital marketing services, and industry expertise across multiple sectors.',
 };
 
 export default function HomePage() {
@@ -20,7 +21,8 @@ export default function HomePage() {
 
   const statsData = {
     title: 'Our Global Reach',
-    subtitle: 'Delivering excellence across continents with proven results and satisfied clients worldwide',
+    subtitle:
+      'Delivering excellence across continents with proven results and satisfied clients worldwide',
     stats: [
       {
         id: '1',
@@ -215,11 +217,7 @@ export default function HomePage() {
       <PublicHeader />
       {/* No top padding on Home so header blends into Hero */}
       <main className="flex-1">
-        <HomeInteractive
-          heroData={heroData}
-          statsData={statsData}
-          clientsData={clientsData}
-        />
+        <HomeInteractive heroData={heroData} statsData={statsData} clientsData={clientsData} />
       </main>
       <ClientFooter />
     </div>

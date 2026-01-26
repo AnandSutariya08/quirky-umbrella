@@ -366,7 +366,6 @@
 //   );
 // }
 
-
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
@@ -382,12 +381,12 @@ interface HeroSectionProps {
 }
 
 export default function HeroSection({
-  title = "Transform your marketing with AI",
+  title = 'Transform your marketing with AI',
   subtitle = "We build intelligent systems that amplify your team's capabilities, not replace them. Data-driven decisions, automated workflows, measurable results.",
-  ctaText = "Start Your Transformation",
-  ctaLink = "#contact",
-  heroImage = "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=800&fit=crop",
-  heroImageAlt = "Marketing analytics dashboard"
+  ctaText = 'Start Your Transformation',
+  ctaLink = '#contact',
+  heroImage = 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=800&fit=crop',
+  heroImageAlt = 'Marketing analytics dashboard',
 }: HeroSectionProps) {
   const [isHydrated, setIsHydrated] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
@@ -456,7 +455,8 @@ export default function HeroSection({
       setIsHovering(false);
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
       rafRef.current = requestAnimationFrame(() => {
-        if (imageParallaxRef.current) imageParallaxRef.current.style.transform = 'translate3d(0,0,0) rotate(0deg)';
+        if (imageParallaxRef.current)
+          imageParallaxRef.current.style.transform = 'translate3d(0,0,0) rotate(0deg)';
         if (blobARef.current) blobARef.current.style.transform = 'translate3d(0,0,0) scale(1)';
         if (blobBRef.current) blobBRef.current.style.transform = 'translate3d(0,0,0) scale(1)';
         if (blobCRef.current) blobCRef.current.style.transform = 'translate3d(0,0,0) rotate(0deg)';
@@ -472,8 +472,6 @@ export default function HeroSection({
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
   }, [isHydrated]);
-
- 
 
   const handleCTAClick = () => {
     if (ctaLink.startsWith('#')) {
@@ -533,7 +531,10 @@ export default function HeroSection({
               top: particle.top,
               width: `${particle.size}px`,
               height: `${particle.size}px`,
-              animation: i % 2 === 0 ? `float 6s ease-in-out infinite` : `float-soft 10s ease-in-out infinite`,
+              animation:
+                i % 2 === 0
+                  ? `float 6s ease-in-out infinite`
+                  : `float-soft 10s ease-in-out infinite`,
               animationDelay: particle.delay,
             }}
           />
@@ -546,7 +547,7 @@ export default function HeroSection({
           <div className="grid items-center gap-12 lg:grid-cols-2">
             {/* Left: copy */}
             <div className="text-center lg:text-left">
-              <div 
+              <div
                 className="inline-flex items-center justify-center gap-2 rounded-full border border-pink-500/20 bg-white/70 px-4 py-2 backdrop-blur-sm shadow-lg mb-6 transition-all duration-300 hover:shadow-xl hover:scale-105 hover:bg-white/90 cursor-default"
                 style={{
                   animation: 'slide-down 250ms ease-out',
@@ -558,7 +559,7 @@ export default function HeroSection({
                 </span>
               </div>
 
-              <h1 
+              <h1
                 className="text-4xl lg:text-6xl font-bold leading-[1.06]"
                 style={{
                   animation: 'slide-down 250ms ease-out',
@@ -567,7 +568,7 @@ export default function HeroSection({
                 <span className="text-gray-900 inline-block transition-all duration-300 hover:scale-105 hover:text-pink-600">
                   {title}
                 </span>
-                <span 
+                <span
                   className="block mt-2 bg-gradient-to-r from-pink-500 via-blue-500 to-green-500 bg-[length:200%_100%] bg-clip-text text-transparent"
                   style={{
                     animation: 'gradient-pan 10s ease-in-out infinite',
@@ -577,7 +578,7 @@ export default function HeroSection({
                 </span>
               </h1>
 
-              <p 
+              <p
                 className="mt-5 text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto lg:mx-0"
                 style={{
                   animation: 'slide-up 250ms ease-out',
@@ -586,7 +587,7 @@ export default function HeroSection({
                 {subtitle}
               </p>
 
-              <div 
+              <div
                 className="mt-8 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
                 style={{
                   animation: 'slide-up 250ms ease-out',
@@ -618,19 +619,25 @@ export default function HeroSection({
                   <div
                     key={item.k}
                     className={`group relative rounded-2xl border border-gray-200 bg-white/60 backdrop-blur-sm px-4 py-4 shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl cursor-default overflow-hidden ${
-                      item.color === 'pink' ? 'hover:border-pink-300' :
-                      item.color === 'blue' ? 'hover:border-blue-300' :
-                      'hover:border-green-300'
+                      item.color === 'pink'
+                        ? 'hover:border-pink-300'
+                        : item.color === 'blue'
+                          ? 'hover:border-blue-300'
+                          : 'hover:border-green-300'
                     }`}
                     style={{
                       animation: `slide-up 250ms ease-out ${idx * 100}ms backwards`,
                     }}
                   >
-                    <div className={`absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-10 ${
-                      item.color === 'pink' ? 'bg-gradient-to-br from-pink-400 to-pink-600' :
-                      item.color === 'blue' ? 'bg-gradient-to-br from-blue-400 to-blue-600' :
-                      'bg-gradient-to-br from-green-400 to-green-600'
-                    }`} />
+                    <div
+                      className={`absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-10 ${
+                        item.color === 'pink'
+                          ? 'bg-gradient-to-br from-pink-400 to-pink-600'
+                          : item.color === 'blue'
+                            ? 'bg-gradient-to-br from-blue-400 to-blue-600'
+                            : 'bg-gradient-to-br from-green-400 to-green-600'
+                      }`}
+                    />
                     <div className="relative z-10">
                       <div className="text-lg sm:text-xl font-bold text-gray-900 whitespace-nowrap transition-all duration-300 group-hover:scale-110">
                         {item.k}
@@ -653,13 +660,13 @@ export default function HeroSection({
                 onMouseLeave={() => setIsHovering(false)}
               >
                 {/* Shimmer effect */}
-                <div 
+                <div
                   className="absolute inset-0 bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.4),transparent)] bg-[length:200%_100%] opacity-60 z-10 pointer-events-none"
                   style={{
                     animation: 'shimmer 2.25s linear infinite',
                   }}
                 />
-                
+
                 {/* Image container */}
                 <div className="relative w-full aspect-[4/3] sm:aspect-[16/10] lg:aspect-[16/11] overflow-hidden">
                   <img
@@ -667,7 +674,7 @@ export default function HeroSection({
                     alt={heroImageAlt}
                     className="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-110 group-hover:rotate-1"
                   />
-                  
+
                   {/* Overlay gradient on hover */}
                   <div className="absolute inset-0 bg-gradient-to-br from-pink-500/0 via-blue-500/0 to-green-500/0 transition-all duration-700 group-hover:from-pink-500/10 group-hover:via-blue-500/10 group-hover:to-green-500/10" />
                 </div>
@@ -705,21 +712,28 @@ export default function HeroSection({
                       <div
                         key={chip.title}
                         className={`absolute ${chip.position} rounded-2xl border border-gray-200 bg-white/90 backdrop-blur-md px-3 md:px-4 py-2.5 md:py-3 shadow-lg max-w-[200px] md:max-w-[240px] transition-all duration-500 hover:scale-110 hover:shadow-xl ${
-                          chip.color === 'pink' ? 'hover:border-pink-300 hover:bg-pink-50' :
-                          chip.color === 'blue' ? 'hover:border-blue-300 hover:bg-blue-50' :
-                          'hover:border-green-300 hover:bg-green-50'
+                          chip.color === 'pink'
+                            ? 'hover:border-pink-300 hover:bg-pink-50'
+                            : chip.color === 'blue'
+                              ? 'hover:border-blue-300 hover:bg-blue-50'
+                              : 'hover:border-green-300 hover:bg-green-50'
                         }`}
                         style={{
-                          animation: chip.delay === '0s' ? 'float 6s ease-in-out infinite' : 'float-soft 10s ease-in-out infinite',
+                          animation:
+                            chip.delay === '0s'
+                              ? 'float 6s ease-in-out infinite'
+                              : 'float-soft 10s ease-in-out infinite',
                           animationDelay: chip.delay,
                         }}
                       >
                         <div className="flex items-center gap-2 min-w-0">
-                          <Icon 
+                          <Icon
                             className={`w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 hover:rotate-12 ${
-                              chip.color === 'pink' ? 'text-pink-500' :
-                              chip.color === 'blue' ? 'text-blue-500' :
-                              'text-green-500'
+                              chip.color === 'pink'
+                                ? 'text-pink-500'
+                                : chip.color === 'blue'
+                                  ? 'text-blue-500'
+                                  : 'text-green-500'
                             }`}
                           />
                           <span className="text-xs md:text-sm font-semibold text-gray-900 whitespace-nowrap truncate min-w-0">
@@ -762,17 +776,21 @@ export default function HeroSection({
                     <div
                       key={chip.title}
                       className={`rounded-2xl border border-gray-200 bg-white/70 backdrop-blur-sm px-4 py-3 shadow-md transition-all duration-300 hover:shadow-lg hover:-translate-y-1 ${
-                        chip.color === 'pink' ? 'hover:border-pink-300' :
-                        chip.color === 'blue' ? 'hover:border-blue-300' :
-                        'hover:border-green-300'
+                        chip.color === 'pink'
+                          ? 'hover:border-pink-300'
+                          : chip.color === 'blue'
+                            ? 'hover:border-blue-300'
+                            : 'hover:border-green-300'
                       }`}
                     >
                       <div className="flex items-center gap-2 min-w-0">
-                        <Icon 
+                        <Icon
                           className={`w-5 h-5 ${
-                            chip.color === 'pink' ? 'text-pink-500' :
-                            chip.color === 'blue' ? 'text-blue-500' :
-                            'text-green-500'
+                            chip.color === 'pink'
+                              ? 'text-pink-500'
+                              : chip.color === 'blue'
+                                ? 'text-blue-500'
+                                : 'text-green-500'
                           }`}
                         />
                         <span className="text-sm font-semibold text-gray-900 truncate min-w-0">
@@ -791,7 +809,7 @@ export default function HeroSection({
               <div className="mt-6 flex justify-center lg:justify-end">
                 <div className="inline-flex items-center gap-2 text-sm text-gray-600 transition-all duration-300 hover:text-pink-500 cursor-default">
                   <span>Scroll</span>
-                  <ChevronDown 
+                  <ChevronDown
                     className="w-5 h-5"
                     style={{
                       animation: 'bounce 1s infinite',
@@ -806,37 +824,79 @@ export default function HeroSection({
 
       <style jsx>{`
         @keyframes float {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-12px); }
+          0%,
+          100% {
+            transform: translateY(0px);
+          }
+          50% {
+            transform: translateY(-12px);
+          }
         }
         @keyframes float-soft {
-          0%, 100% { transform: translateY(0px) translateX(0px); }
-          50% { transform: translateY(-10px) translateX(6px); }
+          0%,
+          100% {
+            transform: translateY(0px) translateX(0px);
+          }
+          50% {
+            transform: translateY(-10px) translateX(6px);
+          }
         }
         @keyframes drift-x {
-          0%, 100% { transform: translateX(0px); }
-          50% { transform: translateX(18px); }
+          0%,
+          100% {
+            transform: translateX(0px);
+          }
+          50% {
+            transform: translateX(18px);
+          }
         }
         @keyframes gradient-pan {
-          0% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
+          0% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+          100% {
+            background-position: 0% 50%;
+          }
         }
         @keyframes shimmer {
-          0% { background-position: -200% 0; }
-          100% { background-position: 200% 0; }
+          0% {
+            background-position: -200% 0;
+          }
+          100% {
+            background-position: 200% 0;
+          }
         }
         @keyframes slide-down {
-          0% { transform: translateY(-10px); opacity: 0; }
-          100% { transform: translateY(0); opacity: 1; }
+          0% {
+            transform: translateY(-10px);
+            opacity: 0;
+          }
+          100% {
+            transform: translateY(0);
+            opacity: 1;
+          }
         }
         @keyframes slide-up {
-          0% { transform: translateY(10px); opacity: 0; }
-          100% { transform: translateY(0); opacity: 1; }
+          0% {
+            transform: translateY(10px);
+            opacity: 0;
+          }
+          100% {
+            transform: translateY(0);
+            opacity: 1;
+          }
         }
         @keyframes bounce {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-5px); }
+          0%,
+          100% {
+            transform: translateY(0);
+          }
+          50% {
+            transform: translateY(-5px);
+          }
         }
       `}</style>
     </section>

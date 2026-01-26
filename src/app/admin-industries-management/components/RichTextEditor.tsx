@@ -9,7 +9,11 @@ interface RichTextEditorProps {
   placeholder?: string;
 }
 
-const RichTextEditor = ({ value, onChange, placeholder = 'Start writing...' }: RichTextEditorProps) => {
+const RichTextEditor = ({
+  value,
+  onChange,
+  placeholder = 'Start writing...',
+}: RichTextEditorProps) => {
   const [showPreview, setShowPreview] = useState(false);
   const [isHydrated, setIsHydrated] = useState(false);
   const editorRef = useRef<HTMLTextAreaElement>(null);
@@ -25,7 +29,8 @@ const RichTextEditor = ({ value, onChange, placeholder = 'Start writing...' }: R
     const start = textarea.selectionStart;
     const end = textarea.selectionEnd;
     const selectedText = value.substring(start, end);
-    const newText = value.substring(0, start) + before + selectedText + after + value.substring(end);
+    const newText =
+      value.substring(0, start) + before + selectedText + after + value.substring(end);
 
     onChange(newText);
 
@@ -39,10 +44,22 @@ const RichTextEditor = ({ value, onChange, placeholder = 'Start writing...' }: R
     { icon: 'BoldIcon', label: 'Bold', action: () => insertFormatting('<strong>', '</strong>') },
     { icon: 'ItalicIcon', label: 'Italic', action: () => insertFormatting('<em>', '</em>') },
     { icon: 'UnderlineIcon', label: 'Underline', action: () => insertFormatting('<u>', '</u>') },
-    { icon: 'ListBulletIcon', label: 'Bullet List', action: () => insertFormatting('<ul>\n  <li>', '</li>\n</ul>') },
-    { icon: 'NumberedListIcon', label: 'Numbered List', action: () => insertFormatting('<ol>\n  <li>', '</li>\n</ol>') },
+    {
+      icon: 'ListBulletIcon',
+      label: 'Bullet List',
+      action: () => insertFormatting('<ul>\n  <li>', '</li>\n</ul>'),
+    },
+    {
+      icon: 'NumberedListIcon',
+      label: 'Numbered List',
+      action: () => insertFormatting('<ol>\n  <li>', '</li>\n</ol>'),
+    },
     { icon: 'LinkIcon', label: 'Link', action: () => insertFormatting('<a href="URL">', '</a>') },
-    { icon: 'PhotoIcon', label: 'Image', action: () => insertFormatting('<img src="URL" alt="Description" />') },
+    {
+      icon: 'PhotoIcon',
+      label: 'Image',
+      action: () => insertFormatting('<img src="URL" alt="Description" />'),
+    },
   ];
 
   if (!isHydrated) {
@@ -101,7 +118,9 @@ const RichTextEditor = ({ value, onChange, placeholder = 'Start writing...' }: R
         ) : (
           <div
             className="min-h-[16rem] px-4 py-3 bg-background border border-border rounded-md prose prose-sm max-w-none"
-            dangerouslySetInnerHTML={{ __html: value || '<p class="text-muted-foreground">No content to preview</p>' }}
+            dangerouslySetInnerHTML={{
+              __html: value || '<p class="text-muted-foreground">No content to preview</p>',
+            }}
           />
         )}
       </div>

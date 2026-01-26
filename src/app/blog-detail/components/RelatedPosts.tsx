@@ -47,9 +47,7 @@ const RelatedPosts = ({ posts }: RelatedPostsProps) => {
               <h3 className="font-heading text-xl font-bold text-foreground mb-3 line-clamp-2 group-hover:text-primary transition-smooth">
                 {post.title}
               </h3>
-              <p className="text-muted-foreground text-sm mb-4 line-clamp-3">
-                {post.excerpt}
-              </p>
+              <p className="text-muted-foreground text-sm mb-4 line-clamp-3">{post.excerpt}</p>
               <div className="flex items-center justify-between text-xs text-muted-foreground">
                 <div className="flex items-center gap-2">
                   <Icon name="CalendarIcon" size={16} />

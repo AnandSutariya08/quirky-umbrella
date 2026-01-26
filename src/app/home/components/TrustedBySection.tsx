@@ -16,11 +16,7 @@ interface TrustedBySectionProps {
   clients: ClientLogo[];
 }
 
-export default function TrustedBySection({
-  title,
-  subtitle,
-  clients,
-}: TrustedBySectionProps) {
+export default function TrustedBySection({ title, subtitle, clients }: TrustedBySectionProps) {
   const PAGE_SIZE = 9; // 3x3 grid
   const ROTATE_MS = 3000;
   const FADE_MS = 220;
@@ -58,7 +54,10 @@ export default function TrustedBySection({
       {/* Background decorative elements */}
       <div className="absolute inset-0 opacity-20">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+        <div
+          className="absolute bottom-0 right-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-3xl animate-pulse"
+          style={{ animationDelay: '1s' }}
+        />
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
@@ -93,34 +92,54 @@ export default function TrustedBySection({
           </div>
         </div>
 
-        {/* 3x3 rotating logo grid */}
-        <div className="mt-10 flex justify-center">
-          <div
-            className={`w-full max-w-5xl transition-opacity duration-200 ${isFading ? 'opacity-0' : 'opacity-100'}`}
-          >
-            <div className="grid grid-cols-3 gap-x-10 gap-y-10 items-center">
-              {visibleClients.map((client) => (
-                <div key={client.id} className="flex items-center justify-center" title={client.name}>
-                  <AppImage
-                    src={client.logo}
-                    alt={client.alt}
-                    width={260}
-                    height={120}
-                    className="h-12 w-auto max-w-[220px] object-contain !bg-transparent transition-transform duration-300 hover:scale-[1.04]"
-                  />
-                </div>
-              ))}
+        {/* Infinite scrolling logo carousel */}
+        <div className="mt-10 overflow-hidden relative">
+          {/* Left/Right masks for smoother fading */}
+          <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-background to-transparent z-10 hidden md:block" />
+          <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-background to-transparent z-10 hidden md:block" />
 
-              {/* If clients < 9, fill empty cells to keep grid stable */}
-              {clients.length < PAGE_SIZE &&
-                Array.from({ length: PAGE_SIZE - clients.length }).map((_, i) => (
-                  <div key={`empty-${i}`} className="h-12" />
-                ))}
-            </div>
+          <div className="flex space-x-12 animate-scroll-left whitespace-nowrap py-10">
+            {[...clients, ...clients].map((client, idx) => (
+              <div
+                key={`${client.id}-${idx}`}
+                className="flex-shrink-0 flex items-center justify-center min-w-[120px] md:min-w-[180px] grayscale hover:grayscale-0 transition-all duration-300"
+                title={client.name}
+              >
+                <AppImage
+                  src={client.logo}
+                  alt={client.alt}
+                  width={200}
+                  height={80}
+                  className="h-8 md:h-12 w-auto object-contain !bg-transparent opacity-60 hover:opacity-100 transition-opacity"
+                />
+              </div>
+            ))}
           </div>
         </div>
 
-
+        <style jsx global>{`
+          @keyframes scroll-left {
+            0% {
+              transform: translateX(0);
+            }
+            100% {
+              transform: translateX(-50%);
+            }
+          }
+          .animate-scroll-left {
+            animation: scroll-left 40s linear infinite;
+            display: flex;
+            width: max-content;
+          }
+          .animate-scroll-left:hover {
+            animation-play-state: paused;
+          }
+          @media (max-width: 768px) {
+            .animate-scroll-left {
+              animation-duration: 25s;
+            }
+          }
+        `}</style>
       </div>
     </section>
   );

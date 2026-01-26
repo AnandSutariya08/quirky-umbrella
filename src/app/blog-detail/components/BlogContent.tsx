@@ -4,7 +4,7 @@ interface BlogContentProps {
 
 const BlogContent = ({ contentHtml }: BlogContentProps) => {
   return (
-    <div 
+    <div
       className="prose prose-lg max-w-none mb-16
         prose-headings:font-heading prose-headings:font-bold prose-headings:text-foreground
         prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-6

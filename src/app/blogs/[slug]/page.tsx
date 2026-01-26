@@ -79,7 +79,7 @@ function BlogDetailLoading() {
 
 export default async function BlogPage({ params }: BlogPageProps) {
   let blog;
-  
+
   try {
     blog = await blogsService.getBySlug(params.slug);
   } catch (error) {

@@ -55,10 +55,12 @@ const IndustriesManagementInteractive = () => {
         title: 'Technology Solutions',
         slug: 'technology-solutions',
         metaTitle: 'Technology Solutions - Quirky Umbrella',
-        metaDescription: 'Innovative technology solutions for modern businesses seeking digital transformation and competitive advantage.',
+        metaDescription:
+          'Innovative technology solutions for modern businesses seeking digital transformation and competitive advantage.',
         contentHtml: `<h2>Transforming Businesses Through Technology</h2>\n<p>We deliver cutting-edge technology solutions that drive innovation and growth. Our expertise spans cloud computing, AI integration, and digital transformation strategies.</p>\n<h3>Our Technology Services</h3>\n<ul>\n  <li>Cloud Infrastructure & Migration</li>\n  <li>AI & Machine Learning Integration</li>\n  <li>Custom Software Development</li>\n  <li>Cybersecurity Solutions</li>\n</ul>\n<p>Partner with us to leverage technology for sustainable competitive advantage.</p>`,
         imageUrl: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80',
-        imageAlt: 'Modern technology office with multiple computer monitors displaying code and data analytics on sleek desks',
+        imageAlt:
+          'Modern technology office with multiple computer monitors displaying code and data analytics on sleek desks',
         isPublished: true,
         createdAt: '2026-01-15T10:30:00Z',
         updatedAt: '2026-01-19T14:20:00Z',
@@ -68,10 +70,12 @@ const IndustriesManagementInteractive = () => {
         title: 'Healthcare Innovation',
         slug: 'healthcare-innovation',
         metaTitle: 'Healthcare Innovation - Quirky Umbrella',
-        metaDescription: 'Revolutionizing healthcare delivery with innovative solutions that improve patient outcomes and operational efficiency.',
+        metaDescription:
+          'Revolutionizing healthcare delivery with innovative solutions that improve patient outcomes and operational efficiency.',
         contentHtml: `<h2>Advancing Healthcare Through Innovation</h2>\n<p>Our healthcare solutions combine medical expertise with cutting-edge technology to improve patient care and streamline operations.</p>\n<h3>Healthcare Capabilities</h3>\n<ul>\n  <li>Telemedicine Platform Development</li>\n  <li>Electronic Health Records (EHR) Systems</li>\n  <li>Patient Engagement Solutions</li>\n  <li>Healthcare Analytics & Insights</li>\n</ul>\n<p>Transform your healthcare organization with our innovative solutions.</p>`,
         imageUrl: 'https://images.pexels.com/photos/4386467/pexels-photo-4386467.jpeg?w=800&q=80',
-        imageAlt: 'Healthcare professional in white coat using digital tablet in modern medical facility with advanced equipment',
+        imageAlt:
+          'Healthcare professional in white coat using digital tablet in modern medical facility with advanced equipment',
         isPublished: true,
         createdAt: '2026-01-14T09:15:00Z',
         updatedAt: '2026-01-18T16:45:00Z',
@@ -81,10 +85,13 @@ const IndustriesManagementInteractive = () => {
         title: 'Financial Services',
         slug: 'financial-services',
         metaTitle: 'Financial Services - Quirky Umbrella',
-        metaDescription: 'Comprehensive financial solutions designed to optimize operations, ensure compliance, and drive growth.',
+        metaDescription:
+          'Comprehensive financial solutions designed to optimize operations, ensure compliance, and drive growth.',
         contentHtml: `<h2>Empowering Financial Excellence</h2>\n<p>We provide innovative financial solutions that help institutions navigate complex regulatory environments while delivering exceptional customer experiences.</p>\n<h3>Financial Solutions</h3>\n<ul>\n  <li>Digital Banking Platforms</li>\n  <li>Payment Processing Systems</li>\n  <li>Risk Management Solutions</li>\n  <li>Regulatory Compliance Tools</li>\n</ul>\n<p>Build trust and drive growth with our financial technology expertise.</p>`,
-        imageUrl: 'https://images.pixabay.com/photo/2016/11/27/21/42/stock-1863880_1280.jpg?w=800&q=80',
-        imageAlt: 'Financial analyst reviewing stock market data on multiple screens showing charts and graphs in modern office',
+        imageUrl:
+          'https://images.pixabay.com/photo/2016/11/27/21/42/stock-1863880_1280.jpg?w=800&q=80',
+        imageAlt:
+          'Financial analyst reviewing stock market data on multiple screens showing charts and graphs in modern office',
         isPublished: false,
         createdAt: '2026-01-13T11:00:00Z',
         updatedAt: '2026-01-17T10:30:00Z',
@@ -94,10 +101,12 @@ const IndustriesManagementInteractive = () => {
         title: 'Retail & E-commerce',
         slug: 'retail-ecommerce',
         metaTitle: 'Retail & E-commerce - Quirky Umbrella',
-        metaDescription: 'Omnichannel retail solutions that create seamless shopping experiences and drive sales growth.',
+        metaDescription:
+          'Omnichannel retail solutions that create seamless shopping experiences and drive sales growth.',
         contentHtml: `<h2>Revolutionizing Retail Experiences</h2>\n<p>Our retail solutions bridge online and offline channels to create unified shopping experiences that delight customers and boost revenue.</p>\n<h3>Retail Solutions</h3>\n<ul>\n  <li>E-commerce Platform Development</li>\n  <li>Inventory Management Systems</li>\n  <li>Customer Loyalty Programs</li>\n  <li>Point of Sale (POS) Solutions</li>\n</ul>\n<p>Transform your retail business with our comprehensive solutions.</p>`,
         imageUrl: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&q=80',
-        imageAlt: 'Modern retail store interior with clothing displays, bright lighting, and customers browsing merchandise',
+        imageAlt:
+          'Modern retail store interior with clothing displays, bright lighting, and customers browsing merchandise',
         isPublished: true,
         createdAt: '2026-01-12T13:45:00Z',
         updatedAt: '2026-01-16T09:15:00Z',
@@ -107,10 +116,12 @@ const IndustriesManagementInteractive = () => {
         title: 'Education & Learning',
         slug: 'education-learning',
         metaTitle: 'Education & Learning - Quirky Umbrella',
-        metaDescription: 'Innovative educational technology solutions that enhance learning outcomes and institutional efficiency.',
+        metaDescription:
+          'Innovative educational technology solutions that enhance learning outcomes and institutional efficiency.',
         contentHtml: `<h2>Transforming Education Through Technology</h2>\n<p>We create engaging learning experiences through innovative educational technology that empowers students and educators alike.</p>\n<h3>Education Solutions</h3>\n<ul>\n  <li>Learning Management Systems (LMS)</li>\n  <li>Virtual Classroom Platforms</li>\n  <li>Student Information Systems</li>\n  <li>Educational Content Development</li>\n</ul>\n<p>Enhance learning outcomes with our educational technology solutions.</p>`,
         imageUrl: 'https://images.pexels.com/photos/5212345/pexels-photo-5212345.jpeg?w=800&q=80',
-        imageAlt: 'Students collaborating around laptop in modern classroom with interactive whiteboard and colorful learning materials',
+        imageAlt:
+          'Students collaborating around laptop in modern classroom with interactive whiteboard and colorful learning materials',
         isPublished: true,
         createdAt: '2026-01-11T08:30:00Z',
         updatedAt: '2026-01-15T14:00:00Z',
@@ -216,7 +227,9 @@ const IndustriesManagementInteractive = () => {
       <div className="max-w-7xl mx-auto p-6 space-y-6">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-heading font-bold text-foreground">Industries Management</h1>
+            <h1 className="text-3xl font-heading font-bold text-foreground">
+              Industries Management
+            </h1>
             <p className="text-muted-foreground mt-1">
               Manage your industry content and SEO settings
             </p>
@@ -252,7 +265,9 @@ const IndustriesManagementInteractive = () => {
                 <button
                   onClick={() => setViewMode('table')}
                   className={`p-2.5 rounded-md transition-smooth press-scale ${
-                    viewMode === 'table' ?'bg-primary text-primary-foreground' :'bg-muted text-foreground hover:bg-muted/80'
+                    viewMode === 'table'
+                      ? 'bg-primary text-primary-foreground'
+                      : 'bg-muted text-foreground hover:bg-muted/80'
                   }`}
                   title="Table View"
                 >
@@ -261,7 +276,9 @@ const IndustriesManagementInteractive = () => {
                 <button
                   onClick={() => setViewMode('grid')}
                   className={`p-2.5 rounded-md transition-smooth press-scale ${
-                    viewMode === 'grid' ?'bg-primary text-primary-foreground' :'bg-muted text-foreground hover:bg-muted/80'
+                    viewMode === 'grid'
+                      ? 'bg-primary text-primary-foreground'
+                      : 'bg-muted text-foreground hover:bg-muted/80'
                   }`}
                   title="Grid View"
                 >
@@ -274,7 +291,7 @@ const IndustriesManagementInteractive = () => {
                 onChange={(e) => {
                   const [field, order] = e.target.value.split('-') as [
                     'title' | 'updatedAt',
-                    'asc' | 'desc'
+                    'asc' | 'desc',
                   ];
                   setSortBy(field);
                   setSortOrder(order);
@@ -291,11 +308,10 @@ const IndustriesManagementInteractive = () => {
 
           <div className="flex items-center justify-between text-sm text-muted-foreground">
             <span>
-              {filteredIndustries.length} {filteredIndustries.length === 1 ? 'industry' : 'industries'} found
+              {filteredIndustries.length}{' '}
+              {filteredIndustries.length === 1 ? 'industry' : 'industries'} found
             </span>
-            <span>
-              {filteredIndustries.filter((i) => i.isPublished).length} published
-            </span>
+            <span>{filteredIndustries.filter((i) => i.isPublished).length} published</span>
           </div>
         </div>
 
@@ -313,7 +329,9 @@ const IndustriesManagementInteractive = () => {
               <div className="text-center">
                 <h3 className="text-lg font-medium text-foreground mb-1">No industries found</h3>
                 <p className="text-muted-foreground">
-                  {searchQuery ? 'Try adjusting your search' : 'Get started by adding your first industry'}
+                  {searchQuery
+                    ? 'Try adjusting your search'
+                    : 'Get started by adding your first industry'}
                 </p>
               </div>
               {!searchQuery && (

@@ -12,7 +12,9 @@ interface BlogEditorProps {
 }
 
 const BlogEditor = ({ blog, onSave, onCancel }: BlogEditorProps) => {
-  const [formData, setFormData] = useState<Omit<Blog, 'id' | 'createdAt' | 'updatedAt' | 'views' | 'likes'>>(
+  const [formData, setFormData] = useState<
+    Omit<Blog, 'id' | 'createdAt' | 'updatedAt' | 'views' | 'likes'>
+  >(
     blog || {
       title: '',
       slug: '',
@@ -78,17 +80,18 @@ const BlogEditor = ({ blog, onSave, onCancel }: BlogEditorProps) => {
     let score = 0;
     if (formData.title.length > 0 && formData.title.length <= 60) score += 20;
     if (formData.metaTitle.length > 0 && formData.metaTitle.length <= 60) score += 20;
-    if (formData.metaDescription.length >= 120 && formData.metaDescription.length <= 160) score += 30;
+    if (formData.metaDescription.length >= 120 && formData.metaDescription.length <= 160)
+      score += 30;
     if (formData.contentHtml.length > 300) score += 30;
     setSeoScore(score);
   };
 
   const handleInputChange = (field: keyof typeof formData, value: any) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
   const handleAuthorChange = (field: 'name' | 'avatar' | 'avatarAlt', value: string) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       author: {
         ...prev.author,
@@ -119,10 +122,16 @@ const BlogEditor = ({ blog, onSave, onCancel }: BlogEditorProps) => {
   };
 
   const handleRemoveTag = (tag: string) => {
-    handleInputChange('tags', formData.tags.filter(t => t !== tag));
+    handleInputChange(
+      'tags',
+      formData.tags.filter((t) => t !== tag)
+    );
   };
 
-  const handleImageUpload = (type: 'thumbnail' | 'featured' | 'authorAvatar', e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageUpload = (
+    type: 'thumbnail' | 'featured' | 'authorAvatar',
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const file = e.target.files?.[0];
     if (file) {
       const reader = new FileReader();
@@ -175,9 +184,7 @@ const BlogEditor = ({ blog, onSave, onCancel }: BlogEditorProps) => {
       <div className="bg-card rounded-lg border border-border p-6 space-y-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div>
-            <label className="block text-sm font-medium text-foreground mb-2">
-              Blog Title *
-            </label>
+            <label className="block text-sm font-medium text-foreground mb-2">Blog Title *</label>
             <input
               type="text"
               value={formData.title}
@@ -189,9 +196,7 @@ const BlogEditor = ({ blog, onSave, onCancel }: BlogEditorProps) => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-foreground mb-2">
-              Slug *
-            </label>
+            <label className="block text-sm font-medium text-foreground mb-2">Slug *</label>
             <input
               type="text"
               value={formData.slug}
@@ -203,9 +208,7 @@ const BlogEditor = ({ blog, onSave, onCancel }: BlogEditorProps) => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-foreground mb-2">
-              Author Name *
-            </label>
+            <label className="block text-sm font-medium text-foreground mb-2">Author Name *</label>
             <input
               type="text"
               value={formData.author.name}
@@ -232,9 +235,7 @@ const BlogEditor = ({ blog, onSave, onCancel }: BlogEditorProps) => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-foreground mb-2">
-              Category *
-            </label>
+            <label className="block text-sm font-medium text-foreground mb-2">Category *</label>
             <select
               value={formData.category}
               onChange={(e) => handleInputChange('category', e.target.value)}
@@ -252,9 +253,7 @@ const BlogEditor = ({ blog, onSave, onCancel }: BlogEditorProps) => {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-foreground mb-2">
-            Tags
-          </label>
+          <label className="block text-sm font-medium text-foreground mb-2">Tags</label>
           <div className="flex gap-2 mb-2">
             <input
               type="text"
@@ -300,7 +299,7 @@ const BlogEditor = ({ blog, onSave, onCancel }: BlogEditorProps) => {
               <div className="w-full h-48 rounded-md overflow-hidden border border-border">
                 <AppImage
                   src={thumbnailPreview}
-                  alt={formData.thumbnailAlt || "Thumbnail preview"}
+                  alt={formData.thumbnailAlt || 'Thumbnail preview'}
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -340,7 +339,7 @@ const BlogEditor = ({ blog, onSave, onCancel }: BlogEditorProps) => {
               <div className="w-full h-48 rounded-md overflow-hidden border border-border">
                 <AppImage
                   src={featuredImagePreview}
-                  alt={formData.featuredImageAlt || "Featured image preview"}
+                  alt={formData.featuredImageAlt || 'Featured image preview'}
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -372,15 +371,13 @@ const BlogEditor = ({ blog, onSave, onCancel }: BlogEditorProps) => {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-foreground mb-2">
-            Author Avatar
-          </label>
+          <label className="block text-sm font-medium text-foreground mb-2">Author Avatar</label>
           <div className="space-y-3">
             {authorAvatarPreview && (
               <div className="w-24 h-24 rounded-full overflow-hidden border border-border">
                 <AppImage
                   src={authorAvatarPreview}
-                  alt={formData.author.avatarAlt || "Author avatar"}
+                  alt={formData.author.avatarAlt || 'Author avatar'}
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -424,9 +421,7 @@ const BlogEditor = ({ blog, onSave, onCancel }: BlogEditorProps) => {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-foreground mb-2">
-            Excerpt
-          </label>
+          <label className="block text-sm font-medium text-foreground mb-2">Excerpt</label>
           <textarea
             value={formData.excerpt}
             onChange={(e) => handleInputChange('excerpt', e.target.value)}
@@ -439,7 +434,7 @@ const BlogEditor = ({ blog, onSave, onCancel }: BlogEditorProps) => {
 
       <div className="bg-card rounded-lg border border-border p-6 space-y-4">
         <h3 className="text-lg font-semibold text-foreground">Content Editor</h3>
-        
+
         <div className="flex flex-wrap gap-2 p-3 bg-muted rounded-md border border-border">
           <button
             type="button"
@@ -520,9 +515,7 @@ const BlogEditor = ({ blog, onSave, onCancel }: BlogEditorProps) => {
             lineHeight: '1.65',
           }}
         />
-        <p className="text-sm text-muted-foreground">
-          {formData.contentHtml.length} characters
-        </p>
+        <p className="text-sm text-muted-foreground">{formData.contentHtml.length} characters</p>
       </div>
 
       <div className="bg-card rounded-lg border border-border p-6 space-y-4">
@@ -582,9 +575,7 @@ const BlogEditor = ({ blog, onSave, onCancel }: BlogEditorProps) => {
         <h3 className="text-lg font-semibold text-foreground mb-4">Publishing Options</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-foreground mb-2">
-              Publish Date
-            </label>
+            <label className="block text-sm font-medium text-foreground mb-2">Publish Date</label>
             <input
               type="date"
               value={publishedDate}

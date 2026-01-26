@@ -5,7 +5,6 @@ import Icon from '@/components/ui/AppIcon';
 import SchedulingSystem from './SchedulingSystem';
 
 export default function ContactSection() {
-
   const contactInfo = [
     {
       icon: 'EnvelopeIcon',
@@ -44,7 +43,6 @@ export default function ContactSection() {
     { name: 'Instagram', icon: 'CameraIcon', href: 'https://instagram.com/quirkyumbrella' },
   ];
 
-
   return (
     <section className="pt-24 pb-16 lg:pt-28 lg:pb-24 bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5 overflow-x-hidden">
       <div className="container mx-auto px-6 w-full max-w-full">
@@ -61,7 +59,8 @@ export default function ContactSection() {
             </span>
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Have a question or want to discuss your project? We're here to help. Reach out and let's create something amazing together.
+            Have a question or want to discuss your project? We're here to help. Reach out and let's
+            create something amazing together.
           </p>
         </div>
 
@@ -129,9 +128,15 @@ export default function ContactSection() {
                 <div className="relative h-64 bg-muted rounded-xl overflow-hidden border border-border">
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="text-center">
-                      <Icon name="MapPinIcon" size={48} className="text-muted-foreground mx-auto mb-2" />
+                      <Icon
+                        name="MapPinIcon"
+                        size={48}
+                        className="text-muted-foreground mx-auto mb-2"
+                      />
                       <p className="text-muted-foreground">Interactive Map</p>
-                      <p className="text-sm text-muted-foreground mt-1">123 Innovation Street, San Francisco, CA</p>
+                      <p className="text-sm text-muted-foreground mt-1">
+                        123 Innovation Street, San Francisco, CA
+                      </p>
                     </div>
                   </div>
                 </div>

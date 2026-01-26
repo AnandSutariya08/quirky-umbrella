@@ -54,7 +54,6 @@ export default function SchedulingSystem() {
     loadSettings();
   }, []);
 
-
   useEffect(() => {
     if (selectedDate && selectedMeetingType) {
       loadAvailableSlots();
@@ -64,7 +63,7 @@ export default function SchedulingSystem() {
   const loadSettings = async () => {
     try {
       let s = await bookingsService.getSettings();
-      
+
       // Initialize default availability if none exists
       if (s && (!s.availability || s.availability.length === 0)) {
         const defaultAvailability = [
@@ -86,7 +85,7 @@ export default function SchedulingSystem() {
 
         s = await bookingsService.getSettings();
       }
-      
+
       setSettings(s);
     } catch (error) {
       console.error('Error loading settings:', error);
@@ -141,7 +140,7 @@ export default function SchedulingSystem() {
     // Convert availability from admin timezone to user timezone (only if different)
     let availabilityStartTime = dayAvailability.startTime;
     let availabilityEndTime = dayAvailability.endTime;
-    
+
     if (!isSameTimezone) {
       const userAvailability = convertAvailabilityToUserTimezone(
         { startTime: dayAvailability.startTime, endTime: dayAvailability.endTime },
@@ -197,13 +196,13 @@ export default function SchedulingSystem() {
     const current = new Date(startTime);
     while (current < endTime) {
       const timeString = `${String(current.getHours()).padStart(2, '0')}:${String(current.getMinutes()).padStart(2, '0')}`;
-      
+
       // Check if slot is available (not booked)
       if (!bookedTimes.includes(timeString)) {
         // Check if we have enough time before end time
         const slotEnd = new Date(current);
         slotEnd.setMinutes(slotEnd.getMinutes() + slotDuration);
-        
+
         if (slotEnd <= endTime) {
           slots.push(timeString);
         }
@@ -222,10 +221,13 @@ export default function SchedulingSystem() {
     const maxDays = settings?.advanceBookingDays || 30;
     const workingDays = settings?.workingDays || [1, 2, 3, 4, 5];
 
-    let currentDate = new Date(today);
+    const currentDate = new Date(today);
     currentDate.setDate(currentDate.getDate() + 1); // Start from tomorrow
 
-    while (dates.length < 14 && currentDate <= new Date(today.getTime() + maxDays * 24 * 60 * 60 * 1000)) {
+    while (
+      dates.length < 14 &&
+      currentDate <= new Date(today.getTime() + maxDays * 24 * 60 * 60 * 1000)
+    ) {
       const dayOfWeek = currentDate.getDay();
       if (workingDays.includes(dayOfWeek)) {
         dates.push(new Date(currentDate));
@@ -300,10 +302,10 @@ export default function SchedulingSystem() {
       const normalizedUserTz = userTimezone.replace('Calcutta', 'Kolkata');
       const normalizedAdminTz = adminTimezone.replace('Calcutta', 'Kolkata');
       const isSameTimezone = normalizedUserTz === normalizedAdminTz;
-      
+
       let adminDate: Date;
       let adminTime: string;
-      
+
       if (isSameTimezone) {
         // Same timezone - use selected time directly, no conversion needed
         adminDate = new Date(selectedDate!);
@@ -385,8 +387,10 @@ export default function SchedulingSystem() {
         <h3 className="text-2xl lg:text-3xl font-bold text-foreground mb-2 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent break-words">
           Booking Confirmed! 🎉
         </h3>
-        <p className="text-muted-foreground mb-8 break-words">Your meeting has been successfully scheduled</p>
-        
+        <p className="text-muted-foreground mb-8 break-words">
+          Your meeting has been successfully scheduled
+        </p>
+
         <div className="bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5 rounded-xl p-6 mb-8 text-left max-w-md mx-auto border border-primary/20 w-full">
           <div className="space-y-4">
             <div className="flex items-start gap-3">
@@ -398,7 +402,7 @@ export default function SchedulingSystem() {
                 <p className="text-foreground font-semibold">{selectedMeeting?.name}</p>
               </div>
             </div>
-            
+
             <div className="flex items-start gap-3">
               <div className="flex-shrink-0 w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
                 <Icon name="ClockIcon" size={20} className="text-primary" />
@@ -406,12 +410,13 @@ export default function SchedulingSystem() {
               <div>
                 <p className="text-sm text-muted-foreground mb-1">Date & Time</p>
                 <p className="text-foreground font-semibold">
-                  {selectedDate && formatDate(selectedDate)} at {selectedTime && formatTime(selectedTime)}
+                  {selectedDate && formatDate(selectedDate)} at{' '}
+                  {selectedTime && formatTime(selectedTime)}
                 </p>
                 <p className="text-xs text-muted-foreground mt-1">({userTimezone})</p>
               </div>
             </div>
-            
+
             <div className="flex items-start gap-3">
               <div className="flex-shrink-0 w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
                 <Icon name="ClockIcon" size={20} className="text-primary" />
@@ -422,28 +427,30 @@ export default function SchedulingSystem() {
               </div>
             </div>
           </div>
-          
+
           {settings && (
             <div className="mt-4 pt-4 border-t border-border">
               <p className="text-xs text-muted-foreground">
                 <Icon name="InformationCircleIcon" size={14} className="inline mr-1" />
-                Time shown in your timezone. Meeting scheduled in {settings.timezone || 'admin timezone'}.
+                Time shown in your timezone. Meeting scheduled in{' '}
+                {settings.timezone || 'admin timezone'}.
               </p>
             </div>
           )}
         </div>
-        
+
         <div className="bg-muted/50 rounded-lg p-4 mb-6 max-w-md mx-auto w-full">
           <p className="text-sm text-foreground break-words">
             <Icon name="EnvelopeIcon" size={16} className="inline mr-2 text-primary" />
-            Confirmation email sent to <span className="font-semibold break-all">{formData.attendeeEmail}</span>
+            Confirmation email sent to{' '}
+            <span className="font-semibold break-all">{formData.attendeeEmail}</span>
           </p>
         </div>
-        
+
         <p className="text-muted-foreground mb-6 break-words px-4">
           We look forward to speaking with you! See you soon. 👋
         </p>
-        
+
         <button
           onClick={() => {
             setSubmitted(false);
@@ -451,7 +458,13 @@ export default function SchedulingSystem() {
             setSelectedMeetingType(null);
             setSelectedDate(null);
             setSelectedTime(null);
-            setFormData({ attendeeName: '', attendeeEmail: '', attendeePhone: '', companyName: '', message: '' });
+            setFormData({
+              attendeeName: '',
+              attendeeEmail: '',
+              attendeePhone: '',
+              companyName: '',
+              message: '',
+            });
             setErrors({});
           }}
           className="px-8 py-4 bg-gradient-to-r from-primary to-secondary text-primary-foreground rounded-xl font-semibold transition-all duration-300 hover:shadow-warm-xl hover:-translate-y-1 press-scale flex items-center gap-2 mx-auto w-full max-w-xs"
@@ -468,7 +481,7 @@ export default function SchedulingSystem() {
       {/* Decorative Background Elements */}
       <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-primary/5 to-transparent rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
       <div className="absolute bottom-0 left-0 w-48 h-48 bg-gradient-to-tr from-secondary/5 to-transparent rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 pointer-events-none"></div>
-      
+
       <div className="relative z-10 w-full max-w-full">
         {/* Progress Indicator */}
         <div className="mb-10 w-full">
@@ -489,9 +502,7 @@ export default function SchedulingSystem() {
                 <div
                   key={step}
                   className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                    step <= currentStep
-                      ? 'bg-primary w-8'
-                      : 'bg-muted'
+                    step <= currentStep ? 'bg-primary w-8' : 'bg-muted'
                   }`}
                 />
               ))}
@@ -505,358 +516,418 @@ export default function SchedulingSystem() {
           </div>
         </div>
 
-      {/* Step 1: Select Meeting Type */}
-      {currentStep === 1 && (
-        <div className="animate-fade-in">
-          <div className="text-center mb-8">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full mb-4">
-              <Icon name="VideoCameraIcon" size={18} className="text-primary" />
-              <span className="text-sm font-medium text-primary">Select Meeting Type</span>
-            </div>
-            <p className="text-muted-foreground">Choose the type of meeting that best fits your needs</p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-4 lg:gap-6">
-            {meetingTypes.map((type, index) => (
-              <button
-                key={type.id}
-                onClick={() => handleMeetingTypeSelect(type.id)}
-                className="group relative p-6 lg:p-8 bg-gradient-to-br from-background to-muted/30 border-2 border-border rounded-2xl hover:border-primary hover:shadow-warm-xl transition-all duration-300 text-left overflow-hidden transform hover:-translate-y-1"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                {/* Hover Effect Background */}
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                
-                <div className="relative z-10">
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center group-hover:bg-primary transition-all duration-300">
-                      <Icon name="CalendarIcon" size={24} className="text-primary group-hover:text-primary-foreground transition-colors" />
-                    </div>
-                    <Icon name="ArrowRightIcon" size={20} className="text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
-                  </div>
-                  
-                  <h3 className="text-lg font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
-                    {type.name}
-                  </h3>
-                  <p className="text-sm text-muted-foreground mb-4 leading-relaxed">{type.description}</p>
-                  
-                  <div className="flex items-center gap-2">
-                    <Icon name="ClockIcon" size={16} className="text-primary" />
-                    <span className="text-sm font-semibold text-primary">{type.duration} minutes</span>
-                  </div>
-                </div>
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* Step 2: Select Date */}
-      {currentStep === 2 && selectedMeetingType && (
-        <div className="animate-fade-in">
-          <div className="flex items-center gap-4 mb-8">
-            <button
-              onClick={() => {
-                setCurrentStep(1);
-                setSelectedDate(null);
-              }}
-              className="p-2 hover:bg-muted rounded-lg transition-all duration-200 hover:scale-110"
-            >
-              <Icon name="ArrowLeftIcon" size={20} className="text-foreground" />
-            </button>
-            <div className="flex-1">
-              <div className="flex items-center gap-2 mb-2">
-                <Icon name="CalendarIcon" size={20} className="text-primary" />
-                <h2 className="text-2xl font-bold text-foreground">Select a Date</h2>
+        {/* Step 1: Select Meeting Type */}
+        {currentStep === 1 && (
+          <div className="animate-fade-in">
+            <div className="text-center mb-8">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full mb-4">
+                <Icon name="VideoCameraIcon" size={18} className="text-primary" />
+                <span className="text-sm font-medium text-primary">Select Meeting Type</span>
               </div>
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-primary rounded-full"></div>
-                <p className="text-muted-foreground">{selectedMeeting.name}</p>
-              </div>
+              <p className="text-muted-foreground">
+                Choose the type of meeting that best fits your needs
+              </p>
             </div>
-          </div>
-          
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3">
-            {getNextAvailableDates().map((date, index) => {
-              const isSelected = selectedDate?.toDateString() === date.toDateString();
-              const isToday = date.toDateString() === new Date().toDateString();
-              return (
+            <div className="grid md:grid-cols-3 gap-4 lg:gap-6">
+              {meetingTypes.map((type, index) => (
                 <button
-                  key={index}
-                  onClick={() => handleDateSelect(date)}
-                  className={`group relative p-4 lg:p-5 rounded-xl border-2 transition-all duration-300 transform hover:scale-105 ${
-                    isSelected
-                      ? 'border-primary bg-gradient-to-br from-primary/20 to-primary/10 text-primary shadow-warm-md scale-105'
-                      : 'border-border hover:border-primary/50 hover:bg-muted/50'
-                  }`}
+                  key={type.id}
+                  onClick={() => handleMeetingTypeSelect(type.id)}
+                  className="group relative p-6 lg:p-8 bg-gradient-to-br from-background to-muted/30 border-2 border-border rounded-2xl hover:border-primary hover:shadow-warm-xl transition-all duration-300 text-left overflow-hidden transform hover:-translate-y-1"
+                  style={{ animationDelay: `${index * 100}ms` }}
                 >
-                  {isToday && (
-                    <div className="absolute -top-1 -right-1 w-3 h-3 bg-accent rounded-full border-2 border-card"></div>
-                  )}
-                  <div className="text-center">
-                    <div className="text-xs font-medium opacity-70 mb-1">
-                      {new Intl.DateTimeFormat('en-US', { weekday: 'short' }).format(date)}
+                  {/* Hover Effect Background */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+                  <div className="relative z-10">
+                    <div className="flex items-start justify-between mb-4">
+                      <div className="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center group-hover:bg-primary transition-all duration-300">
+                        <Icon
+                          name="CalendarIcon"
+                          size={24}
+                          className="text-primary group-hover:text-primary-foreground transition-colors"
+                        />
+                      </div>
+                      <Icon
+                        name="ArrowRightIcon"
+                        size={20}
+                        className="text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all"
+                      />
                     </div>
-                    <div className="text-lg font-bold mb-1">
-                      {new Intl.DateTimeFormat('en-US', { day: 'numeric' }).format(date)}
-                    </div>
-                    <div className="text-xs text-muted-foreground">
-                      {new Intl.DateTimeFormat('en-US', { month: 'short' }).format(date)}
+
+                    <h3 className="text-lg font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
+                      {type.name}
+                    </h3>
+                    <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
+                      {type.description}
+                    </p>
+
+                    <div className="flex items-center gap-2">
+                      <Icon name="ClockIcon" size={16} className="text-primary" />
+                      <span className="text-sm font-semibold text-primary">
+                        {type.duration} minutes
+                      </span>
                     </div>
                   </div>
-                  {isSelected && (
-                    <div className="absolute inset-0 border-2 border-primary rounded-xl animate-pulse"></div>
-                  )}
                 </button>
-              );
-            })}
-          </div>
-        </div>
-      )}
-
-      {/* Step 3: Select Time */}
-      {currentStep === 3 && selectedDate && (
-        <div className="animate-fade-in">
-          <div className="flex items-center gap-4 mb-8">
-            <button
-              onClick={() => {
-                setCurrentStep(2);
-                setSelectedTime(null);
-              }}
-              className="p-2 hover:bg-muted rounded-lg transition-all duration-200 hover:scale-110"
-            >
-              <Icon name="ArrowLeftIcon" size={20} className="text-foreground" />
-            </button>
-            <div className="flex-1">
-              <div className="flex items-center gap-2 mb-2">
-                <Icon name="ClockIcon" size={20} className="text-primary" />
-                <h2 className="text-2xl font-bold text-foreground">Select a Time</h2>
-              </div>
-              <div className="flex items-center gap-2 flex-wrap">
-                <div className="flex items-center gap-2">
-                  <Icon name="CalendarIcon" size={16} className="text-muted-foreground" />
-                  <p className="text-muted-foreground">{formatDate(selectedDate)}</p>
-                </div>
-                <span className="text-muted-foreground">•</span>
-                <p className="text-muted-foreground">{selectedMeeting?.name}</p>
-              </div>
+              ))}
             </div>
           </div>
-          
-          {availableSlots.length === 0 ? (
-            <div className="text-center py-16 bg-gradient-to-br from-muted/30 to-muted/10 rounded-2xl border border-border">
-              <div className="inline-flex items-center justify-center w-20 h-20 bg-muted rounded-full mb-6">
-                <Icon name="ClockIcon" size={40} className="text-muted-foreground" />
-              </div>
-              <h3 className="text-xl font-semibold text-foreground mb-2">No Available Slots</h3>
-              <p className="text-muted-foreground mb-6">This date is fully booked. Please choose another date.</p>
+        )}
+
+        {/* Step 2: Select Date */}
+        {currentStep === 2 && selectedMeetingType && (
+          <div className="animate-fade-in">
+            <div className="flex items-center gap-4 mb-8">
               <button
-                onClick={() => setCurrentStep(2)}
-                className="px-6 py-3 bg-primary text-primary-foreground rounded-xl font-semibold transition-all duration-300 hover:shadow-warm-md hover:-translate-y-1 press-scale flex items-center gap-2 mx-auto"
+                onClick={() => {
+                  setCurrentStep(1);
+                  setSelectedDate(null);
+                }}
+                className="p-2 hover:bg-muted rounded-lg transition-all duration-200 hover:scale-110"
               >
-                <Icon name="ArrowLeftIcon" size={18} />
-                Choose Another Date
+                <Icon name="ArrowLeftIcon" size={20} className="text-foreground" />
               </button>
-            </div>
-          ) : (
-            <div>
-              <div className="flex items-center gap-2 mb-4 text-sm text-muted-foreground">
-                <Icon name="InformationCircleIcon" size={16} />
-                <span>Times shown in your timezone ({userTimezone})</span>
-              </div>
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-                {availableSlots.map((time, index) => {
-                  const isSelected = selectedTime === time;
-                  return (
-                    <button
-                      key={time}
-                      onClick={() => handleTimeSelect(time)}
-                      className={`group relative p-4 rounded-xl border-2 transition-all duration-300 transform hover:scale-105 ${
-                        isSelected
-                          ? 'border-primary bg-gradient-to-br from-primary/20 to-primary/10 text-primary shadow-warm-md scale-105'
-                          : 'border-border hover:border-primary/50 hover:bg-muted/50'
-                      }`}
-                    >
-                      <div className="flex items-center justify-center gap-2">
-                        <Icon name="ClockIcon" size={18} className={isSelected ? 'text-primary' : 'text-muted-foreground'} />
-                        <span className="font-semibold">{formatTime(time)}</span>
-                      </div>
-                      {isSelected && (
-                        <div className="absolute -top-1 -right-1 w-4 h-4 bg-primary rounded-full flex items-center justify-center">
-                          <Icon name="CheckCircleIcon" size={12} className="text-primary-foreground" />
-                        </div>
-                      )}
-                    </button>
-                  );
-                })}
+              <div className="flex-1">
+                <div className="flex items-center gap-2 mb-2">
+                  <Icon name="CalendarIcon" size={20} className="text-primary" />
+                  <h2 className="text-2xl font-bold text-foreground">Select a Date</h2>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-primary rounded-full"></div>
+                  <p className="text-muted-foreground">{selectedMeeting.name}</p>
+                </div>
               </div>
             </div>
-          )}
-        </div>
-      )}
 
-      {/* Step 4: Booking Form */}
-      {currentStep === 4 && selectedTime && (
-        <form onSubmit={handleSubmit} className="animate-fade-in">
-          <div className="flex items-center gap-4 mb-8">
-            <button
-              type="button"
-              onClick={() => {
-                setCurrentStep(3);
-              }}
-              className="p-2 hover:bg-muted rounded-lg transition-all duration-200 hover:scale-110"
-            >
-              <Icon name="ArrowLeftIcon" size={20} className="text-foreground" />
-            </button>
-            <div className="flex-1">
-              <div className="flex items-center gap-2 mb-2">
-                <Icon name="UserCircleIcon" size={20} className="text-primary" />
-                <h2 className="text-2xl font-bold text-foreground">Your Details</h2>
-              </div>
-              <div className="flex items-center gap-2 flex-wrap">
-                <div className="flex items-center gap-2 px-3 py-1 bg-primary/10 rounded-lg">
-                  <Icon name="CalendarIcon" size={14} className="text-primary" />
-                  <span className="text-sm font-medium text-foreground">{formatDate(selectedDate!)}</span>
-                </div>
-                <div className="flex items-center gap-2 px-3 py-1 bg-primary/10 rounded-lg">
-                  <Icon name="ClockIcon" size={14} className="text-primary" />
-                  <span className="text-sm font-medium text-foreground">{formatTime(selectedTime)}</span>
-                </div>
-                <div className="flex items-center gap-2 px-3 py-1 bg-secondary/10 rounded-lg">
-                  <Icon name="VideoCameraIcon" size={14} className="text-secondary" />
-                  <span className="text-sm font-medium text-foreground">{selectedMeeting?.name}</span>
-                </div>
-              </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3">
+              {getNextAvailableDates().map((date, index) => {
+                const isSelected = selectedDate?.toDateString() === date.toDateString();
+                const isToday = date.toDateString() === new Date().toDateString();
+                return (
+                  <button
+                    key={index}
+                    onClick={() => handleDateSelect(date)}
+                    className={`group relative p-4 lg:p-5 rounded-xl border-2 transition-all duration-300 transform hover:scale-105 ${
+                      isSelected
+                        ? 'border-primary bg-gradient-to-br from-primary/20 to-primary/10 text-primary shadow-warm-md scale-105'
+                        : 'border-border hover:border-primary/50 hover:bg-muted/50'
+                    }`}
+                  >
+                    {isToday && (
+                      <div className="absolute -top-1 -right-1 w-3 h-3 bg-accent rounded-full border-2 border-card"></div>
+                    )}
+                    <div className="text-center">
+                      <div className="text-xs font-medium opacity-70 mb-1">
+                        {new Intl.DateTimeFormat('en-US', { weekday: 'short' }).format(date)}
+                      </div>
+                      <div className="text-lg font-bold mb-1">
+                        {new Intl.DateTimeFormat('en-US', { day: 'numeric' }).format(date)}
+                      </div>
+                      <div className="text-xs text-muted-foreground">
+                        {new Intl.DateTimeFormat('en-US', { month: 'short' }).format(date)}
+                      </div>
+                    </div>
+                    {isSelected && (
+                      <div className="absolute inset-0 border-2 border-primary rounded-xl animate-pulse"></div>
+                    )}
+                  </button>
+                );
+              })}
             </div>
           </div>
+        )}
 
-          <div className="space-y-6">
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="space-y-2">
-                <label htmlFor="attendeeName" className="flex items-center gap-2 text-sm font-semibold text-foreground">
-                  <Icon name="UserCircleIcon" size={16} className="text-primary" />
-                  Full Name <span className="text-error">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="attendeeName"
-                  name="attendeeName"
-                  required
-                  value={formData.attendeeName}
-                  onChange={handleFormChange}
-                  className={`w-full px-4 py-3.5 rounded-xl border-2 bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200 ${
-                    errors.attendeeName ? 'border-error focus:ring-error/50' : 'border-border hover:border-primary/50'
-                  }`}
-                  placeholder="John Doe"
-                />
-                {errors.attendeeName && (
-                  <p className="flex items-center gap-1 text-sm text-error">
-                    <Icon name="ExclamationCircleIcon" size={14} />
-                    {errors.attendeeName}
-                  </p>
-                )}
-              </div>
-              <div className="space-y-2">
-                <label htmlFor="attendeeEmail" className="flex items-center gap-2 text-sm font-semibold text-foreground">
-                  <Icon name="EnvelopeIcon" size={16} className="text-primary" />
-                  Email Address <span className="text-error">*</span>
-                </label>
-                <input
-                  type="email"
-                  id="attendeeEmail"
-                  name="attendeeEmail"
-                  required
-                  value={formData.attendeeEmail}
-                  onChange={handleFormChange}
-                  className={`w-full px-4 py-3.5 rounded-xl border-2 bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200 ${
-                    errors.attendeeEmail ? 'border-error focus:ring-error/50' : 'border-border hover:border-primary/50'
-                  }`}
-                  placeholder="john@example.com"
-                />
-                {errors.attendeeEmail && (
-                  <p className="flex items-center gap-1 text-sm text-error">
-                    <Icon name="ExclamationCircleIcon" size={14} />
-                    {errors.attendeeEmail}
-                  </p>
-                )}
+        {/* Step 3: Select Time */}
+        {currentStep === 3 && selectedDate && (
+          <div className="animate-fade-in">
+            <div className="flex items-center gap-4 mb-8">
+              <button
+                onClick={() => {
+                  setCurrentStep(2);
+                  setSelectedTime(null);
+                }}
+                className="p-2 hover:bg-muted rounded-lg transition-all duration-200 hover:scale-110"
+              >
+                <Icon name="ArrowLeftIcon" size={20} className="text-foreground" />
+              </button>
+              <div className="flex-1">
+                <div className="flex items-center gap-2 mb-2">
+                  <Icon name="ClockIcon" size={20} className="text-primary" />
+                  <h2 className="text-2xl font-bold text-foreground">Select a Time</h2>
+                </div>
+                <div className="flex items-center gap-2 flex-wrap">
+                  <div className="flex items-center gap-2">
+                    <Icon name="CalendarIcon" size={16} className="text-muted-foreground" />
+                    <p className="text-muted-foreground">{formatDate(selectedDate)}</p>
+                  </div>
+                  <span className="text-muted-foreground">•</span>
+                  <p className="text-muted-foreground">{selectedMeeting?.name}</p>
+                </div>
               </div>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="space-y-2">
-                <label htmlFor="attendeePhone" className="flex items-center gap-2 text-sm font-semibold text-foreground">
-                  <Icon name="PhoneIcon" size={16} className="text-muted-foreground" />
-                  Phone Number <span className="text-xs text-muted-foreground font-normal">(Optional)</span>
-                </label>
-                <input
-                  type="tel"
-                  id="attendeePhone"
-                  name="attendeePhone"
-                  value={formData.attendeePhone}
-                  onChange={handleFormChange}
-                  className="w-full px-4 py-3.5 rounded-xl border-2 border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200 hover:border-primary/50"
-                  placeholder="+1 (555) 123-4567"
-                />
+            {availableSlots.length === 0 ? (
+              <div className="text-center py-16 bg-gradient-to-br from-muted/30 to-muted/10 rounded-2xl border border-border">
+                <div className="inline-flex items-center justify-center w-20 h-20 bg-muted rounded-full mb-6">
+                  <Icon name="ClockIcon" size={40} className="text-muted-foreground" />
+                </div>
+                <h3 className="text-xl font-semibold text-foreground mb-2">No Available Slots</h3>
+                <p className="text-muted-foreground mb-6">
+                  This date is fully booked. Please choose another date.
+                </p>
+                <button
+                  onClick={() => setCurrentStep(2)}
+                  className="px-6 py-3 bg-primary text-primary-foreground rounded-xl font-semibold transition-all duration-300 hover:shadow-warm-md hover:-translate-y-1 press-scale flex items-center gap-2 mx-auto"
+                >
+                  <Icon name="ArrowLeftIcon" size={18} />
+                  Choose Another Date
+                </button>
               </div>
-              <div className="space-y-2">
-                <label htmlFor="companyName" className="flex items-center gap-2 text-sm font-semibold text-foreground">
-                  <Icon name="BuildingOffice2Icon" size={16} className="text-muted-foreground" />
-                  Company Name <span className="text-xs text-muted-foreground font-normal">(Optional)</span>
-                </label>
-                <input
-                  type="text"
-                  id="companyName"
-                  name="companyName"
-                  value={formData.companyName}
-                  onChange={handleFormChange}
-                  className="w-full px-4 py-3.5 rounded-xl border-2 border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200 hover:border-primary/50"
-                  placeholder="Your Company"
-                />
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <label htmlFor="message" className="flex items-center gap-2 text-sm font-semibold text-foreground">
-                <Icon name="ChatBubbleLeftRightIcon" size={16} className="text-muted-foreground" />
-                Additional Message <span className="text-xs text-muted-foreground font-normal">(Optional)</span>
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                rows={4}
-                value={formData.message}
-                onChange={handleFormChange}
-                className="w-full px-4 py-3.5 rounded-xl border-2 border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200 resize-none hover:border-primary/50"
-                placeholder="Tell us what you'd like to discuss..."
-              />
-            </div>
-
-            {errors.submit && (
-              <div className="p-4 bg-error/10 border-2 border-error rounded-xl flex items-start gap-3 animate-shake">
-                <Icon name="ExclamationTriangleIcon" size={20} className="text-error flex-shrink-0 mt-0.5" />
-                <p className="text-sm text-error font-medium">{errors.submit}</p>
+            ) : (
+              <div>
+                <div className="flex items-center gap-2 mb-4 text-sm text-muted-foreground">
+                  <Icon name="InformationCircleIcon" size={16} />
+                  <span>Times shown in your timezone ({userTimezone})</span>
+                </div>
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                  {availableSlots.map((time, index) => {
+                    const isSelected = selectedTime === time;
+                    return (
+                      <button
+                        key={time}
+                        onClick={() => handleTimeSelect(time)}
+                        className={`group relative p-4 rounded-xl border-2 transition-all duration-300 transform hover:scale-105 ${
+                          isSelected
+                            ? 'border-primary bg-gradient-to-br from-primary/20 to-primary/10 text-primary shadow-warm-md scale-105'
+                            : 'border-border hover:border-primary/50 hover:bg-muted/50'
+                        }`}
+                      >
+                        <div className="flex items-center justify-center gap-2">
+                          <Icon
+                            name="ClockIcon"
+                            size={18}
+                            className={isSelected ? 'text-primary' : 'text-muted-foreground'}
+                          />
+                          <span className="font-semibold">{formatTime(time)}</span>
+                        </div>
+                        {isSelected && (
+                          <div className="absolute -top-1 -right-1 w-4 h-4 bg-primary rounded-full flex items-center justify-center">
+                            <Icon
+                              name="CheckCircleIcon"
+                              size={12}
+                              className="text-primary-foreground"
+                            />
+                          </div>
+                        )}
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
             )}
-
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="w-full px-8 py-4 bg-gradient-to-r from-primary via-secondary to-accent text-primary-foreground rounded-xl font-bold text-lg transition-all duration-300 hover:shadow-warm-xl hover:-translate-y-1 press-scale disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 flex items-center justify-center gap-3"
-            >
-              {isSubmitting ? (
-                <>
-                  <Icon name="ArrowPathIcon" size={22} className="animate-spin" />
-                  <span>Confirming Booking...</span>
-                </>
-              ) : (
-                <>
-                  <Icon name="CheckCircleIcon" size={22} />
-                  <span>Confirm Booking</span>
-                </>
-              )}
-            </button>
           </div>
-        </form>
-      )}
+        )}
+
+        {/* Step 4: Booking Form */}
+        {currentStep === 4 && selectedTime && (
+          <form onSubmit={handleSubmit} className="animate-fade-in">
+            <div className="flex items-center gap-4 mb-8">
+              <button
+                type="button"
+                onClick={() => {
+                  setCurrentStep(3);
+                }}
+                className="p-2 hover:bg-muted rounded-lg transition-all duration-200 hover:scale-110"
+              >
+                <Icon name="ArrowLeftIcon" size={20} className="text-foreground" />
+              </button>
+              <div className="flex-1">
+                <div className="flex items-center gap-2 mb-2">
+                  <Icon name="UserCircleIcon" size={20} className="text-primary" />
+                  <h2 className="text-2xl font-bold text-foreground">Your Details</h2>
+                </div>
+                <div className="flex items-center gap-2 flex-wrap">
+                  <div className="flex items-center gap-2 px-3 py-1 bg-primary/10 rounded-lg">
+                    <Icon name="CalendarIcon" size={14} className="text-primary" />
+                    <span className="text-sm font-medium text-foreground">
+                      {formatDate(selectedDate!)}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2 px-3 py-1 bg-primary/10 rounded-lg">
+                    <Icon name="ClockIcon" size={14} className="text-primary" />
+                    <span className="text-sm font-medium text-foreground">
+                      {formatTime(selectedTime)}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2 px-3 py-1 bg-secondary/10 rounded-lg">
+                    <Icon name="VideoCameraIcon" size={14} className="text-secondary" />
+                    <span className="text-sm font-medium text-foreground">
+                      {selectedMeeting?.name}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="space-y-6">
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <label
+                    htmlFor="attendeeName"
+                    className="flex items-center gap-2 text-sm font-semibold text-foreground"
+                  >
+                    <Icon name="UserCircleIcon" size={16} className="text-primary" />
+                    Full Name <span className="text-error">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="attendeeName"
+                    name="attendeeName"
+                    required
+                    value={formData.attendeeName}
+                    onChange={handleFormChange}
+                    className={`w-full px-4 py-3.5 rounded-xl border-2 bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200 ${
+                      errors.attendeeName
+                        ? 'border-error focus:ring-error/50'
+                        : 'border-border hover:border-primary/50'
+                    }`}
+                    placeholder="John Doe"
+                  />
+                  {errors.attendeeName && (
+                    <p className="flex items-center gap-1 text-sm text-error">
+                      <Icon name="ExclamationCircleIcon" size={14} />
+                      {errors.attendeeName}
+                    </p>
+                  )}
+                </div>
+                <div className="space-y-2">
+                  <label
+                    htmlFor="attendeeEmail"
+                    className="flex items-center gap-2 text-sm font-semibold text-foreground"
+                  >
+                    <Icon name="EnvelopeIcon" size={16} className="text-primary" />
+                    Email Address <span className="text-error">*</span>
+                  </label>
+                  <input
+                    type="email"
+                    id="attendeeEmail"
+                    name="attendeeEmail"
+                    required
+                    value={formData.attendeeEmail}
+                    onChange={handleFormChange}
+                    className={`w-full px-4 py-3.5 rounded-xl border-2 bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200 ${
+                      errors.attendeeEmail
+                        ? 'border-error focus:ring-error/50'
+                        : 'border-border hover:border-primary/50'
+                    }`}
+                    placeholder="john@example.com"
+                  />
+                  {errors.attendeeEmail && (
+                    <p className="flex items-center gap-1 text-sm text-error">
+                      <Icon name="ExclamationCircleIcon" size={14} />
+                      {errors.attendeeEmail}
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <label
+                    htmlFor="attendeePhone"
+                    className="flex items-center gap-2 text-sm font-semibold text-foreground"
+                  >
+                    <Icon name="PhoneIcon" size={16} className="text-muted-foreground" />
+                    Phone Number{' '}
+                    <span className="text-xs text-muted-foreground font-normal">(Optional)</span>
+                  </label>
+                  <input
+                    type="tel"
+                    id="attendeePhone"
+                    name="attendeePhone"
+                    value={formData.attendeePhone}
+                    onChange={handleFormChange}
+                    className="w-full px-4 py-3.5 rounded-xl border-2 border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200 hover:border-primary/50"
+                    placeholder="+1 (555) 123-4567"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label
+                    htmlFor="companyName"
+                    className="flex items-center gap-2 text-sm font-semibold text-foreground"
+                  >
+                    <Icon name="BuildingOffice2Icon" size={16} className="text-muted-foreground" />
+                    Company Name{' '}
+                    <span className="text-xs text-muted-foreground font-normal">(Optional)</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="companyName"
+                    name="companyName"
+                    value={formData.companyName}
+                    onChange={handleFormChange}
+                    className="w-full px-4 py-3.5 rounded-xl border-2 border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200 hover:border-primary/50"
+                    placeholder="Your Company"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <label
+                  htmlFor="message"
+                  className="flex items-center gap-2 text-sm font-semibold text-foreground"
+                >
+                  <Icon
+                    name="ChatBubbleLeftRightIcon"
+                    size={16}
+                    className="text-muted-foreground"
+                  />
+                  Additional Message{' '}
+                  <span className="text-xs text-muted-foreground font-normal">(Optional)</span>
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows={4}
+                  value={formData.message}
+                  onChange={handleFormChange}
+                  className="w-full px-4 py-3.5 rounded-xl border-2 border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200 resize-none hover:border-primary/50"
+                  placeholder="Tell us what you'd like to discuss..."
+                />
+              </div>
+
+              {errors.submit && (
+                <div className="p-4 bg-error/10 border-2 border-error rounded-xl flex items-start gap-3 animate-shake">
+                  <Icon
+                    name="ExclamationTriangleIcon"
+                    size={20}
+                    className="text-error flex-shrink-0 mt-0.5"
+                  />
+                  <p className="text-sm text-error font-medium">{errors.submit}</p>
+                </div>
+              )}
+
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full px-8 py-4 bg-gradient-to-r from-primary via-secondary to-accent text-primary-foreground rounded-xl font-bold text-lg transition-all duration-300 hover:shadow-warm-xl hover:-translate-y-1 press-scale disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 flex items-center justify-center gap-3"
+              >
+                {isSubmitting ? (
+                  <>
+                    <Icon name="ArrowPathIcon" size={22} className="animate-spin" />
+                    <span>Confirming Booking...</span>
+                  </>
+                ) : (
+                  <>
+                    <Icon name="CheckCircleIcon" size={22} />
+                    <span>Confirm Booking</span>
+                  </>
+                )}
+              </button>
+            </div>
+          </form>
+        )}
       </div>
     </div>
   );

@@ -54,7 +54,7 @@ const BlogsManagementInteractive = () => {
   };
 
   const handleEdit = (id: string) => {
-    const blog = blogs.find(b => b.id === id);
+    const blog = blogs.find((b) => b.id === id);
     setEditingBlog(blog);
     setIsEditing(true);
   };
@@ -68,7 +68,7 @@ const BlogsManagementInteractive = () => {
     if (deletingBlogId) {
       try {
         await blogsService.delete(deletingBlogId);
-        setBlogs(blogs.filter(blog => blog.id !== deletingBlogId));
+        setBlogs(blogs.filter((blog) => blog.id !== deletingBlogId));
         setShowDeleteConfirm(false);
         setDeletingBlogId(null);
         showNotification('success', 'Blog deleted successfully');
@@ -79,7 +79,9 @@ const BlogsManagementInteractive = () => {
     }
   };
 
-  const handleSave = async (data: Omit<Blog, 'id' | 'createdAt' | 'updatedAt' | 'views' | 'likes'>) => {
+  const handleSave = async (
+    data: Omit<Blog, 'id' | 'createdAt' | 'updatedAt' | 'views' | 'likes'>
+  ) => {
     try {
       if (editingBlog && editingBlog.id) {
         await blogsService.update(editingBlog.id, data);
@@ -88,7 +90,7 @@ const BlogsManagementInteractive = () => {
         await blogsService.create(data);
         showNotification('success', 'Blog created successfully');
       }
-      
+
       await fetchBlogs();
       setIsEditing(false);
       setEditingBlog(undefined);
@@ -101,12 +103,12 @@ const BlogsManagementInteractive = () => {
   const handleBulkAction = async (action: string, ids: string[]) => {
     try {
       if (action === 'delete') {
-        await Promise.all(ids.map(id => blogsService.delete(id)));
+        await Promise.all(ids.map((id) => blogsService.delete(id)));
         showNotification('success', `${ids.length} blog(s) deleted successfully`);
       } else {
         const status = action === 'publish' ? 'published' : 'draft';
         await Promise.all(
-          ids.map(id => blogsService.update(id, { status: status as 'published' | 'draft' }))
+          ids.map((id) => blogsService.update(id, { status: status as 'published' | 'draft' }))
         );
         showNotification('success', `${ids.length} blog(s) updated successfully`);
       }
@@ -153,7 +155,9 @@ const BlogsManagementInteractive = () => {
           {notification && (
             <div
               className={`flex items-center gap-3 p-4 rounded-md animate-slide-down ${
-                notification.type === 'success' ?'bg-success/10 text-success' :'bg-error/10 text-error'
+                notification.type === 'success'
+                  ? 'bg-success/10 text-success'
+                  : 'bg-error/10 text-error'
               }`}
             >
               <Icon
@@ -172,7 +176,7 @@ const BlogsManagementInteractive = () => {
                 </div>
               </div>
               <div className="text-3xl font-bold text-foreground mb-1">
-                {blogs.filter(b => b.status === 'published').length}
+                {blogs.filter((b) => b.status === 'published').length}
               </div>
               <div className="text-sm text-muted-foreground">Published Posts</div>
             </div>
@@ -184,7 +188,7 @@ const BlogsManagementInteractive = () => {
                 </div>
               </div>
               <div className="text-3xl font-bold text-foreground mb-1">
-                {blogs.filter(b => b.status === 'draft').length}
+                {blogs.filter((b) => b.status === 'draft').length}
               </div>
               <div className="text-sm text-muted-foreground">Draft Posts</div>
             </div>
@@ -196,7 +200,7 @@ const BlogsManagementInteractive = () => {
                 </div>
               </div>
               <div className="text-3xl font-bold text-foreground mb-1">
-                {blogs.filter(b => b.status === 'scheduled').length}
+                {blogs.filter((b) => b.status === 'scheduled').length}
               </div>
               <div className="text-sm text-muted-foreground">Scheduled Posts</div>
             </div>
@@ -226,7 +230,9 @@ const BlogsManagementInteractive = () => {
                 {editingBlog ? 'Edit Blog Post' : 'Create New Blog Post'}
               </h1>
               <p className="text-muted-foreground">
-                {editingBlog ? 'Update your blog content and settings' : 'Create engaging content for your audience'}
+                {editingBlog
+                  ? 'Update your blog content and settings'
+                  : 'Create engaging content for your audience'}
               </p>
             </div>
           </div>

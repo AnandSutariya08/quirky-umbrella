@@ -32,9 +32,15 @@ const ServiceTable = ({ services, onEdit, onDelete, onPreview }: ServiceTablePro
                 <th className="px-6 py-4 text-left text-sm font-semibold text-foreground">Image</th>
                 <th className="px-6 py-4 text-left text-sm font-semibold text-foreground">Title</th>
                 <th className="px-6 py-4 text-left text-sm font-semibold text-foreground">Slug</th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-foreground">Status</th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-foreground">Last Modified</th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-foreground">Actions</th>
+                <th className="px-6 py-4 text-left text-sm font-semibold text-foreground">
+                  Status
+                </th>
+                <th className="px-6 py-4 text-left text-sm font-semibold text-foreground">
+                  Last Modified
+                </th>
+                <th className="px-6 py-4 text-left text-sm font-semibold text-foreground">
+                  Actions
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -80,32 +86,33 @@ const ServiceTable = ({ services, onEdit, onDelete, onPreview }: ServiceTablePro
     }
   };
 
-  const filteredServices = services.filter(service =>
-    service.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    service.slug.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    service.tagline.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredServices = services.filter(
+    (service) =>
+      service.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      service.slug.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      service.tagline.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const sortedServices = [...filteredServices].sort((a, b) => {
     let aValue: any;
     let bValue: any;
-    
+
     if (sortField === 'updatedAt') {
       aValue = a.updatedAt || a.createdAt || new Date(0);
       bValue = b.updatedAt || b.createdAt || new Date(0);
-      return sortDirection === 'asc' 
+      return sortDirection === 'asc'
         ? aValue.getTime() - bValue.getTime()
         : bValue.getTime() - aValue.getTime();
     } else {
       aValue = a[sortField];
       bValue = b[sortField];
       if (typeof aValue === 'string' && typeof bValue === 'string') {
-        return sortDirection === 'asc' 
+        return sortDirection === 'asc'
           ? aValue.localeCompare(bValue)
           : bValue.localeCompare(aValue);
       }
     }
-    
+
     return 0;
   });
 
@@ -147,7 +154,7 @@ const ServiceTable = ({ services, onEdit, onDelete, onPreview }: ServiceTablePro
           <table className="w-full">
             <thead className="bg-muted">
               <tr>
-                <th 
+                <th
                   className="px-6 py-4 text-left text-sm font-semibold text-foreground cursor-pointer hover:bg-muted/80 transition-smooth"
                   onClick={() => handleSort('title')}
                 >
@@ -161,7 +168,7 @@ const ServiceTable = ({ services, onEdit, onDelete, onPreview }: ServiceTablePro
                     )}
                   </div>
                 </th>
-                <th 
+                <th
                   className="px-6 py-4 text-left text-sm font-semibold text-foreground cursor-pointer hover:bg-muted/80 transition-smooth"
                   onClick={() => handleSort('slug')}
                 >
@@ -181,7 +188,7 @@ const ServiceTable = ({ services, onEdit, onDelete, onPreview }: ServiceTablePro
                 <th className="px-6 py-4 text-left text-sm font-semibold text-foreground">
                   Status
                 </th>
-                <th 
+                <th
                   className="px-6 py-4 text-left text-sm font-semibold text-foreground cursor-pointer hover:bg-muted/80 transition-smooth"
                   onClick={() => handleSort('updatedAt')}
                 >
@@ -195,7 +202,9 @@ const ServiceTable = ({ services, onEdit, onDelete, onPreview }: ServiceTablePro
                     )}
                   </div>
                 </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-foreground">Actions</th>
+                <th className="px-6 py-4 text-left text-sm font-semibold text-foreground">
+                  Actions
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -210,7 +219,7 @@ const ServiceTable = ({ services, onEdit, onDelete, onPreview }: ServiceTablePro
               ) : (
                 sortedServices.map((service) => {
                   const lastModified = service.updatedAt || service.createdAt;
-                  const formattedDate = lastModified 
+                  const formattedDate = lastModified
                     ? new Date(lastModified).toLocaleDateString('en-US', {
                         month: '2-digit',
                         day: '2-digit',
@@ -219,9 +228,12 @@ const ServiceTable = ({ services, onEdit, onDelete, onPreview }: ServiceTablePro
                         minute: '2-digit',
                       })
                     : 'N/A';
-                  
+
                   return (
-                    <tr key={service.id} className="border-t border-border hover:bg-muted/50 transition-smooth">
+                    <tr
+                      key={service.id}
+                      className="border-t border-border hover:bg-muted/50 transition-smooth"
+                    >
                       <td className="px-6 py-4">
                         <div className="font-medium text-foreground">{service.title}</div>
                       </td>
@@ -238,18 +250,20 @@ const ServiceTable = ({ services, onEdit, onDelete, onPreview }: ServiceTablePro
                       <td className="px-6 py-4">
                         <span
                           className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium ${
-                            service.isActive ?'bg-success/10 text-success' :'bg-warning/10 text-warning'
+                            service.isActive
+                              ? 'bg-success/10 text-success'
+                              : 'bg-warning/10 text-warning'
                           }`}
                         >
-                          <span className={`w-2 h-2 rounded-full ${
-                            service.isActive ? 'bg-success' : 'bg-warning'
-                          }`} />
+                          <span
+                            className={`w-2 h-2 rounded-full ${
+                              service.isActive ? 'bg-success' : 'bg-warning'
+                            }`}
+                          />
                           {service.isActive ? 'Active' : 'Inactive'}
                         </span>
                       </td>
-                      <td className="px-6 py-4 text-sm text-muted-foreground">
-                        {formattedDate}
-                      </td>
+                      <td className="px-6 py-4 text-sm text-muted-foreground">{formattedDate}</td>
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-2">
                           <button
@@ -287,14 +301,18 @@ const ServiceTable = ({ services, onEdit, onDelete, onPreview }: ServiceTablePro
       <div className="lg:hidden space-y-4">
         {sortedServices.length === 0 ? (
           <div className="bg-card rounded-lg shadow-neutral-md p-8 text-center">
-            <Icon name="DocumentTextIcon" size={48} className="mx-auto mb-4 text-muted-foreground opacity-50" />
+            <Icon
+              name="DocumentTextIcon"
+              size={48}
+              className="mx-auto mb-4 text-muted-foreground opacity-50"
+            />
             <p className="text-lg font-medium text-foreground">No services found</p>
             <p className="text-sm text-muted-foreground mt-2">Try adjusting your search criteria</p>
           </div>
         ) : (
           sortedServices.map((service) => {
             const lastModified = service.updatedAt || service.createdAt;
-            const formattedDate = lastModified 
+            const formattedDate = lastModified
               ? new Date(lastModified).toLocaleDateString('en-US', {
                   month: '2-digit',
                   day: '2-digit',
@@ -303,7 +321,7 @@ const ServiceTable = ({ services, onEdit, onDelete, onPreview }: ServiceTablePro
                   minute: '2-digit',
                 })
               : 'N/A';
-            
+
             return (
               <div key={service.id} className="bg-card rounded-lg shadow-neutral-md p-6 space-y-4">
                 <div className="flex items-start gap-4">
@@ -322,42 +340,46 @@ const ServiceTable = ({ services, onEdit, onDelete, onPreview }: ServiceTablePro
                   <div className="space-y-2">
                     <span
                       className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium ${
-                        service.isActive ?'bg-success/10 text-success' :'bg-warning/10 text-warning'
+                        service.isActive
+                          ? 'bg-success/10 text-success'
+                          : 'bg-warning/10 text-warning'
                       }`}
                     >
-                      <span className={`w-2 h-2 rounded-full ${
-                        service.isActive ? 'bg-success' : 'bg-warning'
-                      }`} />
+                      <span
+                        className={`w-2 h-2 rounded-full ${
+                          service.isActive ? 'bg-success' : 'bg-warning'
+                        }`}
+                      />
                       {service.isActive ? 'Active' : 'Inactive'}
                     </span>
                     <p className="text-xs text-muted-foreground">{formattedDate}</p>
                   </div>
 
-                <div className="flex items-center gap-2">
-                  <button
-                    onClick={() => onPreview(service)}
-                    className="p-2 rounded-md hover:bg-muted transition-smooth press-scale"
-                    title="Preview"
-                  >
-                    <Icon name="EyeIcon" size={20} className="text-foreground" />
-                  </button>
-                  <button
-                    onClick={() => onEdit(service)}
-                    className="p-2 rounded-md hover:bg-muted transition-smooth press-scale"
-                    title="Edit"
-                  >
-                    <Icon name="PencilIcon" size={20} className="text-secondary" />
-                  </button>
-                  <button
-                    onClick={() => handleDeleteClick(service.id || '')}
-                    className="p-2 rounded-md hover:bg-muted transition-smooth press-scale"
-                    title="Delete"
-                  >
-                    <Icon name="TrashIcon" size={20} className="text-error" />
-                  </button>
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={() => onPreview(service)}
+                      className="p-2 rounded-md hover:bg-muted transition-smooth press-scale"
+                      title="Preview"
+                    >
+                      <Icon name="EyeIcon" size={20} className="text-foreground" />
+                    </button>
+                    <button
+                      onClick={() => onEdit(service)}
+                      className="p-2 rounded-md hover:bg-muted transition-smooth press-scale"
+                      title="Edit"
+                    >
+                      <Icon name="PencilIcon" size={20} className="text-secondary" />
+                    </button>
+                    <button
+                      onClick={() => handleDeleteClick(service.id || '')}
+                      className="p-2 rounded-md hover:bg-muted transition-smooth press-scale"
+                      title="Delete"
+                    >
+                      <Icon name="TrashIcon" size={20} className="text-error" />
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
             );
           })
         )}

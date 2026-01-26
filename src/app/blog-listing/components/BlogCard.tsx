@@ -46,11 +46,7 @@ const BlogCard = ({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div
-        className={`relative overflow-hidden ${
-          isFeatured ? 'h-80 md:h-96' : 'h-56'
-        }`}
-      >
+      <div className={`relative overflow-hidden ${isFeatured ? 'h-80 md:h-96' : 'h-56'}`}>
         <AppImage
           src={thumbnailUrl}
           alt={thumbnailAlt}
@@ -112,9 +108,7 @@ const BlogCard = ({
               />
             </div>
             <div>
-              <p className="text-sm font-medium text-foreground">
-                {author.name}
-              </p>
+              <p className="text-sm font-medium text-foreground">{author.name}</p>
             </div>
           </div>
 

@@ -5,9 +5,7 @@ import GrowthAuditForm from './GrowthAuditForm';
 import HowWeWorkSection from './HowWeWorkSection';
 import GlobalReachSection from './GlobalReachSection';
 import TrustedBySection from './TrustedBySection';
-import { 
-  ArrowRight
-} from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 interface StatItem {
   id: string;
@@ -72,22 +70,22 @@ export default function HomeInteractive({
         clients={clientsData.clients}
       />
       <GrowthAuditForm />
-       <div className="mt-16 text-center animate-slide-up" style={{ animationDelay: '400ms' }}>
-            <div className="inline-flex flex-col sm:flex-row items-center gap-4 p-6 bg-card rounded-2xl shadow-warm-lg border border-border">
-              <div className="flex-1 text-left">
-                <h3 className="text-lg font-bold text-foreground mb-1">
-                  Ready to transform your marketing?
-                </h3>
-                <p className="text-sm text-muted-foreground">
-                  Let's discuss how we can help you grow with intelligent systems
-                </p>
-              </div>
-              <button className="group px-6 py-3 bg-gradient-to-r from-primary to-secondary text-primary-foreground rounded-lg font-medium shadow-warm-md hover:shadow-warm-xl transition-all duration-300 hover:scale-105 active:scale-95 flex items-center gap-2">
-                Get Started
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
-              </button>
-            </div>
+      <div className="mt-16 text-center animate-slide-up" style={{ animationDelay: '400ms' }}>
+        <div className="inline-flex flex-col sm:flex-row items-center gap-4 p-6 bg-card rounded-2xl shadow-warm-lg border border-border">
+          <div className="flex-1 text-left">
+            <h3 className="text-lg font-bold text-foreground mb-1">
+              Ready to transform your marketing?
+            </h3>
+            <p className="text-sm text-muted-foreground">
+              Let's discuss how we can help you grow with intelligent systems
+            </p>
           </div>
+          <button className="group px-6 py-3 bg-gradient-to-r from-primary to-secondary text-primary-foreground rounded-lg font-medium shadow-warm-md hover:shadow-warm-xl transition-all duration-300 hover:scale-105 active:scale-95 flex items-center gap-2">
+            Get Started
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+          </button>
+        </div>
+      </div>
     </>
   );
 }

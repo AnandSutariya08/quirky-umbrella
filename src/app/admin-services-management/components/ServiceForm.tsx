@@ -32,7 +32,7 @@ const ServiceForm = ({ service, onSave, onCancel }: ServiceFormProps) => {
     metaDescription: '',
     contentHtml: '',
     imageUrl: '',
-    status: 'draft\' as \'published\' | \'draft',
+    status: "draft' as 'published' | 'draft",
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [imagePreview, setImagePreview] = useState<string>('');
@@ -84,20 +84,20 @@ const ServiceForm = ({ service, onSave, onCancel }: ServiceFormProps) => {
   };
 
   const handleTitleChange = (value: string) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       title: value,
       slug: generateSlug(value),
     }));
     if (errors.title) {
-      setErrors(prev => ({ ...prev, title: '' }));
+      setErrors((prev) => ({ ...prev, title: '' }));
     }
   };
 
   const handleChange = (field: string, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    setFormData((prev) => ({ ...prev, [field]: value }));
     if (errors[field]) {
-      setErrors(prev => ({ ...prev, [field]: '' }));
+      setErrors((prev) => ({ ...prev, [field]: '' }));
     }
   };
 
@@ -106,12 +106,12 @@ const ServiceForm = ({ service, onSave, onCancel }: ServiceFormProps) => {
     if (!file) return;
 
     if (!file.type.startsWith('image/')) {
-      setErrors(prev => ({ ...prev, imageUrl: 'Please select a valid image file' }));
+      setErrors((prev) => ({ ...prev, imageUrl: 'Please select a valid image file' }));
       return;
     }
 
     if (file.size > 5 * 1024 * 1024) {
-      setErrors(prev => ({ ...prev, imageUrl: 'Image size must be less than 5MB' }));
+      setErrors((prev) => ({ ...prev, imageUrl: 'Image size must be less than 5MB' }));
       return;
     }
 
@@ -129,7 +129,7 @@ const ServiceForm = ({ service, onSave, onCancel }: ServiceFormProps) => {
     reader.onload = (e) => {
       const result = e.target?.result as string;
       setImagePreview(result);
-      setFormData(prev => ({ ...prev, imageUrl: result }));
+      setFormData((prev) => ({ ...prev, imageUrl: result }));
       setUploadProgress(100);
       setTimeout(() => {
         setIsUploading(false);
@@ -178,7 +178,7 @@ const ServiceForm = ({ service, onSave, onCancel }: ServiceFormProps) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (validateForm()) {
       onSave(formData);
     }
@@ -273,20 +273,23 @@ const ServiceForm = ({ service, onSave, onCancel }: ServiceFormProps) => {
                 {errors.metaTitle}
               </p>
             ) : (
-              <p className="text-xs text-muted-foreground">
-                Optimal length: 50-60 characters
-              </p>
+              <p className="text-xs text-muted-foreground">Optimal length: 50-60 characters</p>
             )}
-            <span className={`text-xs ${
-              formData.metaTitle.length > 60 ? 'text-error' : 'text-muted-foreground'
-            }`}>
+            <span
+              className={`text-xs ${
+                formData.metaTitle.length > 60 ? 'text-error' : 'text-muted-foreground'
+              }`}
+            >
               {formData.metaTitle.length}/60
             </span>
           </div>
         </div>
 
         <div>
-          <label htmlFor="metaDescription" className="block text-sm font-medium text-foreground mb-2">
+          <label
+            htmlFor="metaDescription"
+            className="block text-sm font-medium text-foreground mb-2"
+          >
             Meta Description <span className="text-error">*</span>
           </label>
           <textarea
@@ -307,13 +310,13 @@ const ServiceForm = ({ service, onSave, onCancel }: ServiceFormProps) => {
                 {errors.metaDescription}
               </p>
             ) : (
-              <p className="text-xs text-muted-foreground">
-                Optimal length: 150-160 characters
-              </p>
+              <p className="text-xs text-muted-foreground">Optimal length: 150-160 characters</p>
             )}
-            <span className={`text-xs ${
-              formData.metaDescription.length > 160 ? 'text-error' : 'text-muted-foreground'
-            }`}>
+            <span
+              className={`text-xs ${
+                formData.metaDescription.length > 160 ? 'text-error' : 'text-muted-foreground'
+              }`}
+            >
               {formData.metaDescription.length}/160
             </span>
           </div>
@@ -335,7 +338,7 @@ const ServiceForm = ({ service, onSave, onCancel }: ServiceFormProps) => {
                   type="button"
                   onClick={() => {
                     setImagePreview('');
-                    setFormData(prev => ({ ...prev, imageUrl: '' }));
+                    setFormData((prev) => ({ ...prev, imageUrl: '' }));
                   }}
                   className="absolute top-2 right-2 p-2 bg-error text-error-foreground rounded-md hover:shadow-warm-md transition-smooth press-scale"
                   title="Remove image"
@@ -344,10 +347,12 @@ const ServiceForm = ({ service, onSave, onCancel }: ServiceFormProps) => {
                 </button>
               </div>
             )}
-            
-            <div className={`border-2 border-dashed rounded-md p-8 text-center transition-smooth ${
-              errors.imageUrl ? 'border-error' : 'border-border hover:border-accent'
-            }`}>
+
+            <div
+              className={`border-2 border-dashed rounded-md p-8 text-center transition-smooth ${
+                errors.imageUrl ? 'border-error' : 'border-border hover:border-accent'
+              }`}
+            >
               <input
                 type="file"
                 id="imageUpload"
@@ -366,9 +371,7 @@ const ServiceForm = ({ service, onSave, onCancel }: ServiceFormProps) => {
                   <p className="text-foreground font-medium">
                     {imagePreview ? 'Change Image' : 'Upload Image'}
                   </p>
-                  <p className="text-sm text-muted-foreground mt-1">
-                    PNG, JPG, GIF up to 5MB
-                  </p>
+                  <p className="text-sm text-muted-foreground mt-1">PNG, JPG, GIF up to 5MB</p>
                 </div>
               </label>
             </div>

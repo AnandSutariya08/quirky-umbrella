@@ -166,7 +166,10 @@ const IndustryFormModal = ({ industry, onClose, onSave }: IndustryFormModalProps
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="p-6 space-y-6 max-h-[calc(100vh-12rem)] overflow-y-auto">
+        <form
+          onSubmit={handleSubmit}
+          className="p-6 space-y-6 max-h-[calc(100vh-12rem)] overflow-y-auto"
+        >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label className="block text-sm font-medium text-foreground mb-2">
@@ -229,7 +232,9 @@ const IndustryFormModal = ({ industry, onClose, onSave }: IndustryFormModalProps
             </label>
             <textarea
               value={formData.metaDescription}
-              onChange={(e) => setFormData((prev) => ({ ...prev, metaDescription: e.target.value }))}
+              onChange={(e) =>
+                setFormData((prev) => ({ ...prev, metaDescription: e.target.value }))
+              }
               className={`w-full px-4 py-3 bg-background border rounded-md text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent resize-none ${
                 errors.metaDescription ? 'border-error' : 'border-border'
               }`}
@@ -238,7 +243,9 @@ const IndustryFormModal = ({ industry, onClose, onSave }: IndustryFormModalProps
               maxLength={160}
             />
             <div className="flex items-center justify-between mt-1">
-              {errors.metaDescription && <p className="text-sm text-error">{errors.metaDescription}</p>}
+              {errors.metaDescription && (
+                <p className="text-sm text-error">{errors.metaDescription}</p>
+              )}
               <p className="text-xs text-muted-foreground ml-auto">
                 {formData.metaDescription.length}/160 characters
               </p>
@@ -279,7 +286,8 @@ const IndustryFormModal = ({ industry, onClose, onSave }: IndustryFormModalProps
                   htmlFor="image-upload"
                   className={`flex items-center justify-center gap-2 w-full px-4 py-3 border-2 border-dashed rounded-md cursor-pointer transition-smooth ${
                     errors.imageUrl
-                      ? 'border-error hover:border-error/80' :'border-border hover:border-accent'
+                      ? 'border-error hover:border-error/80'
+                      : 'border-border hover:border-accent'
                   } ${isUploading ? 'opacity-50 cursor-not-allowed' : ''}`}
                 >
                   <Icon name="PhotoIcon" size={20} className="text-muted-foreground" />
@@ -325,7 +333,10 @@ const IndustryFormModal = ({ industry, onClose, onSave }: IndustryFormModalProps
               onChange={(e) => setFormData((prev) => ({ ...prev, isPublished: e.target.checked }))}
               className="w-5 h-5 rounded border-border text-primary focus:ring-2 focus:ring-accent cursor-pointer"
             />
-            <label htmlFor="isPublished" className="text-sm font-medium text-foreground cursor-pointer">
+            <label
+              htmlFor="isPublished"
+              className="text-sm font-medium text-foreground cursor-pointer"
+            >
               Publish immediately
             </label>
           </div>

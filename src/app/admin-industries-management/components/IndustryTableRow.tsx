@@ -54,8 +54,7 @@ const IndustryTableRow = ({ industry, onEdit, onDelete, onPreview }: IndustryTab
         <td className="px-6 py-4">
           <span
             className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium ${
-              industry.isPublished
-                ? 'bg-success/10 text-success' :'bg-muted text-muted-foreground'
+              industry.isPublished ? 'bg-success/10 text-success' : 'bg-muted text-muted-foreground'
             }`}
           >
             <span

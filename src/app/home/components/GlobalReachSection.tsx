@@ -1,5 +1,3 @@
-
-
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
@@ -65,11 +63,7 @@ const CountryIcon = ({ type, className = '' }: { type: string; className?: strin
   );
 };
 
-export default function GlobalReachSection({
-  title,
-  subtitle,
-  stats,
-}: GlobalReachSectionProps) {
+export default function GlobalReachSection({ title, subtitle, stats }: GlobalReachSectionProps) {
   const [isHydrated, setIsHydrated] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [animatedValues, setAnimatedValues] = useState<Record<string, number>>({});
@@ -179,9 +173,7 @@ export default function GlobalReachSection({
             <h2 className="font-heading text-3xl lg:text-4xl font-bold text-foreground mb-4">
               {title}
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              {subtitle}
-            </p>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">{subtitle}</p>
           </div>
         </div>
       </section>
@@ -189,13 +181,11 @@ export default function GlobalReachSection({
   }
 
   return (
-    
     <section
       ref={sectionRef}
       id="global-reach"
       className="py-16 lg:py-24 bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5 relative overflow-hidden"
     >
-
       {/* Elevated background (soft mesh + grid + vignette) */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute inset-0 opacity-100 [background-image:radial-gradient(60%_50%_at_18%_22%,rgba(236,72,153,0.14)_0%,transparent_62%),radial-gradient(55%_45%_at_82%_28%,rgba(168,85,247,0.12)_0%,transparent_60%),radial-gradient(60%_50%_at_50%_92%,hsl(var(--primary)_/_0.10)_0%,transparent_62%)]" />
@@ -217,9 +207,7 @@ export default function GlobalReachSection({
           <h2 className="font-heading text-3xl lg:text-5xl font-bold text-foreground mb-4">
             {title}
           </h2>
-          <p className="text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto">
-            {subtitle}
-          </p>
+          <p className="text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto">{subtitle}</p>
         </div>
 
         {/* Country Carousel */}
@@ -265,10 +253,14 @@ export default function GlobalReachSection({
                       opacity,
                       zIndex,
                     }}
-                    onClick={() => goToSlide(countries.findIndex(c => c.id === country.id))}
+                    onClick={() => goToSlide(countries.findIndex((c) => c.id === country.id))}
                   >
-                    <div className={`flex flex-col items-center gap-4 ${isActive ? 'animate-float' : ''}`}>
-                      <div className={`relative transition-all duration-500 ${isActive ? 'drop-shadow-2xl' : ''}`}>
+                    <div
+                      className={`flex flex-col items-center gap-4 ${isActive ? 'animate-float' : ''}`}
+                    >
+                      <div
+                        className={`relative transition-all duration-500 ${isActive ? 'drop-shadow-2xl' : ''}`}
+                      >
                         <CountryIcon
                           type={country.icon}
                           className={`w-32 h-40 transition-all duration-500 ${isActive ? 'opacity-100' : 'opacity-45'}`}
@@ -277,10 +269,16 @@ export default function GlobalReachSection({
                           <div className="absolute inset-0 bg-primary/10 rounded-full blur-2xl animate-pulse" />
                         )}
                       </div>
-                      <div className={`text-center transition-all duration-500 ${isActive ? 'opacity-100' : 'opacity-60'
-                        }`}>
-                        <h3 className={`font-bold transition-all duration-500 ${isActive ? 'text-2xl text-foreground' : 'text-lg text-muted-foreground'
-                          }`}>
+                      <div
+                        className={`text-center transition-all duration-500 ${
+                          isActive ? 'opacity-100' : 'opacity-60'
+                        }`}
+                      >
+                        <h3
+                          className={`font-bold transition-all duration-500 ${
+                            isActive ? 'text-2xl text-foreground' : 'text-lg text-muted-foreground'
+                          }`}
+                        >
                           {country.name}
                         </h3>
                       </div>
@@ -297,10 +295,11 @@ export default function GlobalReachSection({
               <button
                 key={country.id}
                 onClick={() => goToSlide(index)}
-                className={`transition-all duration-300 rounded-full ${currentIndex === index
-                  ? 'w-8 h-3 bg-primary'
-                  : 'w-3 h-3 bg-muted hover:bg-muted-foreground'
-                  }`}
+                className={`transition-all duration-300 rounded-full ${
+                  currentIndex === index
+                    ? 'w-8 h-3 bg-primary'
+                    : 'w-3 h-3 bg-muted hover:bg-muted-foreground'
+                }`}
                 aria-label={`Go to ${country.name}`}
               />
             ))}
@@ -333,9 +332,7 @@ export default function GlobalReachSection({
                   {isVisible ? animatedValues[stat.id] || 0 : 0}
                   {stat.suffix}
                 </div>
-                <div className="text-sm font-medium text-muted-foreground">
-                  {stat.label}
-                </div>
+                <div className="text-sm font-medium text-muted-foreground">{stat.label}</div>
               </div>
             </div>
           ))}
@@ -344,20 +341,42 @@ export default function GlobalReachSection({
 
       <style jsx>{`
         @keyframes float {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-12px); }
+          0%,
+          100% {
+            transform: translateY(0px);
+          }
+          50% {
+            transform: translateY(-12px);
+          }
         }
         @keyframes float-soft {
-          0%, 100% { transform: translateY(0px) translateX(0px); }
-          50% { transform: translateY(-10px) translateX(6px); }
+          0%,
+          100% {
+            transform: translateY(0px) translateX(0px);
+          }
+          50% {
+            transform: translateY(-10px) translateX(6px);
+          }
         }
         @keyframes slide-down {
-          0% { transform: translateY(-20px); opacity: 0; }
-          100% { transform: translateY(0); opacity: 1; }
+          0% {
+            transform: translateY(-20px);
+            opacity: 0;
+          }
+          100% {
+            transform: translateY(0);
+            opacity: 1;
+          }
         }
         @keyframes slide-up {
-          0% { transform: translateY(20px); opacity: 0; }
-          100% { transform: translateY(0); opacity: 1; }
+          0% {
+            transform: translateY(20px);
+            opacity: 0;
+          }
+          100% {
+            transform: translateY(0);
+            opacity: 1;
+          }
         }
       `}</style>
     </section>

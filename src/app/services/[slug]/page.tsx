@@ -19,7 +19,7 @@ export async function generateStaticParams() {
   try {
     const services = await servicesService.getAll();
     const activeServices = services.filter((service) => service.isActive);
-    
+
     return activeServices.map((service) => ({
       slug: service.slug,
     }));

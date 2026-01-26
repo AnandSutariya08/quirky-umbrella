@@ -46,7 +46,7 @@ const BlogDetailInteractive = () => {
     setError(null);
     try {
       const fetchedBlog = await blogsService.getBySlug(slug);
-      
+
       if (!fetchedBlog) {
         setError('Blog post not found');
         setIsLoading(false);
@@ -60,7 +60,7 @@ const BlogDetailInteractive = () => {
       }
 
       setBlog(fetchedBlog);
-      
+
       // Increment views (non-blocking)
       if (fetchedBlog.id) {
         blogsService.incrementViews(fetchedBlog.id).catch(console.error);
@@ -69,7 +69,7 @@ const BlogDetailInteractive = () => {
       // Fetch related blogs (same category, excluding current)
       const allBlogs = await blogsService.getPublished();
       const related = allBlogs
-        .filter(b => b.id !== fetchedBlog.id && b.category === fetchedBlog.category)
+        .filter((b) => b.id !== fetchedBlog.id && b.category === fetchedBlog.category)
         .slice(0, 3);
       setRelatedBlogs(related);
     } catch (err) {
@@ -88,7 +88,6 @@ const BlogDetailInteractive = () => {
       year: 'numeric',
     }).format(date);
   };
-
 
   if (!isHydrated || isLoading) {
     return (
@@ -114,11 +113,7 @@ const BlogDetailInteractive = () => {
       <div className="min-h-screen bg-transparent pt-32 pb-20">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto text-center py-20">
-            <Icon
-              name="ExclamationTriangleIcon"
-              size={64}
-              className="text-error mx-auto mb-4"
-            />
+            <Icon name="ExclamationTriangleIcon" size={64} className="text-error mx-auto mb-4" />
             <h2 className="text-2xl font-heading font-semibold text-foreground mb-2">
               {error || 'Blog post not found'}
             </h2>

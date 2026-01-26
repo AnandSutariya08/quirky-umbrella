@@ -21,12 +21,16 @@ const firestoreDb: typeof db = db;
 
 export const blogsService = {
   // Create a new blog
-  async create(blog: Omit<Blog, 'id' | 'createdAt' | 'updatedAt' | 'views' | 'likes'>): Promise<string> {
+  async create(
+    blog: Omit<Blog, 'id' | 'createdAt' | 'updatedAt' | 'views' | 'likes'>
+  ): Promise<string> {
     try {
       console.log('Creating blog with data:', blog);
-      
+
       if (!firestoreDb) {
-        throw new Error('Firestore database is not initialized. Please check your Firebase configuration.');
+        throw new Error(
+          'Firestore database is not initialized. Please check your Firebase configuration.'
+        );
       }
 
       const docRef = await addDoc(collection(firestoreDb, BLOGS_COLLECTION), {
@@ -38,7 +42,7 @@ export const blogsService = {
         publishedDate: blog.publishedDate ? Timestamp.fromDate(blog.publishedDate) : null,
         scheduledDate: blog.scheduledDate ? Timestamp.fromDate(blog.scheduledDate) : null,
       });
-      
+
       console.log('Blog created successfully with ID:', docRef.id);
       return docRef.id;
     } catch (error) {
@@ -55,14 +59,14 @@ export const blogsService = {
         ...blog,
         updatedAt: Timestamp.now(),
       };
-      
+
       if (blog.publishedDate) {
         updateData.publishedDate = Timestamp.fromDate(blog.publishedDate);
       }
       if (blog.scheduledDate) {
         updateData.scheduledDate = Timestamp.fromDate(blog.scheduledDate);
       }
-      
+
       await updateDoc(docRef, updateData);
     } catch (error) {
       console.error('Error updating blog:', error);

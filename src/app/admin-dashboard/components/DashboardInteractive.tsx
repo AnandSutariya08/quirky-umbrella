@@ -42,17 +42,17 @@ const DashboardInteractive = () => {
       // Fetch services
       const services = await servicesService.getAll();
       const activeServices = services.filter((s) => s.isActive);
-      
+
       // Fetch blogs
       const blogs = await blogsService.getAll();
       const publishedBlogs = blogs.filter((b) => b.status === 'published');
       const draftBlogs = blogs.filter((b) => b.status === 'draft');
       const scheduledBlogs = blogs.filter((b) => b.status === 'scheduled');
-      
+
       // Calculate engagement metrics
       const totalViews = blogs.reduce((sum, blog) => sum + (blog.views || 0), 0);
       const totalLikes = blogs.reduce((sum, blog) => sum + (blog.likes || 0), 0);
-      
+
       setStats({
         totalServices: services.length,
         activeServices: activeServices.length,
@@ -118,9 +118,7 @@ const DashboardInteractive = () => {
       <div className="max-w-7xl mx-auto p-6 space-y-6">
         {/* Header */}
         <div>
-          <h1 className="text-3xl font-heading font-bold text-foreground">
-            Dashboard
-          </h1>
+          <h1 className="text-3xl font-heading font-bold text-foreground">Dashboard</h1>
           <p className="text-muted-foreground mt-2">
             Overview of your website content and engagement metrics
           </p>
@@ -168,9 +166,7 @@ const DashboardInteractive = () => {
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex-1">
                     <p className="text-sm font-medium text-muted-foreground">Total Blogs</p>
-                    <h3 className="text-3xl font-bold text-foreground mt-1">
-                      {stats.totalBlogs}
-                    </h3>
+                    <h3 className="text-3xl font-bold text-foreground mt-1">{stats.totalBlogs}</h3>
                     <p className="text-sm text-muted-foreground mt-2">
                       {stats.publishedBlogs} published
                     </p>
@@ -196,9 +192,7 @@ const DashboardInteractive = () => {
                     <h3 className="text-3xl font-bold text-foreground mt-1">
                       {stats.totalViews.toLocaleString()}
                     </h3>
-                    <p className="text-sm text-muted-foreground mt-2">
-                      Across all blogs
-                    </p>
+                    <p className="text-sm text-muted-foreground mt-2">Across all blogs</p>
                   </div>
                   <div className="p-3 bg-success/10 rounded-full">
                     <Icon name="EyeIcon" size={24} className="text-success" />
@@ -214,9 +208,7 @@ const DashboardInteractive = () => {
                     <h3 className="text-3xl font-bold text-foreground mt-1">
                       {stats.totalLikes.toLocaleString()}
                     </h3>
-                    <p className="text-sm text-muted-foreground mt-2">
-                      Blog engagement
-                    </p>
+                    <p className="text-sm text-muted-foreground mt-2">Blog engagement</p>
                   </div>
                   <div className="p-3 bg-error/10 rounded-full">
                     <Icon name="HeartIcon" size={24} className="text-error" />
@@ -245,9 +237,7 @@ const DashboardInteractive = () => {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium text-muted-foreground">Drafts</p>
-                    <h3 className="text-2xl font-bold text-foreground mt-1">
-                      {stats.draftBlogs}
-                    </h3>
+                    <h3 className="text-2xl font-bold text-foreground mt-1">{stats.draftBlogs}</h3>
                   </div>
                   <div className="p-3 bg-warning/10 rounded-full">
                     <Icon name="PencilIcon" size={20} className="text-warning" />
@@ -315,7 +305,9 @@ const DashboardInteractive = () => {
                             {blog.title}
                           </h3>
                           <div className="flex items-center gap-2 mt-1">
-                            <span className={`text-xs px-2 py-0.5 rounded-full ${getStatusColor(blog.status)}`}>
+                            <span
+                              className={`text-xs px-2 py-0.5 rounded-full ${getStatusColor(blog.status)}`}
+                            >
                               {blog.status}
                             </span>
                             <span className="text-xs text-muted-foreground">
@@ -368,7 +360,9 @@ const DashboardInteractive = () => {
                             {service.title}
                           </h3>
                           <div className="flex items-center gap-2 mt-1">
-                            <span className={`text-xs px-2 py-0.5 rounded-full ${service.isActive ? 'bg-success/10 text-success' : 'bg-muted text-muted-foreground'}`}>
+                            <span
+                              className={`text-xs px-2 py-0.5 rounded-full ${service.isActive ? 'bg-success/10 text-success' : 'bg-muted text-muted-foreground'}`}
+                            >
                               {service.isActive ? 'Active' : 'Inactive'}
                             </span>
                             <span className="text-xs text-muted-foreground">
@@ -417,12 +411,24 @@ const DashboardInteractive = () => {
                   <table className="w-full">
                     <thead className="bg-muted">
                       <tr>
-                        <th className="px-4 py-3 text-left text-sm font-semibold text-foreground">Service</th>
-                        <th className="px-4 py-3 text-left text-sm font-semibold text-foreground">Tagline</th>
-                        <th className="px-4 py-3 text-left text-sm font-semibold text-foreground">Status</th>
-                        <th className="px-4 py-3 text-left text-sm font-semibold text-foreground">Created</th>
-                        <th className="px-4 py-3 text-left text-sm font-semibold text-foreground">Updated</th>
-                        <th className="px-4 py-3 text-right text-sm font-semibold text-foreground">Actions</th>
+                        <th className="px-4 py-3 text-left text-sm font-semibold text-foreground">
+                          Service
+                        </th>
+                        <th className="px-4 py-3 text-left text-sm font-semibold text-foreground">
+                          Tagline
+                        </th>
+                        <th className="px-4 py-3 text-left text-sm font-semibold text-foreground">
+                          Status
+                        </th>
+                        <th className="px-4 py-3 text-left text-sm font-semibold text-foreground">
+                          Created
+                        </th>
+                        <th className="px-4 py-3 text-left text-sm font-semibold text-foreground">
+                          Updated
+                        </th>
+                        <th className="px-4 py-3 text-right text-sm font-semibold text-foreground">
+                          Actions
+                        </th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-border">

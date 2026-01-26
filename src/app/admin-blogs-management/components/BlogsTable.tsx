@@ -30,7 +30,7 @@ const BlogsTable = ({ blogs, onEdit, onDelete, onBulkAction }: BlogsTableProps) 
 
   const handleSelectAll = (checked: boolean) => {
     if (checked) {
-      setSelectedBlogs(filteredBlogs.map(blog => blog.id || '').filter(id => id));
+      setSelectedBlogs(filteredBlogs.map((blog) => blog.id || '').filter((id) => id));
     } else {
       setSelectedBlogs([]);
     }
@@ -40,7 +40,7 @@ const BlogsTable = ({ blogs, onEdit, onDelete, onBulkAction }: BlogsTableProps) 
     if (checked) {
       setSelectedBlogs([...selectedBlogs, id]);
     } else {
-      setSelectedBlogs(selectedBlogs.filter(blogId => blogId !== id));
+      setSelectedBlogs(selectedBlogs.filter((blogId) => blogId !== id));
     }
   };
 
@@ -65,13 +65,14 @@ const BlogsTable = ({ blogs, onEdit, onDelete, onBulkAction }: BlogsTableProps) 
     }
   };
 
-  const categories = Array.from(new Set(blogs.map(blog => blog.category)));
+  const categories = Array.from(new Set(blogs.map((blog) => blog.category)));
 
-  const filteredBlogs = blogs.filter(blog => {
+  const filteredBlogs = blogs.filter((blog) => {
     const matchesStatus = filterStatus === 'all' || blog.status === filterStatus;
     const matchesCategory = filterCategory === 'all' || blog.category === filterCategory;
-    const matchesSearch = blog.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         blog.author.name.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesSearch =
+      blog.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      blog.author.name.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesStatus && matchesCategory && matchesSearch;
   });
 
@@ -111,8 +112,10 @@ const BlogsTable = ({ blogs, onEdit, onDelete, onBulkAction }: BlogsTableProps) 
             className="px-4 py-2.5 bg-background border border-input rounded-md text-sm focus:outline-none focus:ring-2 ring-accent ring-offset-2 ring-offset-background transition-smooth"
           >
             <option value="all">All Categories</option>
-            {categories.map(category => (
-              <option key={category} value={category}>{category}</option>
+            {categories.map((category) => (
+              <option key={category} value={category}>
+                {category}
+              </option>
             ))}
           </select>
         </div>
@@ -148,18 +151,34 @@ const BlogsTable = ({ blogs, onEdit, onDelete, onBulkAction }: BlogsTableProps) 
                 <th className="px-6 py-4 text-left">
                   <input
                     type="checkbox"
-                    checked={selectedBlogs.length === filteredBlogs.length && filteredBlogs.length > 0}
+                    checked={
+                      selectedBlogs.length === filteredBlogs.length && filteredBlogs.length > 0
+                    }
                     onChange={(e) => handleSelectAll(e.target.checked)}
                     className="w-4 h-4 rounded border-input accent-primary cursor-pointer"
                   />
                 </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-foreground">Blog Post</th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-foreground">Author</th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-foreground">Category</th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-foreground">Published</th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-foreground">Status</th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-foreground">Engagement</th>
-                <th className="px-6 py-4 text-right text-sm font-semibold text-foreground">Actions</th>
+                <th className="px-6 py-4 text-left text-sm font-semibold text-foreground">
+                  Blog Post
+                </th>
+                <th className="px-6 py-4 text-left text-sm font-semibold text-foreground">
+                  Author
+                </th>
+                <th className="px-6 py-4 text-left text-sm font-semibold text-foreground">
+                  Category
+                </th>
+                <th className="px-6 py-4 text-left text-sm font-semibold text-foreground">
+                  Published
+                </th>
+                <th className="px-6 py-4 text-left text-sm font-semibold text-foreground">
+                  Status
+                </th>
+                <th className="px-6 py-4 text-left text-sm font-semibold text-foreground">
+                  Engagement
+                </th>
+                <th className="px-6 py-4 text-right text-sm font-semibold text-foreground">
+                  Actions
+                </th>
               </tr>
             </thead>
             <tbody className="divide-y divide-border">
@@ -194,9 +213,13 @@ const BlogsTable = ({ blogs, onEdit, onDelete, onBulkAction }: BlogsTableProps) 
                       {blog.category}
                     </span>
                   </td>
-                  <td className="px-6 py-4 text-sm text-foreground">{formatDate(blog.publishedDate)}</td>
+                  <td className="px-6 py-4 text-sm text-foreground">
+                    {formatDate(blog.publishedDate)}
+                  </td>
                   <td className="px-6 py-4">
-                    <span className={`inline-flex px-3 py-1 text-xs font-medium rounded-full capitalize ${getStatusColor(blog.status)}`}>
+                    <span
+                      className={`inline-flex px-3 py-1 text-xs font-medium rounded-full capitalize ${getStatusColor(blog.status)}`}
+                    >
                       {blog.status}
                     </span>
                   </td>
@@ -293,7 +316,9 @@ const BlogsTable = ({ blogs, onEdit, onDelete, onBulkAction }: BlogsTableProps) 
                   </div>
                   <div>
                     <div className="text-xs text-muted-foreground mb-1">Status</div>
-                    <span className={`inline-flex px-2 py-1 text-xs font-medium rounded-full capitalize ${getStatusColor(blog.status)}`}>
+                    <span
+                      className={`inline-flex px-2 py-1 text-xs font-medium rounded-full capitalize ${getStatusColor(blog.status)}`}
+                    >
                       {blog.status}
                     </span>
                   </div>

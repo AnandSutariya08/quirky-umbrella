@@ -105,14 +105,13 @@ export const bookingsService = {
       );
 
       const querySnapshot = await getDocs(q);
-      const bookings = querySnapshot.docs
-        .map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-          scheduledDate: doc.data().scheduledDate?.toDate(),
-          createdAt: doc.data().createdAt?.toDate(),
-          updatedAt: doc.data().updatedAt?.toDate(),
-        })) as Booking[];
+      const bookings = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+        scheduledDate: doc.data().scheduledDate?.toDate(),
+        createdAt: doc.data().createdAt?.toDate(),
+        updatedAt: doc.data().updatedAt?.toDate(),
+      })) as Booking[];
 
       // Filter by time and exclude current booking if editing
       return bookings.filter(
@@ -219,7 +218,7 @@ export const bookingsService = {
       }
 
       const bookingRef = doc(firestoreDb, BOOKINGS_COLLECTION, id);
-      
+
       // Check if document exists before updating
       const docSnap = await getDoc(bookingRef);
       if (!docSnap.exists()) {
@@ -291,17 +290,23 @@ export const bookingsService = {
   },
 
   // Forward/reschedule a booking
-  async forward(id: string, forwardedTo: string, newDate?: Date, newTime?: string, adminNotes?: string): Promise<void> {
+  async forward(
+    id: string,
+    forwardedTo: string,
+    newDate?: Date,
+    newTime?: string,
+    adminNotes?: string
+  ): Promise<void> {
     const updateData: any = {
       forwardedTo,
       adminNotes,
     };
-    
+
     if (newDate && newTime) {
       updateData.scheduledDate = newDate;
       updateData.scheduledTime = newTime;
     }
-    
+
     await this.update(id, updateData);
   },
 

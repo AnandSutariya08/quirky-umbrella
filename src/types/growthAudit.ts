@@ -16,10 +16,10 @@ export interface GrowthAuditSubmission {
   mobile?: string;
   companyName?: string;
   message: string;
-  
+
   // Step 2: Answers
   answers: Record<string, string | string[]>;
-  
+
   // Metadata
   submittedAt: Date;
   createdAt?: Date;

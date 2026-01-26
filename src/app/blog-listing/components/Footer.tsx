@@ -63,8 +63,8 @@ const Footer = () => {
               </span>
             </Link>
             <p className="text-muted-foreground mb-6 max-w-sm">
-              Transforming brands with creative strategies and innovative
-              solutions that drive real business results.
+              Transforming brands with creative strategies and innovative solutions that drive real
+              business results.
             </p>
             <div className="flex items-center gap-3">
               {socialLinks.map((social) => (
@@ -81,9 +81,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <h3 className="font-heading font-semibold text-foreground mb-4">
-              Company
-            </h3>
+            <h3 className="font-heading font-semibold text-foreground mb-4">Company</h3>
             <ul className="space-y-3">
               {footerLinks.company.map((link) => (
                 <li key={link.label}>
@@ -99,9 +97,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <h3 className="font-heading font-semibold text-foreground mb-4">
-              Resources
-            </h3>
+            <h3 className="font-heading font-semibold text-foreground mb-4">Resources</h3>
             <ul className="space-y-3">
               {footerLinks.resources.map((link) => (
                 <li key={link.label}>
@@ -117,9 +113,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <h3 className="font-heading font-semibold text-foreground mb-4">
-              Legal
-            </h3>
+            <h3 className="font-heading font-semibold text-foreground mb-4">Legal</h3>
             <ul className="space-y-3">
               {footerLinks.legal.map((link) => (
                 <li key={link.label}>

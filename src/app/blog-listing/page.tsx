@@ -15,7 +15,7 @@ export default function BlogListingPage() {
   return (
     <div className="flex flex-col min-h-screen">
       <PublicHeader />
-      
+
       <main className="flex-1">
         <HeroSection />
         <BlogListingInteractive />
