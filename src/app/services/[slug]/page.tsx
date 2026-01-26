@@ -6,9 +6,9 @@ import { servicesService } from '@/lib/services';
 import ServiceDetail from './components/ServiceDetail';
 
 interface ServicePageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 // Enable ISR - revalidate every hour
@@ -30,7 +30,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: ServicePageProps): Promise<Metadata> {
-  const service = await servicesService.getBySlug(params.slug);
+  const { slug } = await params;
+  const service = await servicesService.getBySlug(slug);
 
   if (!service) {
     return {
@@ -45,7 +46,8 @@ export async function generateMetadata({ params }: ServicePageProps): Promise<Me
 }
 
 export default async function ServicePage({ params }: ServicePageProps) {
-  const service = await servicesService.getBySlug(params.slug);
+  const { slug } = await params;
+  const service = await servicesService.getBySlug(slug);
 
   if (!service || !service.isActive) {
     notFound();
