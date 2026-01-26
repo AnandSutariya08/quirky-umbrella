@@ -58,7 +58,6 @@ export default function HomeInteractive({
         heroImageAlt={heroData.heroImageAlt}
       />
       <HowWeWorkSection />
-      <GrowthAuditForm />
       <GlobalReachSection
         title={statsData.title}
         subtitle={statsData.subtitle}
@@ -69,6 +68,7 @@ export default function HomeInteractive({
         subtitle={clientsData.subtitle}
         clients={clientsData.clients}
       />
+      <GrowthAuditForm />
     </>
   );
 }
