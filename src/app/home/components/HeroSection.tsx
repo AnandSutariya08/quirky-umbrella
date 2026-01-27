@@ -184,9 +184,9 @@ export default function HeroSection({
               </div>
 
               <h1 className="font-heading text-4xl lg:text-6xl font-black leading-[1.05] tracking-tight animate-slide-down">
-                <span className="text-slate-900 drop-shadow-sm">{title}</span>
-                <span className="block mt-4 bg-gradient-to-r from-pink-500 via-blue-500 to-green-500 bg-[length:200%_100%] bg-clip-text text-transparent animate-gradient-pan pb-2">
-                  Real systems. Real outcomes.
+                <span className="text-slate-900 drop-shadow-sm">Smarter Marketing.</span>
+                <span className="block mt-2 bg-gradient-to-r from-pink-500 via-blue-500 to-green-500 bg-[length:200%_100%] bg-clip-text text-transparent animate-gradient-pan pb-2">
+                  Real Systems, Real Growth.
                 </span>
               </h1>
 
