@@ -15,7 +15,7 @@ export default function AboutUsPage() {
       <PublicHeader />
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-card">
+        <section className="relative bg-gradient-to-br pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
           <div className="absolute inset-0 z-0">
             <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/5 to-transparent" />
             <div className="absolute bottom-0 left-0 w-1/2 h-full bg-gradient-to-r from-secondary/5 to-transparent" />

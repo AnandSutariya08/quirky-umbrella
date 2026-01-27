@@ -181,7 +181,7 @@ const BlogEditor = ({ blog, onSave, onCancel }: BlogEditorProps) => {
 
   return (
     <div className="space-y-6">
-      <div className="bg-card rounded-lg border border-border p-6 space-y-6">
+      <div className=" rounded-lg border border-border p-6 space-y-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div>
             <label className="block text-sm font-medium text-foreground mb-2">Blog Title *</label>
@@ -432,7 +432,7 @@ const BlogEditor = ({ blog, onSave, onCancel }: BlogEditorProps) => {
         </div>
       </div>
 
-      <div className="bg-card rounded-lg border border-border p-6 space-y-4">
+      <div className=" rounded-lg border border-border p-6 space-y-4">
         <h3 className="text-lg font-semibold text-foreground">Content Editor</h3>
 
         <div className="flex flex-wrap gap-2 p-3 bg-muted rounded-md border border-border">
@@ -518,7 +518,7 @@ const BlogEditor = ({ blog, onSave, onCancel }: BlogEditorProps) => {
         <p className="text-sm text-muted-foreground">{formData.contentHtml.length} characters</p>
       </div>
 
-      <div className="bg-card rounded-lg border border-border p-6 space-y-4">
+      <div className=" rounded-lg border border-border p-6 space-y-4">
         <div className="flex items-center justify-between">
           <h3 className="text-lg font-semibold text-foreground">SEO Optimization</h3>
           <div className="flex items-center gap-2">
@@ -571,7 +571,7 @@ const BlogEditor = ({ blog, onSave, onCancel }: BlogEditorProps) => {
         </div>
       </div>
 
-      <div className="bg-card rounded-lg border border-border p-6">
+      <div className=" rounded-lg border border-border p-6">
         <h3 className="text-lg font-semibold text-foreground mb-4">Publishing Options</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>

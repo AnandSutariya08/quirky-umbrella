@@ -4,7 +4,7 @@ import Icon from '@/components/ui/AppIcon';
 
 const Discuss = () => {
   return (
-    <section className="mb-12 bg-gradient-to-br from-primary/5 to-primary/10 rounded-lg p-8 md:p-12">
+    <section className="mb-12 from-primary/5 to-primary/10 rounded-lg p-8 md:p-12">
       <div className="flex items-center gap-3 mb-6">
         <Icon name="ChartBarIcon" size={32} className="text-primary" />
         <h2 className="text-3xl font-semibold text-foreground">Discuss</h2>
@@ -22,7 +22,7 @@ const Discuss = () => {
         </div>
 
         <div className="grid md:grid-cols-2 gap-6 mt-8">
-          <div className="bg-card p-6 rounded-lg border border-border">
+          <div className=" p-6 rounded-lg border border-border">
             <div className="flex items-center gap-3 mb-3">
               <Icon name="ArrowTrendingUpIcon" size={24} className="text-primary" />
               <h4 className="text-lg font-semibold text-foreground">Strategic Growth</h4>
@@ -33,7 +33,7 @@ const Discuss = () => {
             </p>
           </div>
 
-          <div className="bg-card p-6 rounded-lg border border-border">
+          <div className=" p-6 rounded-lg border border-border">
             <div className="flex items-center gap-3 mb-3">
               <Icon name="LightBulbIcon" size={24} className="text-primary" />
               <h4 className="text-lg font-semibold text-foreground">Innovation-Driven</h4>
@@ -44,7 +44,7 @@ const Discuss = () => {
             </p>
           </div>
 
-          <div className="bg-card p-6 rounded-lg border border-border">
+          <div className=" p-6 rounded-lg border border-border">
             <div className="flex items-center gap-3 mb-3">
               <Icon name="UserGroupIcon" size={24} className="text-primary" />
               <h4 className="text-lg font-semibold text-foreground">Customer-Centric</h4>
@@ -55,7 +55,7 @@ const Discuss = () => {
             </p>
           </div>
 
-          <div className="bg-card p-6 rounded-lg border border-border">
+          <div className=" p-6 rounded-lg border border-border">
             <div className="flex items-center gap-3 mb-3">
               <Icon name="RocketLaunchIcon" size={24} className="text-primary" />
               <h4 className="text-lg font-semibold text-foreground">Measurable Results</h4>
