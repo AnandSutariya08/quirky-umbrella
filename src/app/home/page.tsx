@@ -213,10 +213,10 @@ export default function HomePage() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen overflow-x-hidden">
       <PublicHeader />
       {/* No top padding on Home so header blends into Hero */}
-      <main className="flex-1">
+      <main className="flex-1 flex flex-col">
         <HomeInteractive heroData={heroData} statsData={statsData} clientsData={clientsData} />
       </main>
       <ClientFooter />
