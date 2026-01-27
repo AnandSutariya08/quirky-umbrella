@@ -487,7 +487,7 @@ export default function HeroSection({
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden bg-gradient-to-br from-pink-50 via-blue-50 to-green-50"
+      className="relative overflow-hidden bg-gradient-to-br from-pink-50 via-blue-50 to-green-50 min-h-screen"
     >
       {/* Animated background with enhanced blobs */}
       <div className="pointer-events-none absolute inset-0">
