@@ -114,7 +114,7 @@ export default function HeroSection({
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden bg-gradient-to-br from-pink-50 via-blue-50 to-green-50 min-h-[85vh] flex items-center"
+      className="relative overflow-hidden bg-gradient-to-br from-pink-50 via-blue-50 to-green-50 min-h-screen flex items-center justify-center"
     >
       {/* Animated background with enhanced blobs */}
       <div className="pointer-events-none absolute inset-0">
@@ -183,14 +183,14 @@ export default function HeroSection({
                 </span>
               </div>
 
-              <h1 className="font-heading text-4xl lg:text-7xl font-black leading-[1.05] tracking-tight animate-slide-down">
+              <h1 className="font-heading text-4xl lg:text-6xl font-black leading-[1.05] tracking-tight animate-slide-down">
                 <span className="text-slate-900 drop-shadow-sm">{title}</span>
                 <span className="block mt-4 bg-gradient-to-r from-pink-500 via-blue-500 to-green-500 bg-[length:200%_100%] bg-clip-text text-transparent animate-gradient-pan pb-2">
                   Real systems. Real outcomes.
                 </span>
               </h1>
 
-              <p className="text-lg lg:text-xl text-slate-600/90 font-medium leading-relaxed max-w-2xl mx-auto lg:mx-0 animate-slide-up">
+              <p className="text-base lg:text-lg text-slate-600/90 font-medium leading-relaxed max-w-2xl mx-auto lg:mx-0 animate-slide-up">
                 {subtitle}
               </p>
 
