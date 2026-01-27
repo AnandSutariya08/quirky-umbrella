@@ -45,7 +45,7 @@ export default function AboutUsPage() {
         </section>
 
         {/* Mission & Vision */}
-        <section className="py-24 bg-foreground text-background relative overflow-hidden">
+        <section className="py-24 bg-foreground/10 text-background relative overflow-hidden">
           <div className="absolute top-0 right-0 w-full h-full opacity-5 pointer-events-none [background-image:radial-gradient(var(--color-primary)_1px,transparent_1px)] [background-size:40px_40px]" />
           
           <div className="w-full px-6 lg:px-12 relative z-10">
@@ -57,7 +57,7 @@ export default function AboutUsPage() {
                     <span className="text-sm font-bold text-primary uppercase tracking-widest">Our Mission</span>
                   </div>
                   <h2 className="text-4xl lg:text-6xl font-black leading-tight text-background">
-                    Blending <span className="text-primary">Creativity</span> With <span className="text-secondary">Strategy</span>
+                     <span className="text-primary">Blending Creativity</span>  <span className="text-secondary">With Strategy</span>
                   </h2>
                   <p className="text-xl text-muted-foreground leading-relaxed font-medium">
                     Our mission is to empower businesses with branding solutions that aren&apos;t just beautiful, but built to win. We translate complex data into compelling human stories.
@@ -78,9 +78,9 @@ export default function AboutUsPage() {
                   <div className="absolute inset-0 bg-gradient-to-br from-primary to-secondary blur-[100px] opacity-20 group-hover:opacity-30 transition-opacity" />
                   <div className="relative aspect-square lg:aspect-[4/3] rounded-[3rem] border-8 border-background/5 overflow-hidden bg-muted">
                     <img 
-                      src="https://images.unsplash.com/photo-1522071823991-b9671f9d7f1f?w=1200&h=900&fit=crop" 
+                      src="assets/images/image.jpg" 
                       alt="Team working" 
-                      className="w-full h-full object-cover grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700"
+                      className="w-full h-full object-cover group-hover:opacity-100 transition-all duration-700"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-foreground via-transparent to-transparent" />
                   </div>
