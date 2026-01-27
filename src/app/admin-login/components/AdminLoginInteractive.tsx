@@ -16,9 +16,20 @@ const AdminLoginInteractive = () => {
   // Check if already authenticated
   useEffect(() => {
     const checkAuth = () => {
-      const isAuthenticated = localStorage.getItem('adminAuthenticated') === 'true';
-      if (isAuthenticated) {
-        router.push('/admin-services-management');
+      // Use both localStorage and cookies for robust auth checking
+      const localStorageAuth = localStorage.getItem('adminAuthenticated') === 'true';
+      const cookieAuth = document.cookie.split('; ').find(row => row.startsWith('adminAuthenticated='))?.split('=')[1] === 'true';
+      
+      if (localStorageAuth || cookieAuth) {
+        // If one is missing but the other exists, sync them
+        if (!cookieAuth && localStorageAuth) {
+          document.cookie = `adminAuthenticated=true; path=/; max-age=86400`;
+        }
+        if (!localStorageAuth && cookieAuth) {
+          localStorage.setItem('adminAuthenticated', 'true');
+        }
+        
+        router.replace('/admin-services-management');
       } else {
         setIsCheckingAuth(false);
       }
