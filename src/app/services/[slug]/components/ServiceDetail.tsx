@@ -10,40 +10,52 @@ interface ServiceDetailProps {
 
 export default function ServiceDetail({ service }: ServiceDetailProps) {
   return (
-    <div className="bg-background">
-      {/* Simplified Hero Section */}
-      <section className="relative pt-24 pb-16 lg:pt-32 lg:pb-24 border-b border-border">
+    <div className="bg-background relative">
+      {/* Dynamic Background Elements */}
+      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] animate-pulse" />
+        <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-secondary/5 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: '2s' }} />
+        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.15] mix-blend-overlay" />
+      </div>
+
+      {/* Hero Section */}
+      <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-32 z-10">
         <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto text-center space-y-6">
-            <div className="inline-block px-3 py-1 rounded-full bg-primary/5 text-primary text-xs font-bold tracking-widest uppercase">
-              {service.tagline}
-            </div>
-            
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground tracking-tight">
-              {service.title}
-            </h1>
+          <div className="max-w-5xl mx-auto">
+            <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+              <div className="space-y-8 animate-slide-up">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-md">
+                  <Zap className="w-3.5 h-3.5 text-primary" />
+                  <span className="text-xs font-bold text-primary uppercase tracking-[0.2em]">{service.tagline}</span>
+                </div>
+                
+                <h1 className="text-5xl lg:text-7xl font-black text-foreground tracking-tight leading-[1.05]">
+                  {service.title}
+                </h1>
 
-            <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto">
-              {service.description}
-            </p>
+                <p className="text-xl text-muted-foreground/90 font-medium leading-relaxed border-l-4 border-primary/20 pl-6">
+                  {service.description}
+                </p>
+              </div>
 
-            {service.imageUrl && (
-              <div className="pt-8">
-                <div className="relative aspect-video rounded-2xl overflow-hidden shadow-lg border border-border">
+              {service.imageUrl && (
+                <div className="relative aspect-[4/5] lg:aspect-square rounded-[2.5rem] overflow-hidden shadow-2xl border border-white/5 group animate-fade-in">
                   <img 
                     src={service.imageUrl} 
                     alt={service.title}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-[2s]"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-60" />
+                  <div className="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-[2.5rem]" />
                 </div>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
       </section>
 
       {/* Main Content Grid */}
-      <section className="py-20">
+      <section className="py-24 relative z-10 bg-background/50 backdrop-blur-sm border-t border-border/50">
         <div className="container mx-auto px-6">
           <div className="grid lg:grid-cols-12 gap-16">
             {/* Left Column: What & Deliverables */}
