@@ -38,7 +38,7 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
                 </p>
               </div>
 
-              {service.imageUrl && (
+              {service.imageUrl ? (
                 <div className="relative aspect-[4/5] lg:aspect-square rounded-[2.5rem] overflow-hidden shadow-2xl border border-white/5 group animate-fade-in">
                   <img 
                     src={service.imageUrl} 
@@ -47,6 +47,11 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-60" />
                   <div className="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-[2.5rem]" />
+                </div>
+              ) : (
+                <div className="relative aspect-[4/5] lg:aspect-square rounded-[2.5rem] overflow-hidden shadow-2xl border border-white/5 bg-muted/20 flex items-center justify-center animate-fade-in">
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-secondary/10 to-transparent" />
+                  <Zap className="w-20 h-20 text-primary/20" />
                 </div>
               )}
             </div>
