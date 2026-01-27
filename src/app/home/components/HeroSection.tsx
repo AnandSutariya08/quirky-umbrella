@@ -235,53 +235,58 @@ export default function HeroSection({
             </div>
 
             {/* Right: hero visual */}
-            <div className="relative mx-auto w-full animate-fade-in">
+            <div className="relative mx-auto w-full animate-fade-in lg:max-w-xl">
               <div
                 ref={imageParallaxRef}
-                className="group relative rounded-[3rem] border-8 border-white bg-white shadow-2xl overflow-hidden will-change-transform aspect-video lg:aspect-[16/10]"
+                className="group relative rounded-[2rem] border-[6px] border-white/80 bg-white/50 backdrop-blur-sm shadow-2xl overflow-hidden will-change-transform aspect-video lg:aspect-[4/3]"
               >
+                <div className="absolute inset-0 z-10 pointer-events-none border border-white/20 rounded-[1.8rem]" />
                 <img
                   src={heroImage}
                   alt={heroImageAlt}
-                  className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-[3s]"
+                  className="w-full h-full object-cover transform scale-[1.01] group-hover:scale-105 transition-transform duration-[3s]"
                 />
-                <div className="absolute inset-0 bg-gradient-to-tr from-pink-500/10 via-transparent to-blue-500/10 mix-blend-overlay" />
+                <div className="absolute inset-0 bg-gradient-to-tr from-pink-500/10 via-transparent to-blue-500/10 mix-blend-overlay z-20" />
                 
                 {/* Floating chips - Refined for premium feel */}
-                <div className="pointer-events-none absolute inset-0 hidden sm:block">
-                  <div className="absolute left-8 top-8 rounded-2xl bg-white/90 backdrop-blur-xl p-4 shadow-xl border border-white/50 animate-float">
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-lg bg-pink-50 flex items-center justify-center">
-                        <Zap className="w-4 h-4 text-pink-500" />
+                <div className="pointer-events-none absolute inset-0 hidden sm:block z-30">
+                  <div className="absolute left-6 top-6 rounded-2xl bg-white/90 backdrop-blur-xl p-3 shadow-xl border border-white/50 animate-float">
+                    <div className="flex items-center gap-2">
+                      <div className="w-7 h-7 rounded-lg bg-pink-50 flex items-center justify-center">
+                        <Zap className="w-3.5 h-3.5 text-pink-500" />
                       </div>
                       <div>
-                        <div className="text-sm font-black text-slate-900">Automation-first</div>
-                        <div className="text-[10px] font-bold text-slate-500 uppercase tracking-tight">Less chaos, more momentum</div>
+                        <div className="text-xs font-black text-slate-900">Automation-first</div>
+                        <div className="text-[9px] font-bold text-slate-500 uppercase tracking-tight">Efficiency redefined</div>
                       </div>
                     </div>
                   </div>
 
                   <div
-                    className="absolute right-8 bottom-24 rounded-2xl bg-white/90 backdrop-blur-xl p-4 shadow-xl border border-white/50 animate-float-soft"
+                    className="absolute right-6 bottom-12 rounded-2xl bg-white/90 backdrop-blur-xl p-3 shadow-xl border border-white/50 animate-float-soft"
                     style={{ animationDelay: '700ms' }}
                   >
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center">
-                        <TrendingUp className="w-4 h-4 text-blue-500" />
+                    <div className="flex items-center gap-2">
+                      <div className="w-7 h-7 rounded-lg bg-blue-50 flex items-center justify-center">
+                        <TrendingUp className="w-3.5 h-3.5 text-blue-500" />
                       </div>
                       <div>
-                        <div className="text-sm font-black text-slate-900">Measurable growth</div>
-                        <div className="text-[10px] font-bold text-slate-500 uppercase tracking-tight">Signals → decisions</div>
+                        <div className="text-xs font-black text-slate-900">Real Growth</div>
+                        <div className="text-[9px] font-bold text-slate-500 uppercase tracking-tight">Measurable impact</div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
 
+              {/* Decorative elements for more "pop" */}
+              <div className="absolute -top-6 -right-6 w-24 h-24 bg-pink-500/10 blur-3xl rounded-full -z-10" />
+              <div className="absolute -bottom-8 -left-8 w-32 h-32 bg-blue-500/10 blur-3xl rounded-full -z-10" />
+
               {/* Mobile scroll hint - centered */}
-              <div className="mt-12 flex flex-col items-center gap-2 text-slate-400 lg:hidden">
-                <span className="text-[10px] font-black uppercase tracking-[0.3em]">Explore</span>
-                <ChevronDown className="w-5 h-5 animate-bounce" />
+              <div className="mt-8 flex flex-col items-center gap-2 text-slate-400 lg:hidden">
+                <span className="text-[9px] font-black uppercase tracking-[0.3em] opacity-50">Discover More</span>
+                <ChevronDown className="w-4 h-4 animate-bounce opacity-50" />
               </div>
             </div>
           </div>
