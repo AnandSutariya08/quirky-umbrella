@@ -2,7 +2,7 @@ import Icon from '@/components/ui/AppIcon';
 
 const HeroSection = () => {
   return (
-    <section className="relative bg-gradient-to-br from-primary/10 via-secondary/10 to-accent/10 py-20 overflow-hidden">
+    <section className="relative bg-gradient-to-br from-primary/10 via-secondary/10 to-accent/10 py-20 overflow-hidden pt-28 sm:pt-32 md:pt-36 lg:pt-40">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(250,0,172,0.1),transparent_50%),radial-gradient(circle_at_70%_50%,rgba(39,78,255,0.1),transparent_50%)]" />
 
       <div className="container mx-auto px-6 relative z-10">

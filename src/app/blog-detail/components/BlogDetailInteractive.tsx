@@ -146,7 +146,7 @@ const BlogDetailInteractive = () => {
   }));
 
   return (
-    <div className="min-h-screen bg-transparent pt-32 pb-20">
+    <div className="min-h-screen bg-transparent pt-28 sm:pt-32 md:pt-36 lg:pt-40 pb-20">
       <div className="container mx-auto px-6">
         <article className="max-w-4xl mx-auto">
           <BlogHeader

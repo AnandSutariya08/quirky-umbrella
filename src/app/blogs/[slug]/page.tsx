@@ -60,7 +60,7 @@ export async function generateMetadata({ params }: BlogPageProps): Promise<Metad
 
 function BlogDetailLoading() {
   return (
-    <div className="min-h-screen bg-transparent pt-32 pb-20">
+    <div className="min-h-screen bg-transparent pt-28 sm:pt-32 md:pt-36 lg:pt-40pb-20">
       <div className="container mx-auto px-6">
         <article className="max-w-4xl mx-auto">
           <div className="h-12 bg-muted rounded-lg animate-pulse mb-6" />
