@@ -114,7 +114,7 @@ export default function HeroSection({
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden bg-gradient-to-br from-pink-50 via-blue-50 to-green-50 min-h-screen flex items-center"
+      className="relative overflow-hidden bg-gradient-to-br from-pink-50 via-blue-50 to-green-50 min-h-[85vh] flex items-center"
     >
       {/* Animated background with enhanced blobs */}
       <div className="pointer-events-none absolute inset-0">
@@ -183,32 +183,32 @@ export default function HeroSection({
                 </span>
               </div>
 
-              <h1 className="font-heading text-5xl lg:text-8xl font-black leading-[1.05] tracking-tight animate-slide-down">
+              <h1 className="font-heading text-4xl lg:text-7xl font-black leading-[1.05] tracking-tight animate-slide-down">
                 <span className="text-slate-900 drop-shadow-sm">{title}</span>
                 <span className="block mt-4 bg-gradient-to-r from-pink-500 via-blue-500 to-green-500 bg-[length:200%_100%] bg-clip-text text-transparent animate-gradient-pan pb-2">
                   Real systems. Real outcomes.
                 </span>
               </h1>
 
-              <p className="text-xl lg:text-2xl text-slate-600/90 font-medium leading-relaxed max-w-2xl mx-auto lg:mx-0 animate-slide-up">
+              <p className="text-lg lg:text-xl text-slate-600/90 font-medium leading-relaxed max-w-2xl mx-auto lg:mx-0 animate-slide-up">
                 {subtitle}
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start animate-slide-up">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start animate-slide-up">
                 <button
                   onClick={handleCTAClick}
-                  className="group relative px-10 py-5 bg-pink-500 text-white rounded-2xl font-black text-xl shadow-xl shadow-pink-200 hover:shadow-2xl hover:shadow-pink-300 transition-all duration-300 hover:-translate-y-1 active:scale-95 flex items-center justify-center gap-3 overflow-hidden"
+                  className="group relative px-8 py-4 bg-pink-500 text-white rounded-2xl font-black text-lg shadow-xl shadow-pink-200 hover:shadow-2xl hover:shadow-pink-300 transition-all duration-300 hover:-translate-y-1 active:scale-95 flex items-center justify-center gap-3 overflow-hidden"
                 >
                   <span className="relative z-10">{ctaText}</span>
-                  <ArrowRight className="w-6 h-6 group-hover:translate-x-1.5 transition-transform relative z-10" />
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1.5 transition-transform relative z-10" />
                   <div className="absolute inset-0 bg-gradient-to-r from-pink-600 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </button>
                 <a
                   href="/services/workflow-automations"
-                  className="px-10 py-5 bg-white/70 backdrop-blur-md border-2 border-slate-200 text-slate-900 rounded-2xl font-black text-xl shadow-lg hover:shadow-xl hover:bg-white transition-all duration-300 hover:-translate-y-1 active:scale-95 flex items-center justify-center gap-3"
+                  className="px-8 py-4 bg-white/70 backdrop-blur-md border-2 border-slate-200 text-slate-900 rounded-2xl font-black text-lg shadow-lg hover:shadow-xl hover:bg-white transition-all duration-300 hover:-translate-y-1 active:scale-95 flex items-center justify-center gap-3"
                 >
                   Explore Services
-                  <Sparkles className="w-6 h-6 text-blue-500" />
+                  <Sparkles className="w-5 h-5 text-blue-500" />
                 </a>
               </div>
 
