@@ -183,25 +183,26 @@ export default function HeroSection({
                 </span>
               </div>
 
-              <h1 className="font-heading text-4xl lg:text-6xl font-black leading-[1.05] tracking-tight animate-slide-down">
-                <span className="text-slate-900 drop-shadow-sm">Smarter Marketing.</span>
-                <span className="block mt-2 bg-gradient-to-r from-pink-500 via-blue-500 to-green-500 bg-[length:200%_100%] bg-clip-text text-transparent animate-gradient-pan pb-2">
+              <h1 className="font-heading text-5xl lg:text-7xl font-black leading-[1.05] tracking-tight animate-slide-down">
+                <span className="text-slate-900 drop-shadow-2xl">Smarter Marketing.</span>
+                <span className="block mt-4 bg-gradient-to-r from-pink-500 via-blue-600 to-emerald-500 bg-[length:200%_100%] bg-clip-text text-transparent animate-gradient-pan pb-4 filter drop-shadow-sm">
                   Real Systems, Real Growth.
                 </span>
               </h1>
 
-              <p className="text-base lg:text-lg text-slate-600/90 font-medium leading-relaxed max-w-2xl mx-auto lg:mx-0 animate-slide-up">
+              <p className="text-lg lg:text-xl text-slate-600/95 font-semibold leading-relaxed max-w-2xl mx-auto lg:mx-0 animate-slide-up">
                 {subtitle}
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start animate-slide-up">
+              <div className="flex flex-col sm:flex-row gap-5 justify-center lg:justify-start animate-slide-up">
                 <button
                   onClick={handleCTAClick}
-                  className="group relative px-8 py-4 bg-pink-500 text-white rounded-2xl font-black text-lg shadow-xl shadow-pink-200 hover:shadow-2xl hover:shadow-pink-300 transition-all duration-300 hover:-translate-y-1 active:scale-95 flex items-center justify-center gap-3 overflow-hidden"
+                  className="group relative px-10 py-5 bg-pink-500 text-white rounded-2xl font-black text-xl shadow-[0_20px_50px_rgba(236,72,153,0.3)] hover:shadow-[0_20px_60px_rgba(236,72,153,0.4)] transition-all duration-500 hover:-translate-y-2 active:scale-95 flex items-center justify-center gap-3 overflow-hidden"
                 >
                   <span className="relative z-10">{ctaText}</span>
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1.5 transition-transform relative z-10" />
-                  <div className="absolute inset-0 bg-gradient-to-r from-pink-600 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform relative z-10" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-pink-600 to-rose-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute -inset-full top-0 h-full w-1/2 z-20 block transform -skew-x-12 bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:animate-shimmer" />
                 </button>
                 <a
                   href="/services/workflow-automations"
@@ -235,44 +236,45 @@ export default function HeroSection({
             </div>
 
             {/* Right: hero visual */}
-            <div className="relative mx-auto w-full animate-fade-in lg:max-w-xl">
+            <div className="relative mx-auto w-full animate-fade-in lg:max-w-2xl group/hero">
               <div
                 ref={imageParallaxRef}
-                className="group relative rounded-[2rem] border-[6px] border-white/80 bg-white/50 backdrop-blur-sm shadow-2xl overflow-hidden will-change-transform aspect-video lg:aspect-[4/3]"
+                className="group relative rounded-[2.5rem] border-[8px] border-white/90 bg-white/50 backdrop-blur-md shadow-[0_50px_100px_-20px_rgba(0,0,0,0.25)] overflow-hidden will-change-transform aspect-[4/3] lg:aspect-[4/3] scale-100 group-hover/hero:scale-[1.02] transition-all duration-700 ease-out"
               >
-                <div className="absolute inset-0 z-10 pointer-events-none border border-white/20 rounded-[1.8rem]" />
+                <div className="absolute inset-0 z-10 pointer-events-none border border-white/40 rounded-[2.3rem]" />
                 <img
                   src={heroImage}
                   alt={heroImageAlt}
-                  className="w-full h-full object-cover transform scale-[1.01] group-hover:scale-105 transition-transform duration-[3s]"
+                  className="w-full h-full object-cover transform scale-[1.02] group-hover:scale-110 transition-transform duration-[5s] ease-out"
                 />
-                <div className="absolute inset-0 bg-gradient-to-tr from-pink-500/10 via-transparent to-blue-500/10 mix-blend-overlay z-20" />
+                <div className="absolute inset-0 bg-gradient-to-tr from-pink-500/20 via-transparent to-blue-500/20 mix-blend-overlay z-20" />
+                <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-10" />
                 
                 {/* Floating chips - Refined for premium feel */}
                 <div className="pointer-events-none absolute inset-0 hidden sm:block z-30">
-                  <div className="absolute left-6 top-6 rounded-2xl bg-white/90 backdrop-blur-xl p-3 shadow-xl border border-white/50 animate-float">
-                    <div className="flex items-center gap-2">
-                      <div className="w-7 h-7 rounded-lg bg-pink-50 flex items-center justify-center">
-                        <Zap className="w-3.5 h-3.5 text-pink-500" />
+                  <div className="absolute left-8 top-8 rounded-2xl bg-white/95 backdrop-blur-xl p-4 shadow-2xl border border-white/50 animate-float">
+                    <div className="flex items-center gap-3">
+                      <div className="w-9 h-9 rounded-xl bg-pink-500 flex items-center justify-center shadow-lg shadow-pink-200">
+                        <Zap className="w-5 h-5 text-white" />
                       </div>
                       <div>
-                        <div className="text-xs font-black text-slate-900">Automation-first</div>
-                        <div className="text-[9px] font-bold text-slate-500 uppercase tracking-tight">Efficiency redefined</div>
+                        <div className="text-sm font-black text-slate-900">Automation-first</div>
+                        <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Efficiency redefined</div>
                       </div>
                     </div>
                   </div>
 
                   <div
-                    className="absolute right-6 bottom-12 rounded-2xl bg-white/90 backdrop-blur-xl p-3 shadow-xl border border-white/50 animate-float-soft"
+                    className="absolute right-8 bottom-16 rounded-2xl bg-white/95 backdrop-blur-xl p-4 shadow-2xl border border-white/50 animate-float-soft"
                     style={{ animationDelay: '700ms' }}
                   >
-                    <div className="flex items-center gap-2">
-                      <div className="w-7 h-7 rounded-lg bg-blue-50 flex items-center justify-center">
-                        <TrendingUp className="w-3.5 h-3.5 text-blue-500" />
+                    <div className="flex items-center gap-3">
+                      <div className="w-9 h-9 rounded-xl bg-blue-500 flex items-center justify-center shadow-lg shadow-blue-200">
+                        <TrendingUp className="w-5 h-5 text-white" />
                       </div>
                       <div>
-                        <div className="text-xs font-black text-slate-900">Real Growth</div>
-                        <div className="text-[9px] font-bold text-slate-500 uppercase tracking-tight">Measurable impact</div>
+                        <div className="text-sm font-black text-slate-900">Real Growth</div>
+                        <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Measurable impact</div>
                       </div>
                     </div>
                   </div>
@@ -280,8 +282,12 @@ export default function HeroSection({
               </div>
 
               {/* Decorative elements for more "pop" */}
-              <div className="absolute -top-6 -right-6 w-24 h-24 bg-pink-500/10 blur-3xl rounded-full -z-10" />
-              <div className="absolute -bottom-8 -left-8 w-32 h-32 bg-blue-500/10 blur-3xl rounded-full -z-10" />
+              <div className="absolute -top-12 -right-12 w-48 h-48 bg-pink-500/20 blur-[100px] rounded-full -z-10 animate-pulse" />
+              <div className="absolute -bottom-16 -left-16 w-64 h-64 bg-blue-500/20 blur-[120px] rounded-full -z-10 animate-pulse" style={{ animationDelay: '1s' }} />
+              
+              {/* Animated rings */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] border border-pink-200/20 rounded-full -z-20 animate-[spin_20s_linear_infinite] opacity-50" />
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] border border-blue-200/10 rounded-full -z-20 animate-[spin_30s_linear_infinite_reverse] opacity-30" />
 
               {/* Mobile scroll hint - centered */}
               <div className="mt-8 flex flex-col items-center gap-2 text-slate-400 lg:hidden">
