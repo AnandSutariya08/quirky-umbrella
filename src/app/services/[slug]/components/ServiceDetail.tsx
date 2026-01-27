@@ -19,9 +19,9 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
       </div>
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-32 z-10">
-        <div className="container mx-auto px-6">
-          <div className="max-w-5xl mx-auto">
+      <section className="relative min-h-[90vh] flex items-center z-10 overflow-hidden">
+        <div className="w-full">
+          <div className="px-6 lg:px-20">
             <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
               <div className="space-y-8 animate-slide-up">
                 <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-md">
@@ -29,17 +29,17 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
                   <span className="text-xs font-bold text-primary uppercase tracking-[0.2em]">{service.tagline}</span>
                 </div>
                 
-                <h1 className="text-5xl lg:text-7xl font-black text-foreground tracking-tight leading-[1.05]">
+                <h1 className="text-5xl lg:text-8xl font-black text-foreground tracking-tight leading-[1.05]">
                   {service.title}
                 </h1>
 
-                <p className="text-xl text-muted-foreground/90 font-medium leading-relaxed border-l-4 border-primary/20 pl-6">
+                <p className="text-xl lg:text-2xl text-muted-foreground/90 font-medium leading-relaxed border-l-4 border-primary/20 pl-6 max-w-2xl">
                   {service.description}
                 </p>
               </div>
 
               {service.imageUrl ? (
-                <div className="relative aspect-[4/5] lg:aspect-square rounded-[2.5rem] overflow-hidden shadow-2xl border border-white/5 group animate-fade-in">
+                <div className="relative aspect-video lg:aspect-[16/10] rounded-[2.5rem] overflow-hidden shadow-2xl border border-white/5 group animate-fade-in">
                   <img 
                     src={service.imageUrl} 
                     alt={service.title}
@@ -49,7 +49,7 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
                   <div className="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-[2.5rem]" />
                 </div>
               ) : (
-                <div className="relative aspect-[4/5] lg:aspect-square rounded-[2.5rem] overflow-hidden shadow-2xl border border-white/5 bg-muted/20 flex items-center justify-center animate-fade-in">
+                <div className="relative aspect-video lg:aspect-[16/10] rounded-[2.5rem] overflow-hidden shadow-2xl border border-white/5 bg-muted/20 flex items-center justify-center animate-fade-in">
                   <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-secondary/10 to-transparent" />
                   <Zap className="w-20 h-20 text-primary/20" />
                 </div>
