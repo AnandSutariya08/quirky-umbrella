@@ -243,8 +243,8 @@ export default function HowWeWorkSection() {
         />
       </div>
 
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="max-w-6xl mx-auto">
+      <div className="w-full px-6 lg:px-12 relative z-10">
+        <div className="w-full max-w-[1400px] mx-auto">
           {/* Section header with stagger animation */}
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-card/80 backdrop-blur-sm border border-border shadow-md mb-6 animate-slide-down">
@@ -382,14 +382,6 @@ export default function HowWeWorkSection() {
                         {isExpanded ? 'Collapse Details' : 'Explore Capabilities'}
                         <ArrowRight className={`w-5 h-5 transition-transform duration-500 ${isExpanded ? '-rotate-90' : 'group-hover:translate-x-1'}`} />
                       </button>
-                    </div>
-
-                    {/* Desktop "Read More" Hint */}
-                    <div className="hidden md:flex absolute bottom-8 right-10 items-center gap-3 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0">
-                      <span className="text-xs font-black uppercase tracking-widest text-muted-foreground/50">Details</span>
-                      <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${card.gradient} flex items-center justify-center shadow-xl shadow-primary/20`}>
-                        <ArrowRight className="w-6 h-6 text-white" />
-                      </div>
                     </div>
 
                     {/* Sequential Badge */}
