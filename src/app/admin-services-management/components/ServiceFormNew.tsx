@@ -16,6 +16,8 @@ interface ServiceFormNewProps {
   onCancel: () => void;
 }
 
+import ImageUpload from './ImageUpload';
+
 const ServiceFormNew = ({ service, onSave, onCancel }: ServiceFormNewProps) => {
   const [isHydrated, setIsHydrated] = useState(false);
   const [formData, setFormData] = useState<Omit<Service, 'id' | 'createdAt' | 'updatedAt'>>({
@@ -23,6 +25,7 @@ const ServiceFormNew = ({ service, onSave, onCancel }: ServiceFormNewProps) => {
     slug: '',
     tagline: '',
     description: '',
+    imageUrl: '',
     whatIsIt: {
       title: 'What Are Workflow Automations?',
       content: '',
@@ -62,6 +65,7 @@ const ServiceFormNew = ({ service, onSave, onCancel }: ServiceFormNewProps) => {
         slug: service.slug,
         tagline: service.tagline,
         description: service.description,
+        imageUrl: service.imageUrl || '',
         whatIsIt: service.whatIsIt,
         deliverables: service.deliverables,
         approach: service.approach,
@@ -376,40 +380,50 @@ const ServiceFormNew = ({ service, onSave, onCancel }: ServiceFormNewProps) => {
             Basic Information
           </h3>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-foreground mb-2">
-                Title <span className="text-error">*</span>
-              </label>
-              <input
-                type="text"
-                value={formData.title}
-                onChange={(e) => handleTitleChange(e.target.value)}
-                className={`w-full px-4 py-3 bg-background border rounded-md text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-smooth ${
-                  errors.title ? 'border-error' : 'border-border'
-                }`}
-                placeholder="e.g., Workflow Automations"
-              />
-              {errors.title && <p className="mt-1 text-sm text-error">{errors.title}</p>}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-foreground mb-2">
+                  Title <span className="text-error">*</span>
+                </label>
+                <input
+                  type="text"
+                  value={formData.title}
+                  onChange={(e) => handleTitleChange(e.target.value)}
+                  className={`w-full px-4 py-3 bg-background border rounded-md text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-smooth ${
+                    errors.title ? 'border-error' : 'border-border'
+                  }`}
+                  placeholder="e.g., Workflow Automations"
+                />
+                {errors.title && <p className="mt-1 text-sm text-error">{errors.title}</p>}
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-foreground mb-2">
+                  Slug <span className="text-error">*</span>
+                </label>
+                <input
+                  type="text"
+                  value={formData.slug}
+                  onChange={(e) => handleChange('slug', e.target.value)}
+                  className={`w-full px-4 py-3 bg-background border rounded-md text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-smooth ${
+                    errors.slug ? 'border-error' : 'border-border'
+                  }`}
+                  placeholder="workflow-automations"
+                />
+                {errors.slug && <p className="mt-1 text-sm text-error">{errors.slug}</p>}
+                <p className="mt-1 text-xs text-muted-foreground">
+                  URL: /services/{formData.slug || 'service-slug'}
+                </p>
+              </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-foreground mb-2">
-                Slug <span className="text-error">*</span>
-              </label>
-              <input
-                type="text"
-                value={formData.slug}
-                onChange={(e) => handleChange('slug', e.target.value)}
-                className={`w-full px-4 py-3 bg-background border rounded-md text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-smooth ${
-                  errors.slug ? 'border-error' : 'border-border'
-                }`}
-                placeholder="workflow-automations"
+              <ImageUpload
+                currentImageUrl={formData.imageUrl}
+                onUploadComplete={(url) => handleChange('imageUrl', url)}
+                onImageRemove={() => handleChange('imageUrl', '')}
               />
-              {errors.slug && <p className="mt-1 text-sm text-error">{errors.slug}</p>}
-              <p className="mt-1 text-xs text-muted-foreground">
-                URL: /services/{formData.slug || 'service-slug'}
-              </p>
             </div>
           </div>
 
