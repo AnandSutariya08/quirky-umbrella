@@ -54,39 +54,39 @@ export default function DiscussPage() {
             <div className="absolute bottom-[-10%] left-[-5%] w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: '1s' }} />
           </div>
 
-          <div className="w-full px-6 lg:px-12 relative z-10 pt-16 lg:pt-0">
-            <div className="max-w-[1400px] mx-auto">
-              <div className="grid lg:grid-cols-2 gap-16 items-center">
-                <div className="space-y-10 animate-slide-in text-center lg:text-left">
-                  <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-foreground text-background shadow-2xl mb-2 mx-auto lg:mx-0">
+          <div className="w-full px-4 sm:px-6 lg:px-12 relative z-10 pt-16 lg:pt-0">
+            <div className="max-w-[1400px] mx-auto w-full">
+              <div className="grid lg:grid-cols-2 gap-16 items-center w-full">
+                <div className="space-y-10 animate-slide-in text-center lg:text-left flex flex-col items-center lg:items-start w-full">
+                  <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-foreground text-background shadow-2xl mb-2">
                     <MessageSquare className="w-4 h-4 text-primary" />
                     <span className="text-sm font-black uppercase tracking-[0.2em]">Growth Dialogue</span>
                   </div>
                   
-                  <h1 className="font-heading text-6xl lg:text-8xl font-black text-foreground leading-[1.05] tracking-tight">
+                  <h1 className="font-heading text-5xl sm:text-6xl lg:text-8xl font-black text-foreground leading-[1.05] tracking-tight w-full">
                     Let&apos;s Build <br className="hidden lg:block" />
                     <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent animate-gradient-pan">
                       Sustainable Growth
                     </span>
                   </h1>
                   
-                  <p className="text-xl lg:text-2xl text-muted-foreground font-medium leading-relaxed max-w-xl mx-auto lg:mx-0">
+                  <p className="text-xl lg:text-2xl text-muted-foreground font-medium leading-relaxed max-w-xl">
                     Sustainable business growth comes from combining strategic vision with intelligent, data-driven systems. Let&apos;s engineer your future.
                   </p>
 
-                  <div className="flex flex-col sm:flex-row gap-5 justify-center lg:justify-start">
-                    <button className="group relative px-10 py-5 bg-primary text-white rounded-2xl font-black text-xl shadow-[0_20px_50px_rgba(var(--color-primary-rgb),0.3)] hover:shadow-[0_20px_60px_rgba(var(--color-primary-rgb),0.4)] transition-all duration-500 hover:-translate-y-2 flex items-center justify-center gap-3">
+                  <div className="flex flex-col sm:flex-row gap-5 justify-center lg:justify-start w-full sm:w-auto">
+                    <button className="group relative px-10 py-5 bg-primary text-white rounded-2xl font-black text-xl shadow-[0_20px_50px_rgba(var(--color-primary-rgb),0.3)] hover:shadow-[0_20px_60px_rgba(var(--color-primary-rgb),0.4)] transition-all duration-500 hover:-translate-y-2 flex items-center justify-center gap-3 w-full sm:w-auto">
                       Start Discussion
                       <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform" />
                     </button>
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 animate-fade-in">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 animate-fade-in w-full">
                   {points.map((point, i) => (
                     <div 
                       key={point.title}
-                      className="group p-8 rounded-[2rem] bg-card border border-border shadow-[0_20px_40px_rgba(0,0,0,0.03)] hover:shadow-2xl transition-all duration-500 hover:-translate-y-2"
+                      className="group p-8 rounded-[2rem] bg-card border border-border shadow-[0_20px_40px_rgba(0,0,0,0.03)] hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 flex flex-col items-center text-center lg:items-start lg:text-left w-full"
                       style={{ animationDelay: `${i * 100}ms` }}
                     >
                       <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${point.gradient} flex items-center justify-center mb-6 shadow-xl ${point.shadow} group-hover:scale-110 transition-transform`}>
