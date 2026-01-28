@@ -1,15 +1,17 @@
-import type { Metadata } from 'next';
+'use client';
+
 import PublicHeader from '@/components/common/PublicHeader';
 import ClientFooter from '@/components/common/ClientFooter';
 import { ArrowTrendingUpIcon, LightBulbIcon, UserGroupIcon, RocketLaunchIcon } from '@heroicons/react/24/outline';
 import { ArrowRight, MessageSquare } from 'lucide-react';
 import Link from 'next/link';
 
-export const metadata: Metadata = {
-  title: 'Discuss - Quirky Umbrella',
-  description:
-    'Discuss growth strategies and innovative solutions with Quirky Umbrella. Learn about our approach to sustainable business growth and measurable results.',
-};
+// Note: Metadata must be defined in a parent server component
+// export const metadata: Metadata = {
+//   title: 'Discuss - Quirky Umbrella',
+//   description:
+//     'Discuss growth strategies and innovative solutions with Quirky Umbrella. Learn about our approach to sustainable business growth and measurable results.',
+// };
 
 export default function DiscussPage() {
   const points = [
@@ -76,15 +78,7 @@ export default function DiscussPage() {
                   </p>
 
                   <div className="flex flex-col sm:flex-row gap-5 justify-center lg:justify-start w-full sm:w-auto">
-                    <button 
-                      onClick={() => {
-                        const element = document.getElementById('contact');
-                        if (element) {
-                          element.scrollIntoView({ behavior: 'smooth' });
-                        }
-                      }}
-                      className="group relative px-10 py-5 bg-primary text-white rounded-2xl font-black text-xl shadow-[0_20px_50px_rgba(var(--color-primary-rgb),0.3)] hover:shadow-[0_20px_60px_rgba(var(--color-primary-rgb),0.4)] transition-all duration-500 hover:-translate-y-2 flex items-center justify-center gap-3 w-full sm:w-auto"
-                    >
+                    <button className="group relative px-10 py-5 bg-primary text-white rounded-2xl font-black text-xl shadow-[0_20px_50px_rgba(var(--color-primary-rgb),0.3)] hover:shadow-[0_20px_60px_rgba(var(--color-primary-rgb),0.4)] transition-all duration-500 hover:-translate-y-2 flex items-center justify-center gap-3 w-full sm:w-auto">
                       Start Discussion
                       <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform" />
                     </button>
