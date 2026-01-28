@@ -56,7 +56,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
   return (
     <div className="flex flex-col min-h-screen">
       <PublicHeader />
-      <main className="flex-1">
+      <main className="flex-1 pt-28 sm:pt-32 md:pt-36 lg:pt-40">
         <ServiceDetail service={service} />
       </main>
       <ClientFooter />
