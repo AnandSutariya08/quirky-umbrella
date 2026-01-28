@@ -114,7 +114,7 @@ export default function HeroSection({
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden bg-gradient-to-br from-pink-50 via-blue-50 to-green-50 min-h-screen flex items-center justify-center"
+      className="relative overflow-hidden bg-gradient-to-br from-pink-50 via-blue-50 to-green-50 min-h-screen flex items-center justify-center pt-20 lg:pt-0"
     >
       {/* Animated background with enhanced blobs */}
       <div className="pointer-events-none absolute inset-0">
@@ -213,7 +213,7 @@ export default function HeroSection({
                 </a>
               </div>
 
-              <div className="grid grid-cols-3 gap-6 max-w-xl mx-auto lg:mx-0 pt-6">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 max-w-xl mx-auto lg:mx-0 pt-6">
                 {[
                   { k: '250+', v: 'Brands helped', icon: Users, color: 'text-pink-500' },
                   { k: '16+ yrs', v: 'Experience', icon: Zap, color: 'text-blue-500' },
@@ -221,14 +221,16 @@ export default function HeroSection({
                 ].map((item) => (
                   <div
                     key={item.k}
-                    className="group relative rounded-3xl border border-slate-100 bg-white/60 backdrop-blur-sm p-5 shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-xl hover:border-pink-100"
+                    className="group relative rounded-3xl border border-slate-100 bg-white/60 backdrop-blur-sm p-4 sm:p-5 shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-xl hover:border-pink-100 flex flex-row sm:flex-col items-center sm:items-start gap-4 sm:gap-0"
                   >
-                    <item.icon className={`w-5 h-5 ${item.color} mb-3 opacity-60 group-hover:opacity-100 transition-opacity`} />
-                    <div className="text-xl font-black text-slate-900 leading-none">
-                      {item.k}
-                    </div>
-                    <div className="text-xs font-bold text-slate-500 mt-2 uppercase tracking-wider">
-                      {item.v}
+                    <item.icon className={`w-5 h-5 ${item.color} sm:mb-3 opacity-60 group-hover:opacity-100 transition-opacity shrink-0`} />
+                    <div>
+                      <div className="text-lg sm:text-xl font-black text-slate-900 leading-none">
+                        {item.k}
+                      </div>
+                      <div className="text-[10px] sm:text-xs font-bold text-slate-500 mt-1 sm:mt-2 uppercase tracking-wider">
+                        {item.v}
+                      </div>
                     </div>
                   </div>
                 ))}
