@@ -1,17 +1,14 @@
-import type { Metadata } from 'next';
+'use client';
+
 import PublicHeader from '@/components/common/PublicHeader';
 import ClientFooter from '@/components/common/ClientFooter';
 import { ArrowTrendingUpIcon, LightBulbIcon, UserGroupIcon, RocketLaunchIcon } from '@heroicons/react/24/outline';
 import { ArrowRight, MessageSquare } from 'lucide-react';
-import Link from 'next/link';
-
-export const metadata: Metadata = {
-  title: 'Discuss - Quirky Umbrella',
-  description:
-    'Discuss growth strategies and innovative solutions with Quirky Umbrella. Learn about our approach to sustainable business growth and measurable results.',
-};
+import { useRouter } from 'next/navigation';
 
 export default function DiscussPage() {
+  const router = useRouter();
+  
   const points = [
     {
       title: 'Strategic Growth',
@@ -47,7 +44,6 @@ export default function DiscussPage() {
     <div className="flex flex-col min-h-screen bg-background overflow-x-hidden">
       <PublicHeader />
       <main className="flex-1">
-        {/* Hero Section */}
         <section className="relative pt-32 pb-24 lg:pt-48 lg:pb-32 overflow-hidden min-h-screen">
           <div className="absolute inset-0 pointer-events-none">
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/5 via-transparent to-transparent opacity-70" />
@@ -63,26 +59,21 @@ export default function DiscussPage() {
                     <MessageSquare className="w-4 h-4 text-primary" />
                     <span className="text-sm font-black uppercase tracking-[0.2em]">Growth Dialogue</span>
                   </div>
-
+                  
                   <h1 className="font-heading text-5xl sm:text-6xl lg:text-8xl font-black text-foreground leading-[1.05] tracking-tight w-full">
                     Let&apos;s Build <br className="hidden lg:block" />
                     <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent animate-gradient-pan">
                       Sustainable Growth
                     </span>
                   </h1>
-
+                  
                   <p className="text-xl lg:text-2xl text-muted-foreground font-medium leading-relaxed max-w-xl">
                     Sustainable business growth comes from combining strategic vision with intelligent, data-driven systems. Let&apos;s engineer your future.
                   </p>
 
                   <div className="flex flex-col sm:flex-row gap-5 justify-center lg:justify-start w-full sm:w-auto">
                     <button 
-                      onClick={() => {
-                        const element = document.getElementById('contact');
-                        if (element) {
-                          element.scrollIntoView({ behavior: 'smooth' });
-                        }
-                      }}
+                      onClick={() => router.push('/contact')}
                       className="group relative px-10 py-5 bg-primary text-white rounded-2xl font-black text-xl shadow-[0_20px_50px_rgba(var(--color-primary-rgb),0.3)] hover:shadow-[0_20px_60px_rgba(var(--color-primary-rgb),0.4)] transition-all duration-500 hover:-translate-y-2 flex items-center justify-center gap-3 w-full sm:w-auto"
                     >
                       Start Discussion
@@ -93,7 +84,7 @@ export default function DiscussPage() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 animate-fade-in w-full">
                   {points.map((point, i) => (
-                    <div
+                    <div 
                       key={point.title}
                       className="group p-8 rounded-[2rem] bg-card border border-border shadow-[0_20px_40px_rgba(0,0,0,0.03)] hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 flex flex-col items-center text-center lg:items-start lg:text-left w-full"
                       style={{ animationDelay: `${i * 100}ms` }}
@@ -111,19 +102,21 @@ export default function DiscussPage() {
           </div>
         </section>
 
-        {/* Closing Thought */}
         <section className="py-24 bg-foreground">
           <div className="w-full px-6 lg:px-12">
             <div className="max-w-[1400px] mx-auto">
               <div className="relative p-12 lg:p-20 rounded-[4rem] bg-gradient-to-br from-background/[0.05] to-transparent border border-background/10 overflow-hidden text-center">
                 <div className="absolute top-0 right-0 w-64 h-64 bg-primary/20 blur-[100px] rounded-full -z-10" />
                 <div className="absolute bottom-0 left-0 w-64 h-64 bg-secondary/20 blur-[100px] rounded-full -z-10" />
-
+                
                 <h2 className="text-4xl lg:text-6xl font-black text-background mb-8">Ready to unlock your potential?</h2>
                 <p className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto font-medium">
                   We don&apos;t just talk about growth—we build the systems that make it inevitable.
                 </p>
-                <button className="px-12 py-6 bg-background text-foreground rounded-3xl font-black text-2xl hover:bg-muted transition-colors shadow-2xl">
+                <button 
+                  onClick={() => router.push('/contact')}
+                  className="px-12 py-6 bg-background text-foreground rounded-3xl font-black text-2xl hover:bg-muted transition-colors shadow-2xl"
+                >
                   Connect With Us
                 </button>
               </div>
