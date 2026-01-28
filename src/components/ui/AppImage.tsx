@@ -101,7 +101,6 @@ function AppImage({
       />
     );
   }
-
   // For local images and data URLs, use Next.js Image component
   const imageProps = {
     src: imageSrc,
