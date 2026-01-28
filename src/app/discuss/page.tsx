@@ -54,27 +54,27 @@ export default function DiscussPage() {
             <div className="absolute bottom-[-10%] left-[-5%] w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: '1s' }} />
           </div>
 
-          <div className="w-full px-6 lg:px-12 relative z-10">
+          <div className="w-full px-6 lg:px-12 relative z-10 pt-16 lg:pt-0">
             <div className="max-w-[1400px] mx-auto">
               <div className="grid lg:grid-cols-2 gap-16 items-center">
-                <div className="space-y-10 animate-slide-in">
-                  <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-foreground text-background shadow-2xl mb-2">
+                <div className="space-y-10 animate-slide-in text-center lg:text-left">
+                  <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-foreground text-background shadow-2xl mb-2 mx-auto lg:mx-0">
                     <MessageSquare className="w-4 h-4 text-primary" />
                     <span className="text-sm font-black uppercase tracking-[0.2em]">Growth Dialogue</span>
                   </div>
                   
                   <h1 className="font-heading text-6xl lg:text-8xl font-black text-foreground leading-[1.05] tracking-tight">
-                    Let&apos;s Build <br />
+                    Let&apos;s Build <br className="hidden lg:block" />
                     <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent animate-gradient-pan">
                       Sustainable Growth
                     </span>
                   </h1>
                   
-                  <p className="text-xl lg:text-2xl text-muted-foreground font-medium leading-relaxed max-w-xl">
+                  <p className="text-xl lg:text-2xl text-muted-foreground font-medium leading-relaxed max-w-xl mx-auto lg:mx-0">
                     Sustainable business growth comes from combining strategic vision with intelligent, data-driven systems. Let&apos;s engineer your future.
                   </p>
 
-                  <div className="flex flex-col sm:flex-row gap-5">
+                  <div className="flex flex-col sm:flex-row gap-5 justify-center lg:justify-start">
                     <button className="group relative px-10 py-5 bg-primary text-white rounded-2xl font-black text-xl shadow-[0_20px_50px_rgba(var(--color-primary-rgb),0.3)] hover:shadow-[0_20px_60px_rgba(var(--color-primary-rgb),0.4)] transition-all duration-500 hover:-translate-y-2 flex items-center justify-center gap-3">
                       Start Discussion
                       <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform" />
