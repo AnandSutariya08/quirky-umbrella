@@ -9,8 +9,7 @@ import {
   RocketLaunchIcon,
 } from '@heroicons/react/24/outline';
 import { ArrowRight, MessageSquare } from 'lucide-react';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 // Note: Metadata must be defined in a parent server component
 // export const metadata: Metadata = {
@@ -91,7 +90,10 @@ export default function DiscussPage() {
                   </p>
 
                   <div className="flex flex-col sm:flex-row gap-5 justify-center lg:justify-start w-full sm:w-auto">
-                    <button className="group relative px-10 py-5 bg-primary text-white rounded-2xl font-black text-xl shadow-[0_20px_50px_rgba(var(--color-primary-rgb),0.3)] hover:shadow-[0_20px_60px_rgba(var(--color-primary-rgb),0.4)] transition-all duration-500 hover:-translate-y-2 flex items-center justify-center gap-3 w-full sm:w-auto">
+                    <button
+                      className="group relative px-10 py-5 bg-primary text-white rounded-2xl font-black text-xl shadow-[0_20px_50px_rgba(var(--color-primary-rgb),0.3)] hover:shadow-[0_20px_60px_rgba(var(--color-primary-rgb),0.4)] transition-all duration-500 hover:-translate-y-2 flex items-center justify-center gap-3 w-full sm:w-auto"
+                      onClick={() => router.push('/contact')} // or wherever you want to go
+                    >
                       Start Discussion
                       <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform" />
                     </button>
