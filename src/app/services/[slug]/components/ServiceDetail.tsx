@@ -416,7 +416,7 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
                   </div>
 
                   <Link
-                    href="/contact"
+                    href="/book-meeting"
                     className="block w-full text-center px-8 py-4 bg-white text-primary rounded-2xl font-black text-lg hover:scale-[1.02] hover:shadow-xl transition-all relative z-10"
                   >
                     Start Project →
@@ -431,7 +431,7 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
                   <p className="text-foreground/80 mb-6">
                     We can tailor our systems to your specific business architecture.
                   </p>
-                  <Link href="/discuss" className="text-primary font-black flex items-center gap-2 hover:gap-3 transition-all group">
+                  <Link href="/book-meeting" className="text-primary font-black flex items-center gap-2 hover:gap-3 transition-all group">
                     Book Strategy Session
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </Link>
@@ -500,16 +500,16 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-8">
               <Link
-                href="/contact"
+                href="/book-meeting"
                 className="w-full sm:w-auto px-10 py-5 bg-primary text-primary-foreground rounded-2xl font-black text-xl hover:scale-[1.02] hover:shadow-2xl hover:shadow-primary/30 transition-all"
               >
                 {service.cta.buttonText}
               </Link>
               <Link
-                href="/discuss"
+                href="/book-meeting"
                 className="w-full sm:w-auto px-10 py-5 rounded-2xl border-2 border-background/20 bg-background/10 backdrop-blur-sm text-background font-black text-xl hover:bg-background/20 transition-all"
               >
-                View Case Studies
+                Book Strategy Session
               </Link>
             </div>
           </div>
