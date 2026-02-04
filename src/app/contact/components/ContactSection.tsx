@@ -133,22 +133,29 @@ export default function ContactSection() {
                 </div>
               </div> */}
 
-              {/* Map Placeholder */}
+              {/* Map View */}
               <div className="pt-8 border-t border-border">
                 <h3 className="text-lg font-semibold text-foreground mb-4">Our Location</h3>
-                <div className="relative h-64 bg-muted rounded-xl overflow-hidden border border-border">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-center">
-                      <Icon
-                        name="MapPinIcon"
-                        size={48}
-                        className="text-muted-foreground mx-auto mb-2"
-                      />
-                      <p className="text-muted-foreground">Interactive Map</p>
-                      <p className="text-sm text-muted-foreground mt-1">
-                        Unit 4401, M3M 65th Avenue, Sector 65, Gurgaon, India
-                      </p>
-                    </div>
+                <div className="relative h-96 bg-muted rounded-xl overflow-hidden border border-border shadow-inner">
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m13!1m1!1s0x390d2279f045c783:0x415b497b0a70f3f8!2sM3M%2065th%20Avenue!5m2!1sen!2sin"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen={true}
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="Quirky Umbrella Location"
+                    className="grayscale hover:grayscale-0 transition-all duration-500"
+                  ></iframe>
+                  <div className="absolute bottom-4 left-4 right-4 bg-background/90 backdrop-blur-sm p-4 rounded-lg border border-border shadow-lg md:max-w-xs">
+                    <p className="font-semibold text-foreground flex items-center gap-2">
+                      <Icon name="MapPinIcon" size={16} className="text-primary" />
+                      Our Office
+                    </p>
+                    <p className="text-sm text-muted-foreground mt-1">
+                      Unit 4401, M3M 65th Avenue, Sector 65, Gurgaon, India
+                    </p>
                   </div>
                 </div>
               </div>
