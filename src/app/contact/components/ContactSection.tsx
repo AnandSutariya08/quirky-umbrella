@@ -67,15 +67,26 @@ export default function ContactSection() {
         <div className="max-w-7xl mx-auto w-full">
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 w-full">
             {/* Contact Information */}
-            <div className="space-y-8 w-full min-w-0">
-              <div>
-                <h2 className="text-2xl font-bold text-foreground mb-4">Contact Information</h2>
-                <p className="text-muted-foreground mb-8">
-                  We're always happy to hear from you. Choose the best way to reach us.
-                </p>
+            <div className="space-y-8 w-full min-w-0 lg:col-span-2">
+              <div className="grid md:grid-cols-2 gap-8">
+                <div>
+                  <h2 className="text-2xl font-bold text-foreground mb-4">Contact Information</h2>
+                  <p className="text-muted-foreground mb-8">
+                    We're always happy to hear from you. Choose the best way to reach us.
+                  </p>
+                </div>
+                <div className="flex items-center justify-end">
+                  <a
+                    href="/book-meeting"
+                    className="px-8 py-4 bg-primary text-primary-foreground rounded-xl font-bold shadow-lg shadow-primary/20 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex items-center gap-2"
+                  >
+                    <Icon name="CalendarIcon" size={20} />
+                    Schedule a Meeting
+                  </a>
+                </div>
               </div>
 
-              <div className="space-y-6">
+              <div className="grid md:grid-cols-2 gap-6">
                 {contactInfo.map((info, index) => (
                   <a
                     key={index}
@@ -141,11 +152,6 @@ export default function ContactSection() {
                   </div>
                 </div>
               </div>
-            </div>
-
-            {/* Scheduling System */}
-            <div className="w-full min-w-0">
-              <SchedulingSystem />
             </div>
           </div>
         </div>

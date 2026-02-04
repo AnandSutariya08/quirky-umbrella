@@ -1,8 +1,11 @@
 'use client';
 
 import Icon from '@/components/ui/AppIcon';
+import { useRouter } from 'next/navigation';
 
 const Discuss = () => {
+  const router = useRouter();
+
   return (
     <section className="mb-12 from-primary/5 to-primary/10 rounded-lg p-8 md:p-12">
       <div className="flex items-center gap-3 mb-6">
@@ -67,11 +70,18 @@ const Discuss = () => {
           </div>
         </div>
 
-        <div className="mt-8 p-6 bg-primary/10 rounded-lg border-l-4 border-primary">
-          <p className="text-foreground font-medium">
+        <div className="mt-8 p-10 bg-primary/10 rounded-[2rem] border border-primary/20 flex flex-col items-center text-center">
+          <p className="text-xl font-bold text-foreground mb-6">
             Ready to discuss your growth strategy? Let's talk about how we can help you achieve your
             business objectives and unlock your full potential.
           </p>
+          <button
+            onClick={() => router.push('/book-meeting')}
+            className="px-10 py-5 bg-primary text-white rounded-2xl font-black text-xl shadow-lg hover:shadow-primary/30 transition-all duration-300 hover:-translate-y-1 flex items-center gap-3"
+          >
+            Start Discussion
+            <Icon name="ArrowRightIcon" size={20} />
+          </button>
         </div>
       </div>
     </section>

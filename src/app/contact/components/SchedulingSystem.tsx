@@ -28,8 +28,8 @@ export const meetingTypes: MeetingTypeOption[] = [
 ];
 
 export default function SchedulingSystem() {
-  const [currentStep, setCurrentStep] = useState(1);
-  const [selectedMeetingType, setSelectedMeetingType] = useState<MeetingType | null>(null);
+  const [currentStep, setCurrentStep] = useState(2);
+  const [selectedMeetingType, setSelectedMeetingType] = useState<MeetingType | null>('discovery');
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
   const [availableSlots, setAvailableSlots] = useState<string[]>([]);
@@ -597,7 +597,7 @@ export default function SchedulingSystem() {
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 bg-primary rounded-full"></div>
-                  <p className="text-muted-foreground">{selectedMeeting.name}</p>
+                  <p className="text-muted-foreground">{selectedMeeting?.name}</p>
                 </div>
               </div>
             </div>

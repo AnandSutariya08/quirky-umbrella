@@ -210,98 +210,28 @@ export default function GlobalReachSection({ title, subtitle, stats }: GlobalRea
           <p className="text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto">{subtitle}</p>
         </div>
 
-        {/* Country Carousel */}
-        <div
-          className="mb-20 relative"
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => setIsPaused(false)}
-        >
-          {/* Navigation Buttons */}
-          <button
-            onClick={goToPrevious}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-card/80 backdrop-blur-sm border border-border flex items-center justify-center text-foreground hover:bg-card transition-all duration-300 hover:scale-110 active:scale-95 shadow-lg"
-            aria-label="Previous country"
-          >
-            <ChevronLeft className="w-6 h-6" />
-          </button>
-
-          <button
-            onClick={goToNext}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-card/80 backdrop-blur-sm border border-border flex items-center justify-center text-foreground hover:bg-card transition-all duration-300 hover:scale-110 active:scale-95 shadow-lg"
-            aria-label="Next country"
-          >
-            <ChevronRight className="w-6 h-6" />
-          </button>
-
-          {/* Carousel Container */}
-          <div className="relative h-72 flex items-center justify-center">
-            <div className="relative w-full max-w-5xl mx-auto flex items-center justify-center">
-              {getVisibleCountries().map((country, idx) => {
-                const offset = country.offset;
-                const isActive = offset === 0;
-                const scale = isActive ? 1 : Math.max(0.6, 1 - Math.abs(offset) * 0.2);
-                const opacity = isActive ? 1 : Math.max(0.3, 1 - Math.abs(offset) * 0.35);
-                const translateX = offset * 220;
-                const zIndex = 10 - Math.abs(offset);
-
-                return (
-                  <div
-                    key={`${country.id}-${idx}`}
-                    className="absolute transition-all duration-700 ease-out cursor-pointer"
-                    style={{
-                      transform: `translateX(${translateX}px) scale(${scale})`,
-                      opacity,
-                      zIndex,
-                    }}
-                    onClick={() => goToSlide(countries.findIndex((c) => c.id === country.id))}
-                  >
-                    <div
-                      className={`flex flex-col items-center gap-4 ${isActive ? 'animate-float' : ''}`}
-                    >
-                      <div
-                        className={`relative transition-all duration-500 ${isActive ? 'drop-shadow-2xl' : ''}`}
-                      >
-                        <CountryIcon
-                          type={country.icon}
-                          className={`w-32 h-40 transition-all duration-500 ${isActive ? 'opacity-100' : 'opacity-45'}`}
-                        />
-                        {isActive && (
-                          <div className="absolute inset-0 bg-primary/10 rounded-full blur-2xl animate-pulse" />
-                        )}
-                      </div>
-                      <div
-                        className={`text-center transition-all duration-500 ${
-                          isActive ? 'opacity-100' : 'opacity-60'
-                        }`}
-                      >
-                        <h3
-                          className={`font-bold transition-all duration-500 ${
-                            isActive ? 'text-2xl text-foreground' : 'text-lg text-muted-foreground'
-                          }`}
-                        >
-                          {country.name}
-                        </h3>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Dots Indicator */}
-          <div className="flex justify-center gap-2 mt-8">
-            {countries.map((country, index) => (
-              <button
-                key={country.id}
-                onClick={() => goToSlide(index)}
-                className={`transition-all duration-300 rounded-full ${
-                  currentIndex === index
-                    ? 'w-8 h-3 bg-primary'
-                    : 'w-3 h-3 bg-muted hover:bg-muted-foreground'
-                }`}
-                aria-label={`Go to ${country.name}`}
-              />
+        {/* Country Scrolling Ticker */}
+        <div className="mb-20 overflow-hidden relative group">
+          <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-background to-transparent z-10" />
+          <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-background to-transparent z-10" />
+          
+          <div className="flex space-x-20 animate-scroll-countries whitespace-nowrap py-10 px-6">
+            {[...countries, ...countries, ...countries, ...countries].map((country, idx) => (
+              <div
+                key={`${country.id}-${idx}`}
+                className="flex-shrink-0 flex flex-col items-center gap-6 group/item transition-all duration-500 hover:-translate-y-2"
+              >
+                <div className="relative">
+                  <CountryIcon
+                    type={country.icon}
+                    className="w-32 h-40 opacity-40 group-hover/item:opacity-100 transition-all duration-500 group-hover/item:scale-110 drop-shadow-xl"
+                  />
+                  <div className="absolute inset-0 bg-primary/10 rounded-full blur-2xl opacity-0 group-hover/item:opacity-100 transition-opacity duration-500" />
+                </div>
+                <h3 className="text-xl font-bold text-muted-foreground group-hover/item:text-foreground transition-colors duration-300">
+                  {country.name}
+                </h3>
+              </div>
             ))}
           </div>
         </div>
@@ -339,7 +269,23 @@ export default function GlobalReachSection({ title, subtitle, stats }: GlobalRea
         </div>
       </div>
 
-      <style jsx>{`
+      <style jsx global>{`
+        @keyframes scroll-countries {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-25%);
+          }
+        }
+        .animate-scroll-countries {
+          animation: scroll-countries 40s linear infinite;
+          display: flex;
+          width: max-content;
+        }
+        .animate-scroll-countries:hover {
+          animation-play-state: paused;
+        }
         @keyframes float {
           0%,
           100% {

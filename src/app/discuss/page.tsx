@@ -92,7 +92,7 @@ export default function DiscussPage() {
                   <div className="flex flex-col sm:flex-row gap-5 justify-center lg:justify-start w-full sm:w-auto">
                     <button
                       className="group relative px-10 py-5 bg-primary text-white rounded-2xl font-black text-xl shadow-[0_20px_50px_rgba(var(--color-primary-rgb),0.3)] hover:shadow-[0_20px_60px_rgba(var(--color-primary-rgb),0.4)] transition-all duration-500 hover:-translate-y-2 flex items-center justify-center gap-3 w-full sm:w-auto"
-                      onClick={() => router.push('/contact')} // or wherever you want to go
+                      onClick={() => router.push('/book-meeting')} // or wherever you want to go
                     >
                       Start Discussion
                       <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform" />
@@ -138,7 +138,7 @@ export default function DiscussPage() {
                   We don&apos;t just talk about growth—we build the systems that make it inevitable.
                 </p>
                 <button
-                  onClick={() => router.push('/contact')}
+                  onClick={() => router.push('/book-meeting')}
                   className="px-12 py-6 bg-background text-foreground rounded-3xl font-black text-2xl hover:bg-muted transition-colors shadow-2xl"
                 >
                   Connect With Us
