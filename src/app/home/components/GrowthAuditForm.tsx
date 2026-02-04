@@ -222,6 +222,17 @@ export default function GrowthAuditForm() {
         answers,
       });
 
+      // Send emails to both admin and client
+      try {
+        const { emailService } = await import('@/lib/email');
+        await emailService.sendGrowthAuditEmails({
+          ...formData,
+          answers,
+        });
+      } catch (emailError) {
+        console.error('Error sending growth audit emails:', emailError);
+      }
+
       setSubmitted(true);
 
       // Reset form after 5 seconds
