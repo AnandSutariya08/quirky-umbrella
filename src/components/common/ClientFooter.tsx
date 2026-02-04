@@ -103,7 +103,7 @@ const ClientFooter = () => {
         <div className="pt-8 border-t border-border">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-muted-foreground text-sm">
-              &copy; {currentYear} Quirky Umbrella. All rights reserved.
+              &copy; 2025 Quirky Umbrella. All rights reserved.
             </p>
             {/* <p className="text-muted-foreground text-sm flex items-center gap-1">
               Crafted with{' '}

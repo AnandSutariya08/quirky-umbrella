@@ -9,30 +9,30 @@ export default function ContactSection() {
     {
       icon: 'EnvelopeIcon',
       title: 'Email Us',
-      content: 'hello@quirkyumbrella.com',
-      link: 'mailto:hello@quirkyumbrella.com',
+      content: 'hello@quirkyumbrella.in',
+      link: 'mailto:hello@quirkyumbrella.in',
       description: 'Send us an email anytime!',
     },
     {
       icon: 'PhoneIcon',
       title: 'Call Us',
-      content: '+1 (555) 123-4567',
-      link: 'tel:+15551234567',
-      description: 'Mon-Fri from 9am to 6pm',
+      content: '+91 9971066552',
+      link: 'tel:+919971066552',
+      description: 'Monday - Friday: 10:00 AM - 6:00 PM IST',
     },
     {
       icon: 'MapPinIcon',
       title: 'Visit Us',
-      content: '123 Innovation Street, Suite 500',
+      content: 'Unit 4401, M3M 65th Avenue',
       link: '#',
-      description: 'San Francisco, CA 94105, USA',
+      description: 'Sector 65, Gurgaon, India',
     },
     {
       icon: 'ClockIcon',
       title: 'Business Hours',
       content: 'Monday - Friday',
       link: '#',
-      description: '9:00 AM - 6:00 PM PST',
+      description: '10:00 AM - 6:00 PM IST',
     },
   ];
 
@@ -115,7 +115,7 @@ export default function ContactSection() {
               </div>
 
               {/* Social Media */}
-              <div className="pt-8 border-t border-border">
+              {/* <div className="pt-8 border-t border-border">
                 <h3 className="text-lg font-semibold text-foreground mb-4">Follow Us</h3>
                 <div className="flex flex-wrap gap-3">
                   {socialLinks.map((social, index) => (
@@ -131,7 +131,7 @@ export default function ContactSection() {
                     </a>
                   ))}
                 </div>
-              </div>
+              </div> */}
 
               {/* Map Placeholder */}
               <div className="pt-8 border-t border-border">
@@ -146,7 +146,7 @@ export default function ContactSection() {
                       />
                       <p className="text-muted-foreground">Interactive Map</p>
                       <p className="text-sm text-muted-foreground mt-1">
-                        123 Innovation Street, San Francisco, CA
+                        Unit 4401, M3M 65th Avenue, Sector 65, Gurgaon, India
                       </p>
                     </div>
                   </div>
