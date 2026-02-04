@@ -15,6 +15,7 @@ import {
 } from 'firebase/firestore';
 import { db } from './firebase';
 import type { Booking, BookingSettings, Availability } from '@/types/booking';
+import { emailService } from './email';
 
 const BOOKINGS_COLLECTION = 'bookings';
 const SETTINGS_COLLECTION = 'bookingSettings';
@@ -71,6 +72,13 @@ export const bookingsService = {
       }
 
       const docRef = await addDoc(collection(firestoreDb, BOOKINGS_COLLECTION), bookingData);
+
+      // Send email notifications
+      try {
+        await emailService.sendBookingEmails(booking);
+      } catch (emailError) {
+        console.error('Failed to send booking emails:', emailError);
+      }
 
       return docRef.id;
     } catch (error) {

@@ -10,6 +10,7 @@ import {
 } from 'firebase/firestore';
 import { db } from './firebase';
 import type { GrowthAuditSubmission } from '@/types/growthAudit';
+import { emailService } from './email';
 
 const GROWTH_AUDIT_COLLECTION = 'growthAuditSubmissions';
 
@@ -31,6 +32,13 @@ export const growthAuditService = {
         createdAt: Timestamp.now(),
         updatedAt: Timestamp.now(),
       });
+
+      // Send email notifications
+      try {
+        await emailService.sendGrowthAuditEmails(submission);
+      } catch (emailError) {
+        console.error('Failed to send growth audit emails:', emailError);
+      }
 
       return docRef.id;
     } catch (error) {
