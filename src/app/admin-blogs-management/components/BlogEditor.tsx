@@ -163,6 +163,20 @@ const BlogEditor = ({ blog, onSave, onCancel }: BlogEditorProps) => {
     handleContentChange();
   };
 
+  const insertNote = (type: 'info' | 'warning' | 'tip') => {
+    const colors = {
+      info: { bg: '#e0f2fe', border: '#0ea5e9', text: '#0369a1' },
+      warning: { bg: '#fff7ed', border: '#f97316', text: '#9a3412' },
+      tip: { bg: '#f0fdf4', border: '#22c55e', text: '#15803d' }
+    };
+    const color = colors[type];
+    const html = `<div class="blog-note ${type}" style="background-color: ${color.bg}; border-left: 4px solid ${color.border}; color: ${color.text}; padding: 1rem; margin: 1.5rem 0; border-radius: 0.375rem;">
+      <strong>${type.toUpperCase()}:</strong> Your content here...
+    </div><p></p>`;
+    document.execCommand('insertHTML', false, html);
+    handleContentChange();
+  };
+
   const handleSubmit = (status: 'published' | 'draft' | 'scheduled') => {
     const finalData: Omit<Blog, 'id' | 'createdAt' | 'updatedAt' | 'views' | 'likes'> = {
       ...formData,
@@ -501,6 +515,31 @@ const BlogEditor = ({ blog, onSave, onCancel }: BlogEditorProps) => {
             title="Paragraph"
           >
             P
+          </button>
+          <div className="w-px bg-border" />
+          <button
+            type="button"
+            onClick={() => insertNote('info')}
+            className="p-2 hover:bg-background rounded transition-smooth press-scale text-info flex items-center gap-1 text-xs font-bold"
+            title="Insert Info Note"
+          >
+            <Icon name="InformationCircleIcon" size={18} /> INFO
+          </button>
+          <button
+            type="button"
+            onClick={() => insertNote('tip')}
+            className="p-2 hover:bg-background rounded transition-smooth press-scale text-success flex items-center gap-1 text-xs font-bold"
+            title="Insert Tip"
+          >
+            <Icon name="LightBulbIcon" size={18} /> TIP
+          </button>
+          <button
+            type="button"
+            onClick={() => insertNote('warning')}
+            className="p-2 hover:bg-background rounded transition-smooth press-scale text-warning flex items-center gap-1 text-xs font-bold"
+            title="Insert Warning"
+          >
+            <Icon name="ExclamationTriangleIcon" size={18} /> WARN
           </button>
         </div>
 

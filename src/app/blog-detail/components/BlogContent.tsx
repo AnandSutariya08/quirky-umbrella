@@ -18,7 +18,8 @@ const BlogContent = ({ contentHtml }: BlogContentProps) => {
         prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-muted-foreground
         prose-code:bg-muted prose-code:px-2 prose-code:py-1 prose-code:rounded prose-code:text-sm prose-code:font-mono
         prose-pre:bg-muted prose-pre:p-6 prose-pre:rounded-lg prose-pre:overflow-x-auto
-        prose-img:rounded-lg prose-img:shadow-neutral-md prose-img:my-8"
+        prose-img:rounded-lg prose-img:shadow-neutral-md prose-img:my-8
+        [&_.blog-note]:my-8 [&_.blog-note]:shadow-sm [&_.blog-note_strong]:mr-2"
       dangerouslySetInnerHTML={{ __html: contentHtml }}
     />
   );
