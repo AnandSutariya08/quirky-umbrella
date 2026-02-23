@@ -49,7 +49,7 @@ const DropdownMenu = ({ collection, onClose, isMobile = false }: DropdownMenuPro
             No services listed
           </div>
         ) : (
-          <div className="max-h-[50vh] overflow-y-auto pr-1 scrollbar-quirky">
+          <div className="pr-1 scrollbar-none">
             <div className="space-y-2">
               {items.map((item) => (
                 <Link
@@ -105,7 +105,7 @@ const DropdownMenu = ({ collection, onClose, isMobile = false }: DropdownMenuPro
           </p>
         </div>
       ) : (
-        <div className="py-2 max-h-[360px] overflow-y-auto pr-1 scrollbar-quirky">
+        <div className="py-2 pr-1 scrollbar-none">
           {items.map((item, index) => (
             <Link
               key={item.id}
