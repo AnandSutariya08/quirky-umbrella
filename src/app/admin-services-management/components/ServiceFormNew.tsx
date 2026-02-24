@@ -9,14 +9,13 @@ import type {
   IndustryUseCase,
   FAQ,
 } from '@/types/service';
+import ImageUpload from './ImageUpload';
 
 interface ServiceFormNewProps {
   service: Service | null;
   onSave: (service: Omit<Service, 'id' | 'createdAt' | 'updatedAt'>) => void;
   onCancel: () => void;
 }
-
-import ImageUpload from './ImageUpload';
 
 const ServiceFormNew = ({ service, onSave, onCancel }: ServiceFormNewProps) => {
   const [isHydrated, setIsHydrated] = useState(false);
@@ -239,6 +238,7 @@ const ServiceFormNew = ({ service, onSave, onCancel }: ServiceFormNewProps) => {
           i === industryIndex
             ? {
                 ...industry,
+                ...industry,
                 items: industry.items.map((item, j) => (j === itemIndex ? value : item)),
               }
             : industry
@@ -271,9 +271,6 @@ const ServiceFormNew = ({ service, onSave, onCancel }: ServiceFormNewProps) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    console.log('=== FORM SUBMISSION STARTED ===');
-    console.log('Raw form data:', formData);
-
     // Clean up empty items
     const cleanedData = {
       ...formData,
@@ -297,8 +294,6 @@ const ServiceFormNew = ({ service, onSave, onCancel }: ServiceFormNewProps) => {
       faqs: formData.faqs.filter((faq) => faq.question.trim() && faq.answer.trim()),
     };
 
-    console.log('Cleaned data:', cleanedData);
-
     // Validate manually to get errors synchronously
     const validationErrors: Record<string, string> = {};
 
@@ -319,20 +314,13 @@ const ServiceFormNew = ({ service, onSave, onCancel }: ServiceFormNewProps) => {
     if (!cleanedData.cta.content.trim()) validationErrors.cta = 'CTA content is required';
     if (cleanedData.faqs.length === 0) validationErrors.faqs = 'At least one FAQ is required';
 
-    console.log('Validation errors:', validationErrors);
-    console.log('Has errors:', Object.keys(validationErrors).length > 0);
-
     if (Object.keys(validationErrors).length === 0) {
-      console.log('✓ Validation passed! Calling onSave...');
       setErrors({});
       onSave(cleanedData);
     } else {
-      console.log('✗ Validation failed with errors:', validationErrors);
       setErrors(validationErrors);
-
       // Scroll to first error
       const firstErrorField = Object.keys(validationErrors)[0];
-      console.log('Scrolling to first error field:', firstErrorField);
       if (firstErrorField) {
         const errorElement =
           document.querySelector(`[name="${firstErrorField}"]`) ||
@@ -353,18 +341,18 @@ const ServiceFormNew = ({ service, onSave, onCancel }: ServiceFormNewProps) => {
   }
 
   return (
-    <div className="bg-card rounded-lg shadow-neutral-md">
-      <div className="p-6 border-b border-border sticky top-0 bg-card z-10">
+    <div className="bg-card rounded-[2rem] shadow-neutral-xl border border-border overflow-hidden animate-slide-up">
+      <div className="p-8 border-b border-border sticky top-0 bg-card/80 backdrop-blur-md z-10">
         <div className="flex items-center justify-between">
-          <h2 className="text-2xl font-heading font-semibold text-foreground">
-            {service ? 'Edit Service' : 'Create New Service'}
+          <h2 className="text-3xl font-black font-heading text-foreground tracking-tight">
+            {service ? 'Refine Service' : 'Design New Service'}
           </h2>
           <button
             onClick={onCancel}
-            className="p-2 rounded-md hover:bg-muted transition-smooth press-scale"
+            className="p-3 rounded-2xl bg-muted/50 hover:bg-muted transition-all press-scale border border-border"
             title="Close"
           >
-            <Icon name="XMarkIcon" size={24} className="text-foreground" />
+            <Icon name="XMarkIcon" size={28} className="text-foreground" />
           </button>
         </div>
       </div>
@@ -374,13 +362,13 @@ const ServiceFormNew = ({ service, onSave, onCancel }: ServiceFormNewProps) => {
         className="p-8 space-y-12 max-h-[calc(100vh-200px)] overflow-y-auto scroll-smooth"
       >
         {/* Basic Information */}
-        <section className="space-y-6 bg-muted/30 p-8 rounded-3xl border border-border/50 transition-all hover:border-primary/30">
+        <section className="space-y-6 bg-muted/30 p-8 rounded-[2rem] border border-border/50 transition-all hover:border-primary/30">
           <div className="flex items-center gap-3 mb-2">
             <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
               <Icon name="DocumentTextIcon" size={24} className="text-primary" />
             </div>
             <h3 className="text-2xl font-black font-heading text-foreground">
-              Basic Information
+              Core Identity
             </h3>
           </div>
 
@@ -409,17 +397,15 @@ const ServiceFormNew = ({ service, onSave, onCancel }: ServiceFormNewProps) => {
                 <label className="block text-sm font-black uppercase tracking-widest text-muted-foreground mb-2 group-focus-within:text-primary transition-colors">
                   Slug <span className="text-error">*</span>
                 </label>
-                <div className="relative">
-                  <input
-                    type="text"
-                    value={formData.slug}
-                    onChange={(e) => handleChange('slug', e.target.value)}
-                    className={`w-full px-5 py-4 bg-background border-2 rounded-2xl text-foreground font-mono text-sm focus:outline-none focus:ring-4 focus:ring-primary/10 transition-all ${
-                      errors.slug ? 'border-error' : 'border-border hover:border-primary/50'
-                    }`}
-                    placeholder="workflow-automations"
-                  />
-                </div>
+                <input
+                  type="text"
+                  value={formData.slug}
+                  onChange={(e) => handleChange('slug', e.target.value)}
+                  className={`w-full px-5 py-4 bg-background border-2 rounded-2xl text-foreground font-mono text-sm focus:outline-none focus:ring-4 focus:ring-primary/10 transition-all ${
+                    errors.slug ? 'border-error' : 'border-border hover:border-primary/50'
+                  }`}
+                  placeholder="workflow-automations"
+                />
                 {errors.slug && <p className="mt-2 text-sm font-bold text-error flex items-center gap-1">
                   <Icon name="ExclamationCircleIcon" size={16} />
                   {errors.slug}
@@ -430,7 +416,7 @@ const ServiceFormNew = ({ service, onSave, onCancel }: ServiceFormNewProps) => {
               </div>
             </div>
 
-            <div className="lg:pl-8 border-l border-border/50">
+            <div className="lg:pl-8 lg:border-l border-border/50">
               <ImageUpload
                 currentImageUrl={formData.imageUrl}
                 onUploadComplete={(url) => handleChange('imageUrl', url)}
@@ -477,7 +463,7 @@ const ServiceFormNew = ({ service, onSave, onCancel }: ServiceFormNewProps) => {
             </p>}
           </div>
 
-          <div className="flex items-center gap-3 p-4 bg-card rounded-2xl border border-border shadow-sm">
+          <div className="flex items-center gap-3 p-4 bg-card rounded-2xl border border-border shadow-sm w-fit">
             <input
               type="checkbox"
               id="isActive"
@@ -486,13 +472,13 @@ const ServiceFormNew = ({ service, onSave, onCancel }: ServiceFormNewProps) => {
               className="w-6 h-6 text-primary rounded-lg border-2 border-border focus:ring-primary transition-all cursor-pointer"
             />
             <label htmlFor="isActive" className="text-base font-black text-foreground cursor-pointer select-none">
-              Visible on Website
+              Visible to Visitors
             </label>
           </div>
         </section>
 
-        {/* What Is It Section */}
-        <section className="space-y-6 bg-muted/30 p-8 rounded-3xl border border-border/50 transition-all hover:border-primary/30">
+        {/* Concept Section */}
+        <section className="space-y-6 bg-muted/30 p-8 rounded-[2rem] border border-border/50 transition-all hover:border-primary/30">
           <div className="flex items-center gap-3 mb-2">
             <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
               <Icon name="QuestionMarkCircleIcon" size={24} className="text-primary" />
@@ -514,7 +500,7 @@ const ServiceFormNew = ({ service, onSave, onCancel }: ServiceFormNewProps) => {
 
           <div className="group">
             <label className="block text-sm font-black uppercase tracking-widest text-muted-foreground mb-2 group-focus-within:text-primary transition-colors">
-              Content <span className="text-error">*</span>
+              Detailed Content <span className="text-error">*</span>
             </label>
             <textarea
               value={formData.whatIsIt.content}
@@ -523,7 +509,7 @@ const ServiceFormNew = ({ service, onSave, onCancel }: ServiceFormNewProps) => {
               className={`w-full px-5 py-4 bg-background border-2 rounded-2xl text-foreground leading-relaxed focus:outline-none focus:ring-4 focus:ring-primary/10 transition-all resize-none ${
                 errors.whatIsIt ? 'border-error' : 'border-border hover:border-primary/50'
               }`}
-              placeholder="Explain what this service is..."
+              placeholder="Explain the service in detail..."
             />
             {errors.whatIsIt && <p className="mt-2 text-sm font-bold text-error flex items-center gap-1">
               <Icon name="ExclamationCircleIcon" size={16} />
@@ -533,337 +519,374 @@ const ServiceFormNew = ({ service, onSave, onCancel }: ServiceFormNewProps) => {
         </section>
 
         {/* Deliverables Section */}
-        <section className="space-y-4 border-b border-border pb-6">
-          <div className="flex items-center justify-between">
-            <h3 className="text-xl font-semibold text-foreground flex items-center gap-2">
-              <Icon name="CheckCircleIcon" size={24} className="text-primary" />
-              Deliverables
-            </h3>
+        <section className="space-y-6 bg-muted/30 p-8 rounded-[2rem] border border-border/50 transition-all hover:border-primary/30">
+          <div className="flex items-center justify-between mb-2">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                <Icon name="CheckCircleIcon" size={24} className="text-primary" />
+              </div>
+              <h3 className="text-2xl font-black font-heading text-foreground">
+                Key Deliverables
+              </h3>
+            </div>
             <button
               type="button"
               onClick={addDeliverable}
-              className="px-4 py-2 bg-primary text-primary-foreground rounded-md text-sm font-medium transition-smooth hover:shadow-warm-md press-scale flex items-center gap-2"
+              className="px-6 py-3 bg-primary text-primary-foreground rounded-2xl font-black text-sm hover:scale-[1.02] hover:shadow-xl transition-all press-scale flex items-center gap-2"
             >
-              <Icon name="PlusIcon" size={16} />
-              Add Deliverable
+              <Icon name="PlusIcon" size={18} />
+              Add Item
             </button>
           </div>
 
-          <div>
-            <label className="block text-sm font-medium text-foreground mb-2">Section Title</label>
+          <div className="group">
+            <label className="block text-sm font-black uppercase tracking-widest text-muted-foreground mb-2 group-focus-within:text-primary transition-colors">Section Title</label>
             <input
               type="text"
               value={formData.deliverables.title}
               onChange={(e) => handleNestedChange('deliverables', 'title', e.target.value)}
-              className="w-full px-4 py-3 bg-background border border-border rounded-md text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-smooth"
+              className="w-full px-5 py-4 bg-background border-2 border-border rounded-2xl text-foreground font-bold focus:outline-none focus:ring-4 focus:ring-primary/10 transition-all hover:border-primary/50"
             />
           </div>
 
-          <div className="space-y-3">
+          <div className="space-y-4">
             {formData.deliverables.items.map((item, index) => (
-              <div key={index} className="flex items-start gap-2">
+              <div key={index} className="flex items-center gap-3 group/item">
                 <input
                   type="text"
                   value={item.text}
                   onChange={(e) => updateDeliverable(index, e.target.value)}
-                  className="flex-1 px-4 py-3 bg-background border border-border rounded-md text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-smooth"
-                  placeholder="e.g., Faster execution with minimal manual intervention"
+                  className="flex-1 px-5 py-4 bg-background border-2 border-border rounded-2xl text-foreground font-medium focus:outline-none focus:ring-4 focus:ring-primary/10 transition-all group-hover/item:border-primary/30"
+                  placeholder="e.g., Real-time data synchronization"
                 />
                 {formData.deliverables.items.length > 1 && (
                   <button
                     type="button"
                     onClick={() => removeDeliverable(index)}
-                    className="p-3 text-error hover:bg-error/10 rounded-md transition-smooth"
+                    className="p-4 text-error hover:bg-error/10 rounded-2xl transition-all"
                   >
-                    <Icon name="TrashIcon" size={18} />
+                    <Icon name="TrashIcon" size={20} />
                   </button>
                 )}
               </div>
             ))}
           </div>
-          {errors.deliverables && <p className="text-sm text-error">{errors.deliverables}</p>}
+          {errors.deliverables && <p className="mt-2 text-sm font-bold text-error flex items-center gap-1">
+            <Icon name="ExclamationCircleIcon" size={16} />
+            {errors.deliverables}
+          </p>}
         </section>
 
         {/* Approach Section */}
-        <section className="space-y-4 border-b border-border pb-6">
-          <h3 className="text-xl font-semibold text-foreground flex items-center gap-2">
-            <Icon name="LightBulbIcon" size={24} className="text-primary" />
-            Approach
-          </h3>
+        <section className="space-y-6 bg-muted/30 p-8 rounded-[2rem] border border-border/50 transition-all hover:border-primary/30">
+          <div className="flex items-center gap-3 mb-2">
+            <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+              <Icon name="LightBulbIcon" size={24} className="text-primary" />
+            </div>
+            <h3 className="text-2xl font-black font-heading text-foreground">
+              Strategic Approach
+            </h3>
+          </div>
 
-          <div>
-            <label className="block text-sm font-medium text-foreground mb-2">Section Title</label>
+          <div className="group">
+            <label className="block text-sm font-black uppercase tracking-widest text-muted-foreground mb-2 group-focus-within:text-primary transition-colors">Section Title</label>
             <input
               type="text"
               value={formData.approach.title}
               onChange={(e) => handleNestedChange('approach', 'title', e.target.value)}
-              className="w-full px-4 py-3 bg-background border border-border rounded-md text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-smooth"
+              className="w-full px-5 py-4 bg-background border-2 border-border rounded-2xl text-foreground font-bold focus:outline-none focus:ring-4 focus:ring-primary/10 transition-all hover:border-primary/50"
             />
           </div>
 
-          <div>
-            <label className="block text-sm font-medium text-foreground mb-2">
-              Content <span className="text-error">*</span>
+          <div className="group">
+            <label className="block text-sm font-black uppercase tracking-widest text-muted-foreground mb-2 group-focus-within:text-primary transition-colors">
+              Strategy Overview <span className="text-error">*</span>
             </label>
             <textarea
               value={formData.approach.content}
               onChange={(e) => handleNestedChange('approach', 'content', e.target.value)}
               rows={6}
-              className={`w-full px-4 py-3 bg-background border rounded-md text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-smooth resize-none ${
-                errors.approach ? 'border-error' : 'border-border'
+              className={`w-full px-5 py-4 bg-background border-2 rounded-2xl text-foreground leading-relaxed focus:outline-none focus:ring-4 focus:ring-primary/10 transition-all resize-none ${
+                errors.approach ? 'border-error' : 'border-border hover:border-primary/50'
               }`}
-              placeholder="Describe your approach..."
+              placeholder="Describe the overall strategy..."
             />
-            {errors.approach && <p className="mt-1 text-sm text-error">{errors.approach}</p>}
+            {errors.approach && <p className="mt-2 text-sm font-bold text-error flex items-center gap-1">
+              <Icon name="ExclamationCircleIcon" size={16} />
+              {errors.approach}
+            </p>}
           </div>
 
-          <div>
-            <label className="block text-sm font-medium text-foreground mb-2">Process Title</label>
-            <input
-              type="text"
-              value={formData.approach.processTitle}
-              onChange={(e) => handleNestedChange('approach', 'processTitle', e.target.value)}
-              className="w-full px-4 py-3 bg-background border border-border rounded-md text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-smooth"
-            />
-          </div>
-
-          <div className="space-y-3">
+          <div className="space-y-6 pt-8 border-t border-border/50">
             <div className="flex items-center justify-between">
-              <label className="block text-sm font-medium text-foreground">
-                Process Steps <span className="text-error">*</span>
-              </label>
+              <div className="group flex-1 mr-4">
+                <label className="block text-sm font-black uppercase tracking-widest text-muted-foreground mb-2">Process List Header</label>
+                <input
+                  type="text"
+                  value={formData.approach.processTitle}
+                  onChange={(e) => handleNestedChange('approach', 'processTitle', e.target.value)}
+                  className="w-full px-5 py-4 bg-background border-2 border-border rounded-2xl text-foreground font-bold focus:outline-none focus:ring-4 focus:ring-primary/10 transition-all hover:border-primary/50"
+                />
+              </div>
               <button
                 type="button"
                 onClick={addProcessStep}
-                className="px-4 py-2 bg-primary text-primary-foreground rounded-md text-sm font-medium transition-smooth hover:shadow-warm-md press-scale flex items-center gap-2"
+                className="mt-6 px-6 py-3 bg-secondary text-secondary-foreground rounded-2xl font-black text-sm hover:scale-[1.02] hover:shadow-xl transition-all press-scale flex items-center gap-2"
               >
-                <Icon name="PlusIcon" size={16} />
+                <Icon name="PlusIcon" size={18} />
                 Add Step
               </button>
             </div>
 
-            {formData.approach.processSteps.map((step, index) => (
-              <div key={index} className="flex items-start gap-2">
-                <input
-                  type="text"
-                  value={step.text}
-                  onChange={(e) => updateProcessStep(index, e.target.value)}
-                  className="flex-1 px-4 py-3 bg-background border border-border rounded-md text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-smooth"
-                  placeholder="e.g., Workflow and automation mapping across core operations"
-                />
-                {formData.approach.processSteps.length > 1 && (
-                  <button
-                    type="button"
-                    onClick={() => removeProcessStep(index)}
-                    className="p-3 text-error hover:bg-error/10 rounded-md transition-smooth"
-                  >
-                    <Icon name="TrashIcon" size={18} />
-                  </button>
-                )}
-              </div>
-            ))}
+            <div className="space-y-4">
+              {formData.approach.processSteps.map((step, index) => (
+                <div key={index} className="flex items-center gap-3 group/step">
+                  <div className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center font-black text-primary flex-shrink-0 border border-border">
+                    {index + 1}
+                  </div>
+                  <input
+                    type="text"
+                    value={step.text}
+                    onChange={(e) => updateProcessStep(index, e.target.value)}
+                    className="flex-1 px-5 py-4 bg-background border-2 border-border rounded-2xl text-foreground font-medium focus:outline-none focus:ring-4 focus:ring-primary/10 transition-all group-hover/step:border-primary/30"
+                    placeholder="e.g., Discovery & Infrastructure Analysis"
+                  />
+                  {formData.approach.processSteps.length > 1 && (
+                    <button
+                      type="button"
+                      onClick={() => removeProcessStep(index)}
+                      className="p-4 text-error hover:bg-error/10 rounded-2xl transition-all"
+                    >
+                      <Icon name="TrashIcon" size={20} />
+                    </button>
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
-          {errors.processSteps && <p className="text-sm text-error">{errors.processSteps}</p>}
         </section>
 
-        {/* Use Cases Section */}
-        <section className="space-y-4 border-b border-border pb-6">
+        {/* Industry Cases */}
+        <section className="space-y-8 bg-muted/30 p-8 rounded-[2rem] border border-border/50 transition-all hover:border-primary/30">
           <div className="flex items-center justify-between">
-            <h3 className="text-xl font-semibold text-foreground flex items-center gap-2">
-              <Icon name="BuildingOfficeIcon" size={24} className="text-primary" />
-              Industry Use Cases
-            </h3>
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                <Icon name="BriefcaseIcon" size={24} className="text-primary" />
+              </div>
+              <h3 className="text-2xl font-black font-heading text-foreground">
+                Industry Specifics
+              </h3>
+            </div>
             <button
               type="button"
               onClick={addIndustry}
-              className="px-4 py-2 bg-primary text-primary-foreground rounded-md text-sm font-medium transition-smooth hover:shadow-warm-md press-scale flex items-center gap-2"
+              className="px-6 py-3 bg-primary text-primary-foreground rounded-2xl font-black text-sm hover:scale-[1.02] hover:shadow-xl transition-all press-scale flex items-center gap-2"
             >
-              <Icon name="PlusIcon" size={16} />
-              Add Industry
+              <Icon name="PlusIcon" size={18} />
+              Add Vertical
             </button>
           </div>
 
-          <div>
-            <label className="block text-sm font-medium text-foreground mb-2">Section Title</label>
+          <div className="group">
+            <label className="block text-sm font-black uppercase tracking-widest text-muted-foreground mb-2 group-focus-within:text-primary transition-colors">Section Title</label>
             <input
               type="text"
               value={formData.useCases.title}
               onChange={(e) => handleNestedChange('useCases', 'title', e.target.value)}
-              className="w-full px-4 py-3 bg-background border border-border rounded-md text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-smooth"
+              className="w-full px-5 py-4 bg-background border-2 border-border rounded-2xl text-foreground font-bold focus:outline-none focus:ring-4 focus:ring-primary/10 transition-all hover:border-primary/50"
             />
           </div>
 
-          <div className="space-y-6">
-            {formData.useCases.industries.map((industry, industryIndex) => (
-              <div key={industryIndex} className="p-4 border border-border rounded-lg space-y-3">
-                <div className="flex items-start gap-2">
-                  <input
-                    type="text"
-                    value={industry.title}
-                    onChange={(e) => updateIndustry(industryIndex, 'title', e.target.value)}
-                    className="flex-1 px-4 py-3 bg-background border border-border rounded-md text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-smooth font-medium"
-                    placeholder="Industry name (e.g., eCommerce & D2C)"
-                  />
+          <div className="grid grid-cols-1 gap-8">
+            {formData.useCases.industries.map((industry, indIdx) => (
+              <div key={indIdx} className="p-8 bg-card rounded-[2rem] border-2 border-border/50 space-y-6 relative group/ind shadow-sm">
+                <div className="flex items-center justify-between">
+                  <div className="flex-1 mr-4">
+                    <label className="block text-xs font-black uppercase tracking-widest text-muted-foreground mb-2">Vertical Name</label>
+                    <input
+                      type="text"
+                      value={industry.title}
+                      onChange={(e) => updateIndustry(indIdx, 'title', e.target.value)}
+                      className="w-full px-5 py-4 bg-background border-2 border-border rounded-2xl text-foreground font-black focus:outline-none focus:ring-4 focus:ring-primary/10 transition-all hover:border-primary/50"
+                      placeholder="e.g., Global E-commerce"
+                    />
+                  </div>
                   {formData.useCases.industries.length > 1 && (
                     <button
                       type="button"
-                      onClick={() => removeIndustry(industryIndex)}
-                      className="p-3 text-error hover:bg-error/10 rounded-md transition-smooth"
+                      onClick={() => removeIndustry(indIdx)}
+                      className="mt-6 p-4 text-error hover:bg-error/10 rounded-2xl transition-all"
                     >
-                      <Icon name="TrashIcon" size={18} />
+                      <Icon name="TrashIcon" size={20} />
                     </button>
                   )}
                 </div>
 
-                <div className="space-y-2 pl-4">
-                  {industry.items.map((item, itemIndex) => (
-                    <div key={itemIndex} className="flex items-start gap-2">
-                      <input
-                        type="text"
-                        value={item}
-                        onChange={(e) =>
-                          updateIndustryItem(industryIndex, itemIndex, e.target.value)
-                        }
-                        className="flex-1 px-4 py-3 bg-background border border-border rounded-md text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-smooth text-sm"
-                        placeholder="Use case item..."
-                      />
-                      {industry.items.length > 1 && (
-                        <button
-                          type="button"
-                          onClick={() => removeIndustryItem(industryIndex, itemIndex)}
-                          className="p-2 text-error hover:bg-error/10 rounded-md transition-smooth"
-                        >
-                          <Icon name="XMarkIcon" size={16} />
-                        </button>
-                      )}
-                    </div>
-                  ))}
-                  <button
-                    type="button"
-                    onClick={() => addIndustryItem(industryIndex)}
-                    className="px-3 py-2 text-sm text-primary hover:bg-primary/10 rounded-md transition-smooth flex items-center gap-2"
-                  >
-                    <Icon name="PlusIcon" size={14} />
-                    Add Item
-                  </button>
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <label className="block text-xs font-black uppercase tracking-widest text-muted-foreground">Applications</label>
+                    <button
+                      type="button"
+                      onClick={() => addIndustryItem(indIdx)}
+                      className="text-primary font-black text-xs uppercase tracking-widest hover:underline flex items-center gap-1"
+                    >
+                      <Icon name="PlusIcon" size={14} />
+                      Add App
+                    </button>
+                  </div>
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    {industry.items.map((item, itemIdx) => (
+                      <div key={itemIdx} className="flex items-center gap-2 group/item">
+                        <input
+                          type="text"
+                          value={item}
+                          onChange={(e) => updateIndustryItem(indIdx, itemIdx, e.target.value)}
+                          className="flex-1 px-4 py-3 bg-muted/30 border-2 border-border rounded-xl text-foreground font-medium text-sm focus:outline-none focus:ring-4 focus:ring-primary/10 transition-all group-hover/item:border-primary/30"
+                          placeholder="Application detail..."
+                        />
+                        {industry.items.length > 1 && (
+                          <button
+                            type="button"
+                            onClick={() => removeIndustryItem(indIdx, itemIdx)}
+                            className="p-2 text-error hover:bg-error/10 rounded-xl transition-all"
+                          >
+                            <Icon name="XMarkIcon" size={16} />
+                          </button>
+                        )}
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             ))}
           </div>
-          {errors.useCases && <p className="text-sm text-error">{errors.useCases}</p>}
         </section>
 
-        {/* CTA Section */}
-        <section className="space-y-4 border-b border-border pb-6">
-          <h3 className="text-xl font-semibold text-foreground flex items-center gap-2">
-            <Icon name="ArrowRightIcon" size={24} className="text-primary" />
-            Call to Action
-          </h3>
-
-          <div>
-            <label className="block text-sm font-medium text-foreground mb-2">CTA Title</label>
-            <input
-              type="text"
-              value={formData.cta.title}
-              onChange={(e) => handleNestedChange('cta', 'title', e.target.value)}
-              className="w-full px-4 py-3 bg-background border border-border rounded-md text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-smooth"
-            />
+        {/* CTA Conversion */}
+        <section className="space-y-6 bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5 p-8 rounded-[2rem] border-2 border-primary/20 transition-all hover:border-primary/40">
+          <div className="flex items-center gap-3 mb-2">
+            <div className="w-10 h-10 rounded-xl bg-primary text-white flex items-center justify-center">
+              <Icon name="MegaphoneIcon" size={24} />
+            </div>
+            <h3 className="text-2xl font-black font-heading text-foreground">
+              Conversion Focus
+            </h3>
           </div>
 
-          <div>
-            <label className="block text-sm font-medium text-foreground mb-2">
-              CTA Content <span className="text-error">*</span>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="group">
+              <label className="block text-sm font-black uppercase tracking-widest text-muted-foreground mb-2">Primary CTA Header</label>
+              <input
+                type="text"
+                value={formData.cta.title}
+                onChange={(e) => handleNestedChange('cta', 'title', e.target.value)}
+                className="w-full px-5 py-4 bg-background border-2 border-border rounded-2xl text-foreground font-black focus:outline-none focus:ring-4 focus:ring-primary/10 transition-all hover:border-primary/50"
+              />
+            </div>
+            <div className="group">
+              <label className="block text-sm font-black uppercase tracking-widest text-muted-foreground mb-2">Button Text</label>
+              <input
+                type="text"
+                value={formData.cta.buttonText}
+                onChange={(e) => handleNestedChange('cta', 'buttonText', e.target.value)}
+                className="w-full px-5 py-4 bg-background border-2 border-border rounded-2xl text-foreground font-black focus:outline-none focus:ring-4 focus:ring-primary/10 transition-all hover:border-primary/50"
+              />
+            </div>
+          </div>
+
+          <div className="group">
+            <label className="block text-sm font-black uppercase tracking-widest text-muted-foreground mb-2 group-focus-within:text-primary transition-colors">
+              Impact Statement <span className="text-error">*</span>
             </label>
             <textarea
               value={formData.cta.content}
               onChange={(e) => handleNestedChange('cta', 'content', e.target.value)}
-              rows={4}
-              className={`w-full px-4 py-3 bg-background border rounded-md text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-smooth resize-none ${
-                errors.cta ? 'border-error' : 'border-border'
+              rows={3}
+              className={`w-full px-5 py-4 bg-background border-2 rounded-2xl text-foreground font-medium focus:outline-none focus:ring-4 focus:ring-primary/10 transition-all resize-none ${
+                errors.cta ? 'border-error' : 'border-border hover:border-primary/50'
               }`}
-              placeholder="Call to action message..."
+              placeholder="A compelling reason for them to click..."
             />
-            {errors.cta && <p className="mt-1 text-sm text-error">{errors.cta}</p>}
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-foreground mb-2">Button Text</label>
-            <input
-              type="text"
-              value={formData.cta.buttonText}
-              onChange={(e) => handleNestedChange('cta', 'buttonText', e.target.value)}
-              className="w-full px-4 py-3 bg-background border border-border rounded-md text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-smooth"
-            />
+            {errors.cta && <p className="mt-2 text-sm font-bold text-error flex items-center gap-1">
+              <Icon name="ExclamationCircleIcon" size={16} />
+              {errors.cta}
+            </p>}
           </div>
         </section>
 
-        {/* FAQs Section */}
-        <section className="space-y-4">
+        {/* FAQ Management */}
+        <section className="space-y-8 bg-muted/30 p-8 rounded-[2rem] border border-border/50 transition-all hover:border-primary/30">
           <div className="flex items-center justify-between">
-            <h3 className="text-xl font-semibold text-foreground flex items-center gap-2">
-              <Icon name="QuestionMarkCircleIcon" size={24} className="text-primary" />
-              Frequently Asked Questions
-            </h3>
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                <Icon name="ChatBubbleLeftRightIcon" size={24} className="text-primary" />
+              </div>
+              <h3 className="text-2xl font-black font-heading text-foreground">
+                Knowledge Hub
+              </h3>
+            </div>
             <button
               type="button"
               onClick={addFAQ}
-              className="px-4 py-2 bg-primary text-primary-foreground rounded-md text-sm font-medium transition-smooth hover:shadow-warm-md press-scale flex items-center gap-2"
+              className="px-6 py-3 bg-primary text-primary-foreground rounded-2xl font-black text-sm hover:scale-[1.02] hover:shadow-xl transition-all press-scale flex items-center gap-2"
             >
-              <Icon name="PlusIcon" size={16} />
+              <Icon name="PlusIcon" size={18} />
               Add FAQ
             </button>
           </div>
 
-          <div className="space-y-4">
+          <div className="space-y-6">
             {formData.faqs.map((faq, index) => (
-              <div key={index} className="p-4 border border-border rounded-lg space-y-3">
-                <div className="flex items-start gap-2">
-                  <div className="flex-1 space-y-3">
-                    <input
-                      type="text"
-                      value={faq.question}
-                      onChange={(e) => updateFAQ(index, 'question', e.target.value)}
-                      className="w-full px-4 py-3 bg-background border border-border rounded-md text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-smooth font-medium"
-                      placeholder="Question..."
-                    />
-                    <textarea
-                      value={faq.answer}
-                      onChange={(e) => updateFAQ(index, 'answer', e.target.value)}
-                      rows={3}
-                      className="w-full px-4 py-3 bg-background border border-border rounded-md text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-smooth resize-none"
-                      placeholder="Answer..."
-                    />
-                  </div>
+              <div key={index} className="p-8 bg-card rounded-[2rem] border-2 border-border/50 space-y-4 relative group/faq shadow-sm">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-black uppercase tracking-[0.3em] text-primary/40">Entry #{index + 1}</span>
                   {formData.faqs.length > 1 && (
                     <button
                       type="button"
                       onClick={() => removeFAQ(index)}
-                      className="p-3 text-error hover:bg-error/10 rounded-md transition-smooth"
+                      className="p-2 text-error hover:bg-error/10 rounded-xl transition-all"
                     >
                       <Icon name="TrashIcon" size={18} />
                     </button>
                   )}
                 </div>
+                <input
+                  type="text"
+                  value={faq.question}
+                  onChange={(e) => updateFAQ(index, 'question', e.target.value)}
+                  className="w-full px-5 py-4 bg-background border-2 border-border rounded-2xl text-foreground font-black focus:outline-none focus:ring-4 focus:ring-primary/10 transition-all hover:border-primary/50"
+                  placeholder="The user's burning question..."
+                />
+                <textarea
+                  value={faq.answer}
+                  onChange={(e) => updateFAQ(index, 'answer', e.target.value)}
+                  rows={3}
+                  className="w-full px-5 py-4 bg-muted/30 border-2 border-border rounded-2xl text-foreground font-medium focus:outline-none focus:ring-4 focus:ring-primary/10 transition-all hover:border-primary/50 resize-none"
+                  placeholder="The clear, expert resolution..."
+                />
               </div>
             ))}
           </div>
-          {errors.faqs && <p className="text-sm text-error">{errors.faqs}</p>}
+          {errors.faqs && <p className="mt-2 text-sm font-bold text-error flex items-center gap-1">
+            <Icon name="ExclamationCircleIcon" size={16} />
+            {errors.faqs}
+          </p>}
         </section>
 
-        {/* Form Actions */}
-        <div className="flex flex-col sm:flex-row gap-4 pt-6 border-t border-border sticky bottom-0 bg-card">
+        {/* Final Actions */}
+        <div className="pt-12 border-t border-border/50 flex flex-col sm:flex-row items-center justify-end gap-6 pb-12">
           <button
             type="button"
             onClick={onCancel}
-            className="flex-1 px-6 py-3 bg-muted text-foreground rounded-md font-medium transition-smooth hover:bg-muted/80 press-scale"
+            className="w-full sm:w-auto px-12 py-5 bg-muted text-foreground rounded-[1.5rem] font-black text-xl hover:bg-muted/70 transition-all press-scale"
           >
-            Cancel
+            Abandon Edits
           </button>
           <button
             type="submit"
-            className="flex-1 px-6 py-3 bg-primary text-primary-foreground rounded-md font-medium transition-smooth hover:shadow-warm-md press-scale"
+            className="w-full sm:w-auto px-16 py-5 bg-primary text-primary-foreground rounded-[1.5rem] font-black text-xl shadow-2xl hover:scale-[1.02] hover:shadow-primary/30 transition-all press-scale"
           >
-            {service ? 'Update Service' : 'Create Service'}
+            {service ? 'Commit Updates' : 'Launch Service'}
           </button>
         </div>
       </form>
