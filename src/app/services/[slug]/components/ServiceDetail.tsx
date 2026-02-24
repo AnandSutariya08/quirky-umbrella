@@ -297,16 +297,15 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
 
           {/* Hero Image */}
           {service.imageUrl && (
-            <div className="relative max-w-5xl mx-auto rounded-3xl overflow-hidden border-4 border-primary/20 group shadow-2xl bg-muted">
+            <div className="relative w-full max-w-5xl mx-auto rounded-3xl overflow-hidden group">
               <img
                 src={service.imageUrl}
                 alt={service.title}
-                className="w-full h-auto max-h-[70vh] object-contain group-hover:scale-[1.02] transition-transform duration-700"
+                className="w-full h-auto max-h-[85vh] object-contain transition-transform duration-700"
                 onError={(e) => {
                   (e.target as HTMLImageElement).style.display = 'none';
                 }}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-background/20 via-transparent to-transparent pointer-events-none" />
             </div>
           )}
         </div>
