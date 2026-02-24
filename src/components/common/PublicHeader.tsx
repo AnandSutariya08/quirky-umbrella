@@ -176,14 +176,14 @@ const PublicHeader = ({ className = '' }: PublicHeaderProps) => {
                 Contact Us
               </Link>
 
-              <Link
+              {/* <Link
                 href="/admin-services-management"
                 className="ml-2 px-5 py-3 bg-secondary text-secondary-foreground rounded-md font-medium transition-smooth hover:shadow-md hover:-translate-y-0.5 press-scale flex items-center gap-2"
                 title="Admin Access"
               >
                 <Icon name="Cog6ToothIcon" size={18} />
                 Admin
-              </Link>
+              </Link> */}
             </nav>
 
             <button
