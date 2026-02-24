@@ -90,11 +90,11 @@ export default function ImageUpload({
       </label>
 
       {currentImageUrl ? (
-        <div className="relative w-full max-w-md aspect-video rounded-xl overflow-hidden border border-border group">
+        <div className="relative w-full max-w-md rounded-xl overflow-hidden border border-border group bg-muted/10">
           <img
             src={currentImageUrl}
             alt="Service Preview"
-            className="w-full h-full object-cover"
+            className="w-full h-auto max-h-[300px] object-contain"
           />
           <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
             <button

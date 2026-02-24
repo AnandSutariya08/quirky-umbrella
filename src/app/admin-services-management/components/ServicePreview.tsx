@@ -68,13 +68,13 @@ const ServicePreview = ({ service, onClose }: ServicePreviewProps) => {
               </div>
 
               {service.imageUrl && (
-                <div className="relative aspect-video rounded-3xl overflow-hidden border-4 border-primary/10 shadow-2xl group">
+                <div className="relative rounded-3xl overflow-hidden border-4 border-primary/10 shadow-2xl group bg-muted/20">
                   <img
                     src={service.imageUrl}
                     alt={service.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    className="w-full h-auto max-h-[500px] object-contain group-hover:scale-[1.02] transition-transform duration-700"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/20 to-transparent pointer-events-none" />
                 </div>
               )}
             </div>
