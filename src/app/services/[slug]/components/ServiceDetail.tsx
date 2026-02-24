@@ -313,7 +313,7 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
                 src={service.imageUrl}
                 alt={service.title}
                 className="w-full h-auto max-h-[85vh] object-contain transition-transform duration-700"
-                style={{ borderRadius: '2rem' }}
+                style={{ borderRadius: '15px' }}
                 onError={(e) => {
                   (e.target as HTMLImageElement).style.display = 'none';
                 }}
