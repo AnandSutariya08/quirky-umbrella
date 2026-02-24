@@ -371,54 +371,66 @@ const ServiceFormNew = ({ service, onSave, onCancel }: ServiceFormNewProps) => {
 
       <form
         onSubmit={handleSubmit}
-        className="p-6 space-y-8 max-h-[calc(100vh-200px)] overflow-y-auto"
+        className="p-8 space-y-12 max-h-[calc(100vh-200px)] overflow-y-auto scroll-smooth"
       >
         {/* Basic Information */}
-        <section className="space-y-4 border-b border-border pb-6">
-          <h3 className="text-xl font-semibold text-foreground flex items-center gap-2">
-            <Icon name="DocumentTextIcon" size={24} className="text-primary" />
-            Basic Information
-          </h3>
+        <section className="space-y-6 bg-muted/30 p-8 rounded-3xl border border-border/50 transition-all hover:border-primary/30">
+          <div className="flex items-center gap-3 mb-2">
+            <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+              <Icon name="DocumentTextIcon" size={24} className="text-primary" />
+            </div>
+            <h3 className="text-2xl font-black font-heading text-foreground">
+              Basic Information
+            </h3>
+          </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div className="space-y-6">
+              <div className="group">
+                <label className="block text-sm font-black uppercase tracking-widest text-muted-foreground mb-2 group-focus-within:text-primary transition-colors">
                   Title <span className="text-error">*</span>
                 </label>
                 <input
                   type="text"
                   value={formData.title}
                   onChange={(e) => handleTitleChange(e.target.value)}
-                  className={`w-full px-4 py-3 bg-background border rounded-md text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-smooth ${
-                    errors.title ? 'border-error' : 'border-border'
+                  className={`w-full px-5 py-4 bg-background border-2 rounded-2xl text-foreground font-bold focus:outline-none focus:ring-4 focus:ring-primary/10 transition-all ${
+                    errors.title ? 'border-error' : 'border-border hover:border-primary/50'
                   }`}
                   placeholder="e.g., Workflow Automations"
                 />
-                {errors.title && <p className="mt-1 text-sm text-error">{errors.title}</p>}
+                {errors.title && <p className="mt-2 text-sm font-bold text-error flex items-center gap-1">
+                  <Icon name="ExclamationCircleIcon" size={16} />
+                  {errors.title}
+                </p>}
               </div>
 
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
+              <div className="group">
+                <label className="block text-sm font-black uppercase tracking-widest text-muted-foreground mb-2 group-focus-within:text-primary transition-colors">
                   Slug <span className="text-error">*</span>
                 </label>
-                <input
-                  type="text"
-                  value={formData.slug}
-                  onChange={(e) => handleChange('slug', e.target.value)}
-                  className={`w-full px-4 py-3 bg-background border rounded-md text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-smooth ${
-                    errors.slug ? 'border-error' : 'border-border'
-                  }`}
-                  placeholder="workflow-automations"
-                />
-                {errors.slug && <p className="mt-1 text-sm text-error">{errors.slug}</p>}
-                <p className="mt-1 text-xs text-muted-foreground">
+                <div className="relative">
+                  <input
+                    type="text"
+                    value={formData.slug}
+                    onChange={(e) => handleChange('slug', e.target.value)}
+                    className={`w-full px-5 py-4 bg-background border-2 rounded-2xl text-foreground font-mono text-sm focus:outline-none focus:ring-4 focus:ring-primary/10 transition-all ${
+                      errors.slug ? 'border-error' : 'border-border hover:border-primary/50'
+                    }`}
+                    placeholder="workflow-automations"
+                  />
+                </div>
+                {errors.slug && <p className="mt-2 text-sm font-bold text-error flex items-center gap-1">
+                  <Icon name="ExclamationCircleIcon" size={16} />
+                  {errors.slug}
+                </p>}
+                <p className="mt-2 text-xs font-bold text-primary/60 bg-primary/5 px-3 py-1 rounded-full inline-block">
                   URL: /services/{formData.slug || 'service-slug'}
                 </p>
               </div>
             </div>
 
-            <div>
+            <div className="lg:pl-8 border-l border-border/50">
               <ImageUpload
                 currentImageUrl={formData.imageUrl}
                 onUploadComplete={(url) => handleChange('imageUrl', url)}
@@ -427,83 +439,96 @@ const ServiceFormNew = ({ service, onSave, onCancel }: ServiceFormNewProps) => {
             </div>
           </div>
 
-          <div>
-            <label className="block text-sm font-medium text-foreground mb-2">
+          <div className="group">
+            <label className="block text-sm font-black uppercase tracking-widest text-muted-foreground mb-2 group-focus-within:text-primary transition-colors">
               Tagline <span className="text-error">*</span>
             </label>
             <input
               type="text"
               value={formData.tagline}
               onChange={(e) => handleChange('tagline', e.target.value)}
-              className={`w-full px-4 py-3 bg-background border rounded-md text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-smooth ${
-                errors.tagline ? 'border-error' : 'border-border'
+              className={`w-full px-5 py-4 bg-background border-2 rounded-2xl text-foreground font-bold focus:outline-none focus:ring-4 focus:ring-primary/10 transition-all ${
+                errors.tagline ? 'border-error' : 'border-border hover:border-primary/50'
               }`}
               placeholder="Intelligent Systems That Run Your Business"
             />
-            {errors.tagline && <p className="mt-1 text-sm text-error">{errors.tagline}</p>}
+            {errors.tagline && <p className="mt-2 text-sm font-bold text-error flex items-center gap-1">
+              <Icon name="ExclamationCircleIcon" size={16} />
+              {errors.tagline}
+            </p>}
           </div>
 
-          <div>
-            <label className="block text-sm font-medium text-foreground mb-2">
+          <div className="group">
+            <label className="block text-sm font-black uppercase tracking-widest text-muted-foreground mb-2 group-focus-within:text-primary transition-colors">
               Description <span className="text-error">*</span>
             </label>
             <textarea
               value={formData.description}
               onChange={(e) => handleChange('description', e.target.value)}
               rows={4}
-              className={`w-full px-4 py-3 bg-background border rounded-md text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-smooth resize-none ${
-                errors.description ? 'border-error' : 'border-border'
+              className={`w-full px-5 py-4 bg-background border-2 rounded-2xl text-foreground leading-relaxed focus:outline-none focus:ring-4 focus:ring-primary/10 transition-all resize-none ${
+                errors.description ? 'border-error' : 'border-border hover:border-primary/50'
               }`}
               placeholder="Main description paragraph..."
             />
-            {errors.description && <p className="mt-1 text-sm text-error">{errors.description}</p>}
+            {errors.description && <p className="mt-2 text-sm font-bold text-error flex items-center gap-1">
+              <Icon name="ExclamationCircleIcon" size={16} />
+              {errors.description}
+            </p>}
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3 p-4 bg-card rounded-2xl border border-border shadow-sm">
             <input
               type="checkbox"
               id="isActive"
               checked={formData.isActive}
               onChange={(e) => handleChange('isActive', e.target.checked)}
-              className="w-4 h-4 text-primary focus:ring-primary"
+              className="w-6 h-6 text-primary rounded-lg border-2 border-border focus:ring-primary transition-all cursor-pointer"
             />
-            <label htmlFor="isActive" className="text-sm font-medium text-foreground">
-              Active (Service will appear in navbar)
+            <label htmlFor="isActive" className="text-base font-black text-foreground cursor-pointer select-none">
+              Visible on Website
             </label>
           </div>
         </section>
 
         {/* What Is It Section */}
-        <section className="space-y-4 border-b border-border pb-6">
-          <h3 className="text-xl font-semibold text-foreground flex items-center gap-2">
-            <Icon name="QuestionMarkCircleIcon" size={24} className="text-primary" />
-            What Is It Section
-          </h3>
+        <section className="space-y-6 bg-muted/30 p-8 rounded-3xl border border-border/50 transition-all hover:border-primary/30">
+          <div className="flex items-center gap-3 mb-2">
+            <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+              <Icon name="QuestionMarkCircleIcon" size={24} className="text-primary" />
+            </div>
+            <h3 className="text-2xl font-black font-heading text-foreground">
+              Core Concept
+            </h3>
+          </div>
 
-          <div>
-            <label className="block text-sm font-medium text-foreground mb-2">Section Title</label>
+          <div className="group">
+            <label className="block text-sm font-black uppercase tracking-widest text-muted-foreground mb-2 group-focus-within:text-primary transition-colors">Section Title</label>
             <input
               type="text"
               value={formData.whatIsIt.title}
               onChange={(e) => handleNestedChange('whatIsIt', 'title', e.target.value)}
-              className="w-full px-4 py-3 bg-background border border-border rounded-md text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-smooth"
+              className="w-full px-5 py-4 bg-background border-2 border-border rounded-2xl text-foreground font-bold focus:outline-none focus:ring-4 focus:ring-primary/10 transition-all hover:border-primary/50"
             />
           </div>
 
-          <div>
-            <label className="block text-sm font-medium text-foreground mb-2">
+          <div className="group">
+            <label className="block text-sm font-black uppercase tracking-widest text-muted-foreground mb-2 group-focus-within:text-primary transition-colors">
               Content <span className="text-error">*</span>
             </label>
             <textarea
               value={formData.whatIsIt.content}
               onChange={(e) => handleNestedChange('whatIsIt', 'content', e.target.value)}
               rows={6}
-              className={`w-full px-4 py-3 bg-background border rounded-md text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-smooth resize-none ${
-                errors.whatIsIt ? 'border-error' : 'border-border'
+              className={`w-full px-5 py-4 bg-background border-2 rounded-2xl text-foreground leading-relaxed focus:outline-none focus:ring-4 focus:ring-primary/10 transition-all resize-none ${
+                errors.whatIsIt ? 'border-error' : 'border-border hover:border-primary/50'
               }`}
               placeholder="Explain what this service is..."
             />
-            {errors.whatIsIt && <p className="mt-1 text-sm text-error">{errors.whatIsIt}</p>}
+            {errors.whatIsIt && <p className="mt-2 text-sm font-bold text-error flex items-center gap-1">
+              <Icon name="ExclamationCircleIcon" size={16} />
+              {errors.whatIsIt}
+            </p>}
           </div>
         </section>
 
