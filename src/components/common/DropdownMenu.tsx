@@ -23,12 +23,21 @@ const DropdownMenu = ({ collection, onClose, isMobile = false }: DropdownMenuPro
 
   const items = useMemo<DropdownItem[]>(() => {
     if (collection === 'services') {
-      return services.map((service) => ({
+      const mappedServices = services.map((service) => ({
         id: service.id || '',
         title: service.title,
         slug: service.slug,
         description: service.tagline,
       }));
+
+      // Sort "WorkFlow Automations" to the top
+      return mappedServices.sort((a, b) => {
+        const aIsWorkflow = a.title.toLowerCase().includes('workflow automations');
+        const bIsWorkflow = b.title.toLowerCase().includes('workflow automations');
+        if (aIsWorkflow && !bIsWorkflow) return -1;
+        if (!aIsWorkflow && bIsWorkflow) return 1;
+        return 0;
+      });
     }
     return [];
   }, [services, collection]);
