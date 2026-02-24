@@ -272,7 +272,7 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
   return (
     <div className="relative min-h-screen font-body">
       {/* Subtle Background Pattern */}
-      <div className="fixed inset-0 pointer-events-none opacity-[0.03]">
+      {/* <div className="fixed inset-0 pointer-events-none opacity-[0.03]">
         <div
           className="absolute inset-0"
           style={{
@@ -280,10 +280,10 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
             backgroundSize: '40px 40px',
           }}
         />
-      </div>
+      </div> */}
 
       {/* Hero Section - Editorial Layout */}
-      <section className="relative z-10 pt-32 md:pt-40 pb-20 md:pb-32">
+      <section className="relative z-10 pt-19 md:pt-19 pb-20 md:pb-32">
         <div className="container mx-auto px-4 sm:px-6 lg:px-12 max-w-7xl">
           {/* Tagline */}
           <div className="mb-8 md:mb-12">
