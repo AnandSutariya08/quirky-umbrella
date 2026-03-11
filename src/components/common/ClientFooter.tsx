@@ -21,7 +21,7 @@ const ClientFooter = () => {
   const socialLinks = [
     {
       name: 'WhatsApp',
-      href: 'https://wa.me/919999999999?text=Hi%20Quirky%20Umbrella%2C%20I%20want%20to%20connect.',
+      href: 'https://wa.me/919971066552?text=Hi%20Quirky%20Umbrella%2C%20I%20want%20to%20connect.',
       icon: MessageCircle,
     },
     {
@@ -36,7 +36,7 @@ const ClientFooter = () => {
     },
     {
       name: 'Email',
-      href: 'mailto:hello@quirkyumbrella.com?subject=Let%27s%20Connect',
+      href: 'mailto:hello@quirkyumbrella.in?subject=Let%27s%20Connect',
       icon: Mail,
     },
   ];
