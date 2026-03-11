@@ -117,7 +117,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background overflow-x-hidden">
       <aside
         className={`hidden lg:block lg:fixed top-0 left-0 h-screen bg-card border-r border-border transition-all duration-300 z-[100] ${
           isSidebarCollapsed ? 'w-20' : 'w-64'
@@ -248,7 +248,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
       <main
         className={`transition-all duration-300 ${
           isSidebarCollapsed ? 'lg:ml-20' : 'lg:ml-64'
-        } pt-16 lg:pt-0`}
+        } pt-16 lg:pt-0 min-w-0`}
       >
         {children}
       </main>

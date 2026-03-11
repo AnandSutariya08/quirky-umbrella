@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import BlogCard from '../../blog-listing/components/BlogCard';
 import FilterBar from '../../blog-listing/components/FilterBar';
 import Icon from '@/components/ui/AppIcon';
@@ -51,21 +51,25 @@ const BlogListingServer = ({ initialBlogs }: BlogListingServerProps) => {
   const startIndex = (currentPage - 1) * postsPerPage;
   const endIndex = startIndex + postsPerPage;
   const currentPosts = filteredPosts.slice(startIndex, endIndex);
+  const featuredPost = currentPosts.find((post) => post.isFeatured) || currentPosts[0];
+  const gridPosts = featuredPost
+    ? currentPosts.filter((post) => post.slug !== featuredPost.slug)
+    : currentPosts;
 
-  const handleCategoryChange = (category: string) => {
+  const handleCategoryChange = useCallback((category: string) => {
     setSelectedCategory(category);
     setCurrentPage(1);
-  };
+  }, []);
 
-  const handleSearchChange = (query: string) => {
+  const handleSearchChange = useCallback((query: string) => {
     setSearchQuery(query);
     setCurrentPage(1);
-  };
+  }, []);
 
-  const handlePageChange = (page: number) => {
+  const handlePageChange = useCallback((page: number) => {
     setCurrentPage(page);
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  }, []);
 
   return (
     <div className="container mx-auto px-6 py-12">
@@ -87,24 +91,56 @@ const BlogListingServer = ({ initialBlogs }: BlogListingServerProps) => {
         </div>
       ) : (
         <>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-            {currentPosts.map((post) => (
-              <BlogCard
-                key={post.id}
-                id={post.id || ''}
-                slug={post.slug}
-                title={post.title}
-                excerpt={post.excerpt}
-                thumbnailUrl={post.thumbnailUrl}
-                thumbnailAlt={post.thumbnailAlt}
-                publishedDate={formatDate(post.publishedDate)}
-                author={post.author}
-                category={post.category}
-                readTime={formatReadTime(post.readTime)}
-                isFeatured={post.isFeatured}
-              />
-            ))}
+          <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
+            <p className="text-sm text-muted-foreground">
+              Showing <span className="font-semibold text-foreground">{currentPosts.length}</span>{' '}
+              of <span className="font-semibold text-foreground">{filteredPosts.length}</span>{' '}
+              stories
+            </p>
+            <p className="text-sm text-muted-foreground">
+              Page {currentPage} of {totalPages || 1}
+            </p>
           </div>
+
+          {featuredPost && (
+            <div className="mb-8">
+              <BlogCard
+                key={featuredPost.id}
+                id={featuredPost.id || ''}
+                slug={featuredPost.slug}
+                title={featuredPost.title}
+                excerpt={featuredPost.excerpt}
+                thumbnailUrl={featuredPost.thumbnailUrl}
+                thumbnailAlt={featuredPost.thumbnailAlt}
+                publishedDate={formatDate(featuredPost.publishedDate)}
+                author={featuredPost.author}
+                category={featuredPost.category}
+                readTime={formatReadTime(featuredPost.readTime)}
+                isFeatured={true}
+              />
+            </div>
+          )}
+
+          {gridPosts.length > 0 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+              {gridPosts.map((post) => (
+                <BlogCard
+                  key={post.id}
+                  id={post.id || ''}
+                  slug={post.slug}
+                  title={post.title}
+                  excerpt={post.excerpt}
+                  thumbnailUrl={post.thumbnailUrl}
+                  thumbnailAlt={post.thumbnailAlt}
+                  publishedDate={formatDate(post.publishedDate)}
+                  author={post.author}
+                  category={post.category}
+                  readTime={formatReadTime(post.readTime)}
+                  isFeatured={false}
+                />
+              ))}
+            </div>
+          )}
 
           {totalPages > 1 && (
             <div className="flex items-center justify-center gap-2">

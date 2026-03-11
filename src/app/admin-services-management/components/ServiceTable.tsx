@@ -149,13 +149,13 @@ const ServiceTable = ({ services, onEdit, onDelete, onPreview }: ServiceTablePro
         </div>
       </div>
 
-      <div className="hidden lg:block bg-card rounded-lg shadow-neutral-md overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="w-full">
+      <div className="hidden xl:block bg-card rounded-lg shadow-neutral-md overflow-hidden">
+        <div className="overflow-hidden">
+          <table className="w-full table-fixed text-sm">
             <thead className="bg-muted">
               <tr>
                 <th
-                  className="px-6 py-4 text-left text-sm font-semibold text-foreground cursor-pointer hover:bg-muted/80 transition-smooth"
+                  className="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide text-foreground cursor-pointer hover:bg-muted/80 transition-smooth"
                   onClick={() => handleSort('title')}
                 >
                   <div className="flex items-center gap-2">
@@ -169,7 +169,7 @@ const ServiceTable = ({ services, onEdit, onDelete, onPreview }: ServiceTablePro
                   </div>
                 </th>
                 <th
-                  className="px-6 py-4 text-left text-sm font-semibold text-foreground cursor-pointer hover:bg-muted/80 transition-smooth"
+                  className="w-44 px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide text-foreground cursor-pointer hover:bg-muted/80 transition-smooth"
                   onClick={() => handleSort('slug')}
                 >
                   <div className="flex items-center gap-2">
@@ -182,14 +182,14 @@ const ServiceTable = ({ services, onEdit, onDelete, onPreview }: ServiceTablePro
                     )}
                   </div>
                 </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-foreground">
+                <th className="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide text-foreground">
                   Tagline
                 </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-foreground">
+                <th className="w-28 px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide text-foreground">
                   Status
                 </th>
                 <th
-                  className="px-6 py-4 text-left text-sm font-semibold text-foreground cursor-pointer hover:bg-muted/80 transition-smooth"
+                  className="w-40 px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide text-foreground cursor-pointer hover:bg-muted/80 transition-smooth"
                   onClick={() => handleSort('updatedAt')}
                 >
                   <div className="flex items-center gap-2">
@@ -202,7 +202,7 @@ const ServiceTable = ({ services, onEdit, onDelete, onPreview }: ServiceTablePro
                     )}
                   </div>
                 </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-foreground">
+                <th className="w-32 px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide text-foreground">
                   Actions
                 </th>
               </tr>
@@ -210,7 +210,7 @@ const ServiceTable = ({ services, onEdit, onDelete, onPreview }: ServiceTablePro
             <tbody>
               {sortedServices.length === 0 ? (
                 <tr>
-                  <td colSpan={6} className="px-6 py-12 text-center text-muted-foreground">
+                  <td colSpan={6} className="px-3 py-12 text-center text-muted-foreground">
                     <Icon name="DocumentTextIcon" size={48} className="mx-auto mb-4 opacity-50" />
                     <p className="text-lg font-medium">No services found</p>
                     <p className="text-sm mt-2">Try adjusting your search criteria</p>
@@ -234,20 +234,20 @@ const ServiceTable = ({ services, onEdit, onDelete, onPreview }: ServiceTablePro
                       key={service.id}
                       className="border-t border-border hover:bg-muted/50 transition-smooth"
                     >
-                      <td className="px-6 py-4">
+                      <td className="px-3 py-3">
                         <div className="font-medium text-foreground">{service.title}</div>
                       </td>
-                      <td className="px-6 py-4">
+                      <td className="px-3 py-3">
                         <code className="text-sm text-secondary bg-secondary/10 px-2 py-1 rounded">
                           {service.slug}
                         </code>
                       </td>
-                      <td className="px-6 py-4">
-                        <div className="text-sm text-muted-foreground line-clamp-2 max-w-xs">
+                      <td className="px-3 py-3">
+                        <div className="text-sm text-muted-foreground line-clamp-2">
                           {service.tagline}
                         </div>
                       </td>
-                      <td className="px-6 py-4">
+                      <td className="px-3 py-3">
                         <span
                           className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium ${
                             service.isActive
@@ -263,8 +263,8 @@ const ServiceTable = ({ services, onEdit, onDelete, onPreview }: ServiceTablePro
                           {service.isActive ? 'Active' : 'Inactive'}
                         </span>
                       </td>
-                      <td className="px-6 py-4 text-sm text-muted-foreground">{formattedDate}</td>
-                      <td className="px-6 py-4">
+                      <td className="px-3 py-3 text-sm text-muted-foreground">{formattedDate}</td>
+                      <td className="px-3 py-3">
                         <div className="flex items-center gap-2">
                           <button
                             onClick={() => onPreview(service)}
@@ -298,7 +298,7 @@ const ServiceTable = ({ services, onEdit, onDelete, onPreview }: ServiceTablePro
         </div>
       </div>
 
-      <div className="lg:hidden space-y-4">
+      <div className="xl:hidden space-y-4">
         {sortedServices.length === 0 ? (
           <div className="bg-card rounded-lg shadow-neutral-md p-8 text-center">
             <Icon

@@ -213,8 +213,8 @@ const IndustriesManagementInteractive = () => {
 
   if (!isHydrated) {
     return (
-      <div className="min-h-screen bg-background p-6">
-        <div className="max-w-7xl mx-auto space-y-6">
+      <div className="min-h-screen bg-background px-3 py-6 sm:px-4 lg:px-6 xl:px-8">
+        <div className="w-full space-y-6">
           <div className="h-12 bg-muted rounded animate-pulse" />
           <div className="h-64 bg-muted rounded animate-pulse" />
         </div>
@@ -224,7 +224,7 @@ const IndustriesManagementInteractive = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="max-w-7xl mx-auto p-6 space-y-6">
+      <div className="w-full px-3 py-6 sm:px-4 lg:px-6 xl:px-8 space-y-6">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div>
             <h1 className="text-3xl font-heading font-bold text-foreground">

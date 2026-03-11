@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import Icon from '@/components/ui/AppIcon';
+import { Instagram, Linkedin, Mail, MessageCircle } from 'lucide-react';
 
 const ClientFooter = () => {
   const currentYear = new Date().getFullYear();
@@ -19,10 +19,26 @@ const ClientFooter = () => {
   };
 
   const socialLinks = [
-    { name: 'Twitter', icon: 'XMarkIcon', href: '#' },
-    { name: 'LinkedIn', icon: 'LinkIcon', href: '#' },
-    { name: 'Facebook', icon: 'ShareIcon', href: '#' },
-    { name: 'Instagram', icon: 'CameraIcon', href: '#' },
+    {
+      name: 'WhatsApp',
+      href: 'https://wa.me/919999999999?text=Hi%20Quirky%20Umbrella%2C%20I%20want%20to%20connect.',
+      icon: MessageCircle,
+    },
+    {
+      name: 'Instagram',
+      href: 'https://www.instagram.com/quirkyumbrella/',
+      icon: Instagram,
+    },
+    {
+      name: 'LinkedIn',
+      href: 'https://www.linkedin.com/company/quirky-umbrella/',
+      icon: Linkedin,
+    },
+    {
+      name: 'Email',
+      href: 'mailto:hello@quirkyumbrella.com?subject=Let%27s%20Connect',
+      icon: Mail,
+    },
   ];
 
   return (
@@ -53,12 +69,12 @@ const ClientFooter = () => {
                 <a
                   key={social.name}
                   href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  target={social.name === 'Email' ? undefined : '_blank'}
+                  rel={social.name === 'Email' ? undefined : 'noopener noreferrer'}
                   className="p-2 rounded-lg bg-muted hover:bg-primary hover:text-primary-foreground transition-smooth press-scale"
                   aria-label={social.name}
                 >
-                  <Icon name={social.icon as any} size={18} />
+                  <social.icon size={18} />
                 </a>
               ))}
             </div>
@@ -103,7 +119,7 @@ const ClientFooter = () => {
         <div className="pt-8 border-t border-border">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-muted-foreground text-sm">
-              &copy; 2025 Quirky Umbrella. All rights reserved.
+              &copy; {currentYear} Quirky Umbrella. All rights reserved.
             </p>
             {/* <p className="text-muted-foreground text-sm flex items-center gap-1">
               Crafted with{' '}

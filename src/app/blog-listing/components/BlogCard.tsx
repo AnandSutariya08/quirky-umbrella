@@ -40,7 +40,7 @@ const BlogCard = ({
   return (
     <Link
       href={`/blogs/${slug}`}
-      className={`group block bg-card rounded-xl overflow-hidden shadow-neutral transition-smooth hover:shadow-neutral-lg hover:-translate-y-1 ${
+      className={`group block overflow-hidden rounded-2xl border border-border bg-card shadow-neutral transition-smooth hover:-translate-y-1 hover:shadow-neutral-lg card-pop ${
         isFeatured ? 'md:col-span-2 md:row-span-2' : ''
       }`}
       onMouseEnter={() => setIsHovered(true)}
@@ -54,15 +54,15 @@ const BlogCard = ({
             isHovered ? 'scale-110' : 'scale-100'
           }`}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-gray-900/40 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
         <div className="absolute top-4 left-4">
-          <span className="inline-block px-4 py-2 bg-primary text-primary-foreground text-sm font-medium rounded-md">
+          <span className="inline-block rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-warm">
             {category}
           </span>
         </div>
         {isFeatured && (
           <div className="absolute top-4 right-4">
-            <span className="inline-flex items-center gap-2 px-4 py-2 bg-accent text-accent-foreground text-sm font-medium rounded-md">
+            <span className="inline-flex items-center gap-2 rounded-full bg-accent px-4 py-2 text-sm font-semibold text-accent-foreground shadow-neutral">
               <Icon name="StarIcon" size={16} variant="solid" />
               Featured
             </span>
@@ -83,7 +83,7 @@ const BlogCard = ({
         </div>
 
         <h3
-          className={`font-heading font-semibold text-foreground mb-3 line-clamp-2 transition-smooth group-hover:text-primary ${
+          className={`mb-3 font-heading font-semibold text-foreground line-clamp-2 transition-smooth group-hover:text-primary ${
             isFeatured ? 'text-2xl md:text-3xl' : 'text-xl'
           }`}
         >
@@ -98,7 +98,7 @@ const BlogCard = ({
           {excerpt}
         </p>
 
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between border-t border-border pt-4">
           <div className="flex items-center gap-3">
             <div className="relative w-10 h-10 rounded-full overflow-hidden">
               <AppImage
@@ -112,8 +112,8 @@ const BlogCard = ({
             </div>
           </div>
 
-          <div className="flex items-center gap-2 text-primary font-medium text-sm transition-smooth group-hover:gap-3">
-            Read More
+          <div className="flex items-center gap-2 text-primary font-semibold text-sm transition-smooth group-hover:gap-3">
+            Read full story
             <Icon name="ArrowRightIcon" size={16} />
           </div>
         </div>

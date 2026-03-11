@@ -151,10 +151,12 @@ const BlogDetailInteractive = () => {
         <article className="max-w-4xl mx-auto">
           <BlogHeader
             title={blog.title}
-            author={blog.author.name}
+            excerpt={blog.excerpt}
+            author={blog.author}
             publishDate={formatDate(blog.publishedDate)}
             readTime={blog.readTime}
             category={blog.category}
+            tags={blog.tags}
           />
 
           <div className="relative h-96 rounded-lg overflow-hidden mb-12 shadow-neutral-lg animate-slide-down">

@@ -143,12 +143,12 @@ const BlogsTable = ({ blogs, onEdit, onDelete, onBulkAction }: BlogsTableProps) 
         )}
       </div>
 
-      <div className="hidden lg:block bg-card rounded-lg border border-border overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="w-full">
+      <div className="hidden xl:block max-w-full bg-card rounded-lg border border-border overflow-hidden">
+        <div className="max-w-full overflow-x-auto">
+          <table className="w-full table-fixed text-sm">
             <thead className="bg-muted">
               <tr>
-                <th className="px-6 py-4 text-left">
+                <th className="w-10 px-3 py-3 text-left">
                   <input
                     type="checkbox"
                     checked={
@@ -158,25 +158,25 @@ const BlogsTable = ({ blogs, onEdit, onDelete, onBulkAction }: BlogsTableProps) 
                     className="w-4 h-4 rounded border-input accent-primary cursor-pointer"
                   />
                 </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-foreground">
+                <th className="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide text-foreground">
                   Blog Post
                 </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-foreground">
+                <th className="w-40 px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide text-foreground">
                   Author
                 </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-foreground">
+                <th className="w-36 px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide text-foreground">
                   Category
                 </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-foreground">
+                <th className="w-32 px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide text-foreground">
                   Published
                 </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-foreground">
+                <th className="w-28 px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide text-foreground">
                   Status
                 </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-foreground">
+                <th className="w-32 px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide text-foreground">
                   Engagement
                 </th>
-                <th className="px-6 py-4 text-right text-sm font-semibold text-foreground">
+                <th className="w-36 px-3 py-3 text-right text-xs font-semibold uppercase tracking-wide text-foreground">
                   Actions
                 </th>
               </tr>
@@ -184,7 +184,7 @@ const BlogsTable = ({ blogs, onEdit, onDelete, onBulkAction }: BlogsTableProps) 
             <tbody className="divide-y divide-border">
               {filteredBlogs.map((blog) => (
                 <tr key={blog.id} className="hover:bg-muted/50 transition-smooth">
-                  <td className="px-6 py-4">
+                  <td className="px-3 py-3">
                     <input
                       type="checkbox"
                       checked={selectedBlogs.includes(blog.id)}
@@ -192,9 +192,9 @@ const BlogsTable = ({ blogs, onEdit, onDelete, onBulkAction }: BlogsTableProps) 
                       className="w-4 h-4 rounded border-input accent-primary cursor-pointer"
                     />
                   </td>
-                  <td className="px-6 py-4">
+                  <td className="px-3 py-3">
                     <div className="flex items-center gap-4">
-                      <div className="w-16 h-16 rounded-md overflow-hidden flex-shrink-0">
+                      <div className="h-12 w-12 rounded-md overflow-hidden flex-shrink-0">
                         <AppImage
                           src={blog.featuredImage}
                           alt={blog.featuredImageAlt}
@@ -203,28 +203,28 @@ const BlogsTable = ({ blogs, onEdit, onDelete, onBulkAction }: BlogsTableProps) 
                       </div>
                       <div className="min-w-0">
                         <div className="font-medium text-foreground truncate">{blog.title}</div>
-                        <div className="text-sm text-muted-foreground truncate">{blog.slug}</div>
+                        <div className="text-xs text-muted-foreground truncate">{blog.slug}</div>
                       </div>
                     </div>
                   </td>
-                  <td className="px-6 py-4 text-sm text-foreground">{blog.author.name}</td>
-                  <td className="px-6 py-4">
-                    <span className="inline-flex px-3 py-1 bg-muted text-foreground text-xs font-medium rounded-full">
+                  <td className="px-3 py-3 text-sm text-foreground truncate">{blog.author.name}</td>
+                  <td className="px-3 py-3">
+                    <span className="inline-flex px-2 py-1 bg-muted text-foreground text-xs font-medium rounded-full">
                       {blog.category}
                     </span>
                   </td>
-                  <td className="px-6 py-4 text-sm text-foreground">
+                  <td className="px-3 py-3 text-sm text-foreground">
                     {formatDate(blog.publishedDate)}
                   </td>
-                  <td className="px-6 py-4">
+                  <td className="px-3 py-3">
                     <span
-                      className={`inline-flex px-3 py-1 text-xs font-medium rounded-full capitalize ${getStatusColor(blog.status)}`}
+                      className={`inline-flex px-2 py-1 text-xs font-medium rounded-full capitalize ${getStatusColor(blog.status)}`}
                     >
                       {blog.status}
                     </span>
                   </td>
-                  <td className="px-6 py-4">
-                    <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                  <td className="px-3 py-3">
+                    <div className="flex items-center gap-3 text-sm text-muted-foreground">
                       <div className="flex items-center gap-1">
                         <Icon name="EyeIcon" size={16} />
                         <span>{blog.views || 0}</span>
@@ -235,7 +235,7 @@ const BlogsTable = ({ blogs, onEdit, onDelete, onBulkAction }: BlogsTableProps) 
                       </div>
                     </div>
                   </td>
-                  <td className="px-6 py-4">
+                  <td className="px-3 py-3">
                     <div className="flex items-center justify-end gap-2">
                       <button
                         onClick={() => onEdit(blog.id || '')}
@@ -274,7 +274,7 @@ const BlogsTable = ({ blogs, onEdit, onDelete, onBulkAction }: BlogsTableProps) 
         </div>
       </div>
 
-      <div className="lg:hidden space-y-4">
+      <div className="xl:hidden space-y-4">
         {filteredBlogs.map((blog) => (
           <div key={blog.id} className="bg-card rounded-lg border border-border p-4 space-y-4">
             <div className="flex items-start gap-3">

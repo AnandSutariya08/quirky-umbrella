@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Icon from '@/components/ui/AppIcon';
+import { Facebook, Linkedin, Twitter, Link as LinkIcon } from 'lucide-react';
 
 interface SocialShareProps {
   title: string;
@@ -51,16 +52,16 @@ const SocialShare = ({ title, url }: SocialShareProps) => {
         <span className="text-sm font-medium text-muted-foreground">Share this article:</span>
         <div className="flex gap-3">
           <button className="p-3 rounded-full bg-muted text-foreground transition-smooth">
-            <Icon name="ShareIcon" size={20} />
+            <Twitter size={20} />
           </button>
           <button className="p-3 rounded-full bg-muted text-foreground transition-smooth">
-            <Icon name="ShareIcon" size={20} />
+            <Facebook size={20} />
           </button>
           <button className="p-3 rounded-full bg-muted text-foreground transition-smooth">
-            <Icon name="ShareIcon" size={20} />
+            <Linkedin size={20} />
           </button>
           <button className="p-3 rounded-full bg-muted text-foreground transition-smooth">
-            <Icon name="LinkIcon" size={20} />
+            <LinkIcon size={20} />
           </button>
         </div>
       </div>
@@ -76,21 +77,21 @@ const SocialShare = ({ title, url }: SocialShareProps) => {
           className="p-3 rounded-full bg-muted text-foreground transition-smooth hover:bg-secondary hover:text-secondary-foreground hover:-translate-y-1 press-scale"
           aria-label="Share on Twitter"
         >
-          <Icon name="ShareIcon" size={20} />
+          <Twitter size={20} />
         </button>
         <button
           onClick={() => handleShare('facebook')}
           className="p-3 rounded-full bg-muted text-foreground transition-smooth hover:bg-secondary hover:text-secondary-foreground hover:-translate-y-1 press-scale"
           aria-label="Share on Facebook"
         >
-          <Icon name="ShareIcon" size={20} />
+          <Facebook size={20} />
         </button>
         <button
           onClick={() => handleShare('linkedin')}
           className="p-3 rounded-full bg-muted text-foreground transition-smooth hover:bg-secondary hover:text-secondary-foreground hover:-translate-y-1 press-scale"
           aria-label="Share on LinkedIn"
         >
-          <Icon name="ShareIcon" size={20} />
+          <Linkedin size={20} />
         </button>
         <button
           onClick={handleCopyLink}
