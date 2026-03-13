@@ -102,8 +102,8 @@ export const emailService = {
   },
 
   async sendBookingEmails(booking: any) {
-    // const adminEmail = 'hello@quirkyumbrella.in';
-    const adminEmail = 'anandsutariya83@gmail.com';
+    const adminEmail = 'hello@quirkyumbrella.in';
+    // const adminEmail = 'anandsutariya83@gmail.com';
     const clientEmail = booking.attendeeEmail;
 
     const dateStr = new Date(booking.scheduledDate).toLocaleDateString('en-GB', {
