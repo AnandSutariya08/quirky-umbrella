@@ -212,9 +212,10 @@ export default function GlobalReachSection({ title, subtitle, stats }: GlobalRea
 
         {/* Country Scrolling Ticker */}
         <div className="mb-20 overflow-hidden relative group">
-          <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-background to-transparent z-10" />
-          <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-background to-transparent z-10" />
-          
+          {/* <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-background to-transparent z-10" />
+          <div className="absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-background to-transparent z-10" /> */}
+          <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-background to-transparent z-10 hidden md:block" />
+          <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-background to-transparent z-10 hidden md:block" />
           <div className="flex space-x-20 animate-scroll-countries whitespace-nowrap py-10 px-6">
             {[...countries, ...countries, ...countries, ...countries].map((country, idx) => (
               <div

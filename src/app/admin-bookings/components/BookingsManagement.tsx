@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Icon from '@/components/ui/AppIcon';
 import { bookingsService } from '@/lib/bookings';
-import { formatTimeWithTimezone } from '@/lib/timezone';
+import { convertAvailabilityToUserTimezone, convertToAdminTimezone } from '@/lib/timezone';
 import type { Booking, BookingSettings, Availability } from '@/types/booking';
 import { meetingTypes } from '@/app/contact/components/SchedulingSystem';
 
@@ -127,17 +127,13 @@ export default function BookingsManagement() {
     setShowCancelConfirm(true);
   };
 
-  const confirmCancelBooking = async (freeTimeSlot: boolean) => {
+  const confirmCancelBooking = async (_freeTimeSlot: boolean) => {
     if (!cancellingBooking?.id) return;
 
     try {
-      if (freeTimeSlot) {
-        // Delete the booking to free the time slot
-        await bookingsService.delete(cancellingBooking.id);
-      } else {
-        // Just cancel (mark as cancelled, keeps slot blocked)
-        await bookingsService.cancel(cancellingBooking.id);
-      }
+      // Cancelled bookings are excluded from slot conflicts, so cancel is enough
+      // and also triggers the client notification email.
+      await bookingsService.cancel(cancellingBooking.id);
       await loadData();
       if (selectedBooking?.id === cancellingBooking.id) {
         setSelectedBooking(null);
@@ -793,6 +789,7 @@ export default function BookingsManagement() {
       {showForwardModal && forwardingBooking && (
         <ForwardModal
           booking={forwardingBooking}
+          freeCurrentSlot={freeTimeSlotOnForward}
           onClose={() => {
             setShowForwardModal(false);
             setForwardingBooking(null);
@@ -1104,10 +1101,12 @@ function SettingsModal({
 // Forward/Reschedule Modal Component
 function ForwardModal({
   booking,
+  freeCurrentSlot,
   onClose,
   onForward,
 }: {
   booking: Booking;
+  freeCurrentSlot: boolean;
   onClose: () => void;
   onForward: (
     forwardedTo: string,
@@ -1128,6 +1127,12 @@ function ForwardModal({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isLoadingSlots, setIsLoadingSlots] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [userTimezone, setUserTimezone] = useState<string>('');
+
+  useEffect(() => {
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    setUserTimezone(tz);
+  }, []);
 
   const loadSettings = async () => {
     try {
@@ -1159,15 +1164,33 @@ function ForwardModal({
       return [];
     }
 
-    const [startHour, startMin] = dayAvailability.startTime.split(':').map(Number);
-    const [endHour, endMin] = dayAvailability.endTime.split(':').map(Number);
+    const normalizedUserTz = userTimezone.replace('Calcutta', 'Kolkata');
+    const normalizedAdminTz = adminTimezone.replace('Calcutta', 'Kolkata');
+    const isSameTimezone = normalizedUserTz === normalizedAdminTz;
+
+    let availabilityStartTime = dayAvailability.startTime;
+    let availabilityEndTime = dayAvailability.endTime;
+
+    if (!isSameTimezone && userTimezone) {
+      const userAvailability = convertAvailabilityToUserTimezone(
+        { startTime: dayAvailability.startTime, endTime: dayAvailability.endTime },
+        adminTimezone,
+        userTimezone,
+        date
+      );
+      availabilityStartTime = userAvailability.startTime;
+      availabilityEndTime = userAvailability.endTime;
+    }
+
+    const [startHour, startMin] = availabilityStartTime.split(':').map(Number);
+    const [endHour, endMin] = availabilityEndTime.split(':').map(Number);
 
     const startTime = new Date(date);
     startTime.setHours(startHour, startMin, 0, 0);
     const endTime = new Date(date);
     endTime.setHours(endHour, endMin, 0, 0);
 
-    // Get booked times (only confirmed bookings block slots)
+    // Get booked times (only confirmed bookings block slots), converted when needed
     const bookedTimes = existingBookings
       .filter((b) => {
         if (!b.scheduledDate) return false;
@@ -1179,7 +1202,20 @@ function ForwardModal({
           b.status === 'confirmed'
         );
       })
-      .map((b) => b.scheduledTime);
+      .map((b) => {
+        if (isSameTimezone || !userTimezone) {
+          return b.scheduledTime;
+        }
+
+        const bookedDate = b.scheduledDate || new Date();
+        const bookedTimeInUserTz = convertAvailabilityToUserTimezone(
+          { startTime: b.scheduledTime, endTime: b.scheduledTime },
+          adminTimezone,
+          userTimezone,
+          bookedDate
+        );
+        return bookedTimeInUserTz.startTime;
+      });
 
     const current = new Date(startTime);
     while (current < endTime) {
@@ -1211,8 +1247,10 @@ function ForwardModal({
       endOfDay.setHours(23, 59, 59, 999);
 
       const dateBookings = await bookingsService.getByDateRange(startOfDay, endOfDay);
-      // Exclude the current booking being rescheduled
-      const filteredBookings = dateBookings.filter((b) => b.id !== booking.id);
+      // Only exclude current booking when admin explicitly chose to free the current slot.
+      const filteredBookings = freeCurrentSlot
+        ? dateBookings.filter((b) => b.id !== booking.id)
+        : dateBookings;
       setExistingBookings(filteredBookings);
 
       const slots = generateTimeSlots(selectedDate, filteredBookings, settings);
@@ -1291,6 +1329,8 @@ function ForwardModal({
     e.preventDefault();
 
     const newErrors: Record<string, string> = {};
+    let convertedDate: Date | undefined;
+    let convertedTime: string | undefined;
 
     if (forwardToOption === 'different' && (!forwardedTo || !forwardedTo.trim())) {
       newErrors.forwardedTo = 'Please enter who to forward this booking to.';
@@ -1307,19 +1347,45 @@ function ForwardModal({
       // Check for conflicts if rescheduling
       if (selectedDate && selectedTime && settings) {
         try {
+          const adminTimezone = settings.timezone || 'Asia/Kolkata';
+          const normalizedUserTz = userTimezone.replace('Calcutta', 'Kolkata');
+          const normalizedAdminTz = adminTimezone.replace('Calcutta', 'Kolkata');
+          const isSameTimezone = normalizedUserTz === normalizedAdminTz;
+
+          let adminDate = new Date(selectedDate);
+          let adminTime = selectedTime;
+
+          if (!isSameTimezone && userTimezone) {
+            const converted = convertToAdminTimezone(
+              selectedDate,
+              selectedTime,
+              userTimezone,
+              adminTimezone
+            );
+            adminDate = converted.date;
+            adminTime = converted.time;
+          }
+
           const conflicts = await bookingsService.checkConflict(
-            selectedDate,
-            selectedTime,
+            adminDate,
+            adminTime,
             booking.meetingType,
-            booking.id // Exclude current booking from conflict check
+            freeCurrentSlot ? booking.id : undefined
           );
 
           if (conflicts.length > 0) {
             newErrors.time = 'This time slot is already booked. Please select another time.';
+          } else {
+            convertedDate = adminDate;
+            convertedTime = adminTime;
           }
         } catch (error) {
           console.error('Error checking conflicts:', error);
+          newErrors.time = 'Unable to validate this slot right now. Please try again.';
         }
+      } else if (selectedDate && selectedTime) {
+        convertedDate = selectedDate;
+        convertedTime = selectedTime;
       }
     }
 
@@ -1330,8 +1396,8 @@ function ForwardModal({
 
     setIsSubmitting(true);
     try {
-      const date = reschedule && selectedDate ? selectedDate : undefined;
-      const time = reschedule && selectedTime ? selectedTime : undefined;
+      const date = reschedule ? convertedDate : undefined;
+      const time = reschedule ? convertedTime : undefined;
       await onForward(forwardedTo.trim(), date, time, adminNotes.trim() || undefined);
     } catch (error) {
       console.error('Error forwarding booking:', error);
@@ -1538,6 +1604,10 @@ function ForwardModal({
                       ({formatDate(selectedDate)})
                     </span>
                   </div>
+                  <div className="flex items-center gap-2 mb-4 text-sm text-muted-foreground">
+                    <Icon name="InformationCircleIcon" size={16} />
+                    <span>Times shown in your timezone ({userTimezone || 'local timezone'})</span>
+                  </div>
 
                   {isLoadingSlots ? (
                     <div className="text-center py-12">
@@ -1676,10 +1746,11 @@ function CancelConfirmModal({
 }: {
   booking: Booking;
   onClose: () => void;
-  onConfirm: (freeTimeSlot: boolean) => void;
+  onConfirm: (freeTimeSlot: boolean) => Promise<void>;
 }) {
   // freeTimeSlot parameter is kept for compatibility but not used
   // Cancelled bookings don't block slots anyway
+  const [isCancelling, setIsCancelling] = useState(false);
 
   const getMeetingTypeName = (type: string): string => {
     return meetingTypes.find((m) => m.id === type)?.name || type;
@@ -1745,15 +1816,31 @@ function CancelConfirmModal({
           <div className="flex gap-3">
             <button
               onClick={onClose}
-              className="flex-1 px-6 py-3 bg-muted text-foreground rounded-xl font-semibold transition-all duration-300 hover:bg-muted/80 press-scale"
+              disabled={isCancelling}
+              className="flex-1 px-6 py-3 bg-muted text-foreground rounded-xl font-semibold transition-all duration-300 hover:bg-muted/80 press-scale disabled:opacity-60 disabled:cursor-not-allowed"
             >
               No, Keep It
             </button>
             <button
-              onClick={() => onConfirm(false)}
-              className="flex-1 px-6 py-3 bg-error text-white rounded-xl font-semibold transition-all duration-300 hover:bg-error/90 hover:shadow-lg press-scale"
+              disabled={isCancelling}
+              onClick={async () => {
+                setIsCancelling(true);
+                try {
+                  await onConfirm(false);
+                } finally {
+                  setIsCancelling(false);
+                }
+              }}
+              className="flex-1 px-6 py-3 bg-error text-white rounded-xl font-semibold transition-all duration-300 hover:bg-error/90 hover:shadow-lg press-scale disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
-              Yes, Cancel
+              {isCancelling ? (
+                <>
+                  <Icon name="ArrowPathIcon" size={18} className="animate-spin" />
+                  Cancelling...
+                </>
+              ) : (
+                'Yes, Cancel'
+              )}
             </button>
           </div>
         </div>

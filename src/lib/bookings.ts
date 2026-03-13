@@ -284,7 +284,21 @@ export const bookingsService = {
 
   // Cancel a booking
   async cancel(id: string): Promise<void> {
+    const existingBooking = await this.getById(id);
+    if (!existingBooking) {
+      throw new Error(`Booking with ID ${id} does not exist. It may have been deleted.`);
+    }
+
     await this.update(id, { status: 'cancelled' });
+
+    try {
+      await emailService.sendBookingActionEmail({
+        booking: existingBooking,
+        action: 'cancelled',
+      });
+    } catch (emailError) {
+      console.error('Failed to send cancellation email:', emailError);
+    }
   },
 
   // Approve a booking (change from pending to confirmed)
@@ -305,6 +319,11 @@ export const bookingsService = {
     newTime?: string,
     adminNotes?: string
   ): Promise<void> {
+    const existingBooking = await this.getById(id);
+    if (!existingBooking) {
+      throw new Error(`Booking with ID ${id} does not exist. It may have been deleted.`);
+    }
+
     const updateData: any = {
       forwardedTo,
       adminNotes,
@@ -316,6 +335,28 @@ export const bookingsService = {
     }
 
     await this.update(id, updateData);
+
+    const updatedBooking: Booking = {
+      ...existingBooking,
+      forwardedTo,
+      adminNotes,
+      scheduledDate: newDate || existingBooking.scheduledDate,
+      scheduledTime: newTime || existingBooking.scheduledTime,
+      updatedAt: new Date(),
+    };
+
+    try {
+      await emailService.sendBookingActionEmail({
+        booking: updatedBooking,
+        action: newDate && newTime ? 'rescheduled' : 'forwarded',
+        previousDate: existingBooking.scheduledDate,
+        previousTime: existingBooking.scheduledTime,
+        forwardedTo,
+        adminNotes,
+      });
+    } catch (emailError) {
+      console.error('Failed to send forward/reschedule email:', emailError);
+    }
   },
 
   // Delete a booking
